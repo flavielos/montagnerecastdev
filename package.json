@@ -1,5 +1,5 @@
 {
-  "name": "Recast-ai-starter-kit",
+  "name": "montagneRecast",
   "version": "1.0.0",
   "description": "A bot built with Recast.AI",
   "main": "server.js",
@@ -9,11 +9,11 @@
     "lint": "eslint src/",
     "build": "babel src -d lib"
   },
-  "author": "Recast",
+  "author": "flavielos",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git@github.com:RecastAI/starter-NodeJS.git"
+    "url": "git@github.com:flavielos/montagnerecast.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.22.0",
