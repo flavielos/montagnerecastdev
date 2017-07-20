@@ -4,6 +4,7 @@
  */
 
 const recastai = require('recastai')
+const age = require('./age')
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -43,6 +44,11 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
       // Do some code after sending messages
+	  // ajout Flavie debut
+	  if (result.action && result.action.slug == 'donner-age' && result.action.done){
+		 age(result.getMemory('age_min').raw, result.getMemory('age_max').raw)
+	  }
+	  // ajout Flavie fin
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
