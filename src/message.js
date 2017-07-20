@@ -4,7 +4,7 @@
  */
 
 const recastai = require('recastai')
-const age = require('./age')
+const rd = require('./regles_dialogue')
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -14,6 +14,7 @@ const replyMessage = (message) => {
   const text = message.content
 
   console.log('I receive: ', text)
+  
 
   // Get senderId to catch unique conversation_token
   const senderId = message.senderId
@@ -28,6 +29,12 @@ const replyMessage = (message) => {
     * Or: Update your mongo DB
     * etc...
     */
+	
+	if (result.action && result.action.slug == 'donner-age' && result.action.done){
+		message.addReply(rd.comAgeMin(result.getMemory('age_min').raw, result.getMemory('age_max').raw));
+	}
+	
+	
     if (result.action) {
       console.log('The conversation action is: ', result.action.slug)
     }
@@ -41,28 +48,11 @@ const replyMessage = (message) => {
     }
 
     // Send all replies
+	
     message.reply()
     .then(() => {
       // Do some code after sending messages
-	  // ajout Flavie debut
-	  if (result.action && result.action.slug == 'donner-age' && result.action.done){
-		  var ageTemp;
-		  var age1 = result.getMemory('age_min').raw;
-		  var age2 = result.getMemory('age_max').raw;
-		  if ( age1 > age2 ) {
-			  ageTemp = age2;
-			  age2 = age1;
-			  age1 = ageTemp;
-			  }
-			  message.addReply('chouette')
-			  message.reply()
-		 /*age(result.getMemory('age_min').raw, result.getMemory('age_max').raw)
-		 .then(res => {
-			message.addReply(res)
-				message.reply()
-		})*/
-	  }
-	  // ajout Flavie fin
+	  
     })
     .catch(err => {
       console.error('Error while sending message to channel', err)
