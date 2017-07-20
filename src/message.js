@@ -46,11 +46,21 @@ const replyMessage = (message) => {
       // Do some code after sending messages
 	  // ajout Flavie debut
 	  if (result.action && result.action.slug == 'donner-age' && result.action.done){
-		 age(result.getMemory('age_min').raw, result.getMemory('age_max').raw)
+		  var ageTemp;
+		  var age1 = result.getMemory('age_min').raw;
+		  var age2 = result.getMemory('age_max').raw;
+		  if ( age1 > age2 ) {
+			  ageTemp = age2;
+			  age2 = age1;
+			  age1 = ageTemp;
+			  }
+			  message.addReply('chouette')
+			  message.reply()
+		 /*age(result.getMemory('age_min').raw, result.getMemory('age_max').raw)
 		 .then(res => {
 			message.addReply(res)
 				message.reply()
-		})
+		})*/
 	  }
 	  // ajout Flavie fin
     })
