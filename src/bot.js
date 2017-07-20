@@ -26,6 +26,7 @@ const client = new recastai(process.env.REQUEST_TOKEN)
  * - callback: Callback is a function called by Recast.AI hosting system when your code will be hosted
  */
 export const bot = (body, response, callback) => {
+	console.log(body)
   if (body.message) {
     /*
     * Call the Recast.AI SDK function to handle message from Bot Connector
@@ -49,21 +50,21 @@ export const bot = (body, response, callback) => {
     * ie curl -X "POST" "https://localhost:5000" -d '{"text": "YOUR_TEXT"}' -H "Content-Type: application/json; charset=utf-8"
     * It just sends it to Recast.AI and returns replies
     */
-    client.request.converseText(body.text, { conversationToken: process.env.CONVERSATION_TOKEN || null })
+    /*client.request.converseText(body.text, { conversationToken: process.env.CONVERSATION_TOKEN || null })
       .then((res) => {
-        if (res.reply()) {
+        if (res.reply()) {*/
           /*
            * If response received from Recast.AI contains a reply
            */
-          callback(null, {
+          /*callback(null, {
             reply: res.reply(),
             conversationToken: res.conversationToken,
           })
-        } else {
+        } else {*/
           /*
            * If response received from Recast.AI does not contain any reply
            */
-          callback(null, {
+          /*callback(null, {
             reply: 'No reply :(',
             conversationToken: res.conversationToken,
           })
@@ -71,7 +72,8 @@ export const bot = (body, response, callback) => {
       })
       .catch((err) => {
         callback(err)
-      })
+      })*/
+	  replyMessage(null, body.text, response)
   } else {
     callback('No text provided')
   }
