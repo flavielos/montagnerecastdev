@@ -7,3 +7,5 @@ const age = (age1, age2) => {
 	}
 	return age1
 }
+
+module.exports = age
