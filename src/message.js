@@ -5,6 +5,9 @@
 
 const recastai = require('recastai')
 const rd = require('./regles_dialogue')
+const ay = require('./appel_yseop')
+
+
 
 // This function is the core of the bot behaviour
 const replyMessage = (message) => {
@@ -30,9 +33,23 @@ const replyMessage = (message) => {
     * etc...
     */
 	
-	if (result.action && result.action.slug == 'donner-age' && result.action.done){
-		message.addReply(rd.comAgeMin(result.getMemory('age_min').raw, result.getMemory('age_max').raw));
+	/*if (result.action && result.action.slug == 'donner-age' && result.action.done){
+		message.addReply(rd.comAgeMin(result.getMemory('age_min').years, result.getMemory('age_max').years));
+	}*/
+	
+	if (result.action && result.action.slug == 'donner-niveau' && result.action.done){
+		message.addReply(rd.comNvPhysique(result.getMemory('nv_physique').scalar));
 	}
+	
+	if (result.action && result.action.slug == 'donner-niveau-1' && result.action.done){
+		console.log(result.getMemory('nv_physique').scalar.toString() + 'et' + result.getMemory('nv_difficulte').scalar.toString())
+		message.addReply(rd.comNvDifficulte(result.getMemory('nv_physique').scalar, result.getMemory('nv_difficulte').scalar));
+	}
+	if (result.action && result.action.slug == 'demander-distance' && result.action.done){
+		console.log('entree')
+		ay.appel();
+	}
+	
 	
 	
     if (result.action) {
