@@ -42,8 +42,7 @@ exports.xmlToString = function () {
 '		<y:language id="en"/>'+
 '	</y:misc-in>'+
 '</y:input>';
-	xml.serialize(xml.parse(source))
-	console.log(xml.serialize(xml.parse(source)).toString());
+	xml.serialize(xml.parse(source));
 	return(xml.serialize(xml.parse(source)).toString());
     //
 }   
