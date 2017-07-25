@@ -36,7 +36,7 @@ const replyMessage = (message) => {
 	
 
 	// get prenom
-	/*if (result.action && result.action.slug == 'demander-le-nom' && result.action.done){
+	if (result.action && result.action.slug == 'demander-le-nom' && result.action.done){
 		cc.setAgeMin(result.getMemory('prenom'));
 	};
 	
@@ -231,7 +231,7 @@ const replyMessage = (message) => {
 	if (result.action && result.action.slug == 'meteo' && result.action.done){
 		console.log(ay.appel());
 	};
-	*/
+	
 
 	
 	
