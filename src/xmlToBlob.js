@@ -1,6 +1,7 @@
 var xhr = require('w3c-xmlhttprequest');
 var xml = require('simple-xml-dom')
- 
+const cc = require('./carac_client')
+
 exports.xmlToString = function () { 
 	var source = '<?xml version="1.0" encoding="UTF-8"?>'+
 '<y:input xmlns:y="http://www.yseop.com/engine/3" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" '+
@@ -12,19 +13,19 @@ exports.xmlToString = function () {
 '			<traces>true</traces>'+
 '			<reloadedData>true</reloadedData>'+
 '			<saisieDeDonnees yid="SAISIE_1">'+
-'				<nomClient>Maxime</nomClient>'+
-'				<ageMax>55</ageMax>'+
-'				<ageMin>45</ageMin>'+
+'				<nomClient>' + cc.getPrenom() + '</nomClient>'+
+'				<ageMax>' + cc.getAgeMax() + '</ageMax>'+
+'				<ageMin>' + cc.getAgeMin() + '</ageMin>'+
 '				<dureeDeLaRandonnee>4</dureeDeLaRandonnee>'+
-'				<dureeStricte yid="DUREE_PLUS"/>'+
-'				<isoleAccessible yid="ACCESSIBLE"/>'+
-'				<niveauEloignement yid="NV_ELOIGNEMENT_1"/>'+
-'				<niveauPhysique yid="NV_PHYSIQUE_2"/>'+
-'				<niveauRandonneur yid="NV_RANDONNEUR_2"/>'+
-'				<niveauEquipement yid="NV_EQUIPEMENT_1"/>'+
-'				<niveauDifficulte yid="NV_DIFFICULTE_1"/>'+
-'				<niveauBudget yid="NV_BUDGET_4"/>'+
-'				<niveauActivites yid="NV_ACTIVITES_4"/>'+
+'				<dureeStricte yid="DUREE_PLUS_MOINS"/>'+
+'				<isoleAccessible yid="' + cc.getNvEvasion() + '"/>'+
+'				<niveauEloignement yid="' + cc.getNvEloignement() + '"/>'+
+'				<niveauPhysique yid="' + cc.getNvPhysique() + '"/>'+
+'				<niveauRandonneur yid="' + cc.getNvRandonneur() + '"/>'+
+'				<niveauEquipement yid="' + cc.getNvEquipement() + '"/>'+
+'				<niveauDifficulte yid="' + cc.getNvDifficulte() + '"/>'+
+'				<niveauBudget yid="' + cc.getBudget() + '"/>'+
+'				<niveauActivites yid="' + cc.getNvActivites() + '"/>'+
 '			</saisieDeDonnees>'+
 '			<reloadedData>false</reloadedData>'+
 '			<dialogId>853880</dialogId>'+

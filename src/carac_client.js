@@ -1,3 +1,4 @@
+var PRENOM
 var AGE_MIN;
 var AGE_MAX;
 var NV_PHYSIQUE;
@@ -9,6 +10,13 @@ var NV_ACTIVITES;
 var NV_DECOUVERTE;
 var NV_EVASION;
 
+exports.setPrenom = function(name){
+	this.PRENOM = name;
+};
+
+exports.getPrenom = function(){
+	return(this.PRENOM);
+};
 
 exports.setAgeMin = function(age){
 	this.AGE_MIN = age;
@@ -82,7 +90,7 @@ exports.setNvEquipement = function(nv){
 exports.getNvEquipement = function(){
 	return(this.NV_EQUIPEMENT);
 };
-
+/*
 exports.setNvActivites = function(nv){
 	this.NV_ACTIVITES = nv;
 };
@@ -104,3 +112,4 @@ exports.setNvDecouverte = function(nv){
 exports.getNvDecouverte = function(){
 	return(this.NV_DECOUVERTE);
 };
+*/

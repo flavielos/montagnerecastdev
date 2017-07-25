@@ -35,6 +35,11 @@ const replyMessage = (message) => {
     */
 	
 
+	// get prenom
+	/*if (result.action && result.action.slug == 'demander-le-nom' && result.action.done){
+		cc.setAgeMin(result.getMemory('prenom'));
+	};
+	
 	// get age_min
 	if (result.action && result.action.slug == 'donner-age' && result.action.done){
 		cc.setAgeMin(result.getMemory('age_min').years);
@@ -169,7 +174,7 @@ const replyMessage = (message) => {
 	};
 
 	//get détails
-/*	if (result.action && result.action.slug == 'donner-details'  && result.action.done){
+	if (result.action && result.action.slug == 'donner-details'  && result.action.done){
 		if(result.getMemory('nv_difficulte_1')!=null){
 			cc.setNvDifficulte('NV_DIFFICULTE_1');
 			console.log(result.getMemory('nv_difficulte_1'));
@@ -188,11 +193,11 @@ const replyMessage = (message) => {
 			//message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
 		};
 		if (result.getMemory('nv_evasion_1')!=null){
-			cc.setNvEvasion('NV_EVASION_1');
+			cc.setNvEvasion('ACCESSIBLE');
 			console.log(result.getMemory('nv_evasion_1'));
 			//message.reply(rd.comNvEvasion(cc.getNvEvasion()));
 		} else if (result.getMemory('nv_evasion_2')!=null){
-			cc.setNvEvasion('NV_EVASION_2');
+			cc.setNvEvasion('ISOLE');
 			console.log(result.getMemory('nv_evasion_2'));
 			//message.reply(rd.comNvEvasion(cc.getNvEvasion()));
 		};
@@ -221,12 +226,12 @@ const replyMessage = (message) => {
 			//message.reply(rd.comNvDecouverte(cc.getNvDecouverte()));
 		};
 	};
-*/	
+	
 	// appel yseop
 	if (result.action && result.action.slug == 'meteo' && result.action.done){
 		console.log(ay.appel());
-	}
-	
+	};
+	*/
 
 	
 	

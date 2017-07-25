@@ -167,7 +167,7 @@ exports.comNvEquipement = function(){
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
-
+/*
 exports.comNvDecouverte = function(nv){
 	var com = nv.toString();
 	var reply = {type : 'text', content : com};
@@ -185,7 +185,7 @@ exports.comNvActivite = function(nv){
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
-
+*/
 exports.comYseop = function(){
 	var com = ay.appel();
 	var reply = {type : 'text', content : com};
