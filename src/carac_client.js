@@ -43,7 +43,7 @@ exports.getNvPhysique = function(){
 };
 
 exports.setNvDifficulte = function(nv){
-	this.NV_DIFFICULTE = 'NV_DIFFICULTE_' + nv.toString();
+	this.NV_DIFFICULTE = nv.toString();
 };
 
 exports.getNvDifficulte = function(){
@@ -90,12 +90,12 @@ exports.setNvEquipement = function(nv){
 exports.getNvEquipement = function(){
 	return(this.NV_EQUIPEMENT);
 };
-/*
+
 exports.setNvActivites = function(nv){
 	this.NV_ACTIVITES = nv;
 };
 
-exports.getNvactivites = function(){
+exports.getNvActivites = function(){
 	return(this.NV_ACTIVITES);
 };
 exports.setNvEvasion = function(nv){
@@ -112,4 +112,3 @@ exports.setNvDecouverte = function(nv){
 exports.getNvDecouverte = function(){
 	return(this.NV_DECOUVERTE);
 };
-*/

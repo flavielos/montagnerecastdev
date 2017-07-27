@@ -13,19 +13,19 @@ exports.xmlToString = function () {
 '			<traces>true</traces>'+
 '			<reloadedData>true</reloadedData>'+
 '			<saisieDeDonnees yid="SAISIE_1">'+
-'				<nomClient>' + cc.getPrenom() + '</nomClient>'+
-'				<ageMax>' + cc.getAgeMax() + '</ageMax>'+
-'				<ageMin>' + cc.getAgeMin() + '</ageMin>'+
+'				<nomClient>flavie</nomClient>'+
+'				<ageMax>13</ageMax>'+
+'				<ageMin>45</ageMin>'+
 '				<dureeDeLaRandonnee>4</dureeDeLaRandonnee>'+
 '				<dureeStricte yid="DUREE_PLUS_MOINS"/>'+
-'				<isoleAccessible yid="' + cc.getNvEvasion() + '"/>'+
-'				<niveauEloignement yid="' + cc.getNvEloignement() + '"/>'+
-'				<niveauPhysique yid="' + cc.getNvPhysique() + '"/>'+
-'				<niveauRandonneur yid="' + cc.getNvRandonneur() + '"/>'+
-'				<niveauEquipement yid="' + cc.getNvEquipement() + '"/>'+
-'				<niveauDifficulte yid="' + cc.getNvDifficulte() + '"/>'+
-'				<niveauBudget yid="' + cc.getBudget() + '"/>'+
-'				<niveauActivites yid="' + cc.getNvActivites() + '"/>'+
+'				<isoleAccessible yid="ACCESSIBLE"/>'+
+'				<niveauEloignement yid="NV_ELOIGNEMENT_3"/>'+
+'				<niveauPhysique yid="NV_PHYSIQUE_2"/>'+
+'				<niveauRandonneur yid="NV_RANDONNEUR_1"/>'+
+'				<niveauEquipement yid="NV_EQUIPEMENT_3"/>'+
+'				<niveauDifficulte yid="NV_DIFFICULTE_1"/>'+
+'				<niveauBudget yid="NV_BUDGET_3"/>'+
+'				<niveauActivites yid="NV_ACTIVITES_1"/>'+
 '			</saisieDeDonnees>'+
 '			<reloadedData>false</reloadedData>'+
 '			<dialogId>853880</dialogId>'+

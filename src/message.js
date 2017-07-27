@@ -37,7 +37,7 @@ const replyMessage = (message) => {
 
 	// get prenom
 	if (result.action && result.action.slug == 'demander-le-nom' && result.action.done){
-		cc.setAgeMin(result.getMemory('prenom'));
+		cc.setPrenom(result.getMemory('prenom').raw);
 	};
 	
 	// get age_min
@@ -52,12 +52,11 @@ const replyMessage = (message) => {
 	};
 	// get niveau physique
 	if (result.action && result.action.slug == 'donner-niveau'  && result.action.done){
-		console.log(result.getMemory('nv_physique') == null);
-
 		if (result.getMemory('nv_physique') != null){
 			cc.setNvPhysique('NV_PHYSIQUE_' + result.getMemory('nv_physique').scalar);
 		} 
-		message.addReply(rd.comNvPhysique(cc.getNvPhysique()));
+		message.addReply(rd.comNvPhysique(cc.getNvPhysique()));	
+		
 	};
 	
 	if (result.action &&  result.action.slug == 'donner-niveau-physique' && result.action.done){
@@ -175,35 +174,44 @@ const replyMessage = (message) => {
 
 	//get détails
 	if (result.action && result.action.slug == 'donner-details'  && result.action.done){
+		var reply = '';
 		if(result.getMemory('nv_difficulte_1')!=null){
 			cc.setNvDifficulte('NV_DIFFICULTE_1');
-			console.log(result.getMemory('nv_difficulte_1'));
-			//message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));
+			// console.log(result.getMemory('nv_difficulte_1').value + ' et '+ cc.getNvDifficulte());
+			// message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));
+			// console.log(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));
+			reply+=rd.comNvDifficulte( cc.getNvDifficulte())
 		} else if(result.getMemory('nv_difficulte_2')!=null){
 			cc.setNvDifficulte('NV_DIFFICULTE_2');
-			console.log(result.getMemory('nv_difficulte_2'));
-			//message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
+			// console.log(result.getMemory('nv_difficulte_2'));
+			// message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));	
+			reply+=rd.comNvDifficulte( cc.getNvDifficulte())
 		} else if(result.getMemory('nv_difficulte_3')!=null){
 			cc.setNvDifficulte('NV_DIFFICULTE_3');
-			console.log(result.getMemory('nv_difficulte_3'));
-			//message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
+			reply+=rd.comNvDifficulte( cc.getNvDifficulte())
+			// console.log(result.getMemory('nv_difficulte_3'));
+			// message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
 		} else if(result.getMemory('nv_difficulte_4')!=null){
 			cc.setNvDifficulte('NV_DIFFICULTE_4');
-			console.log(result.getMemory('nv_difficulte_4'));
-			//message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
+			reply+=rd.comNvDifficulte( cc.getNvDifficulte())
+			// console.log(result.getMemory('nv_difficulte_4'));
+			// message.reply(rd.comNvDifficulte(cc.getNvPhysique(), cc.getNvDifficulte()));			
 		};
 		if (result.getMemory('nv_evasion_1')!=null){
 			cc.setNvEvasion('ACCESSIBLE');
-			console.log(result.getMemory('nv_evasion_1'));
-			//message.reply(rd.comNvEvasion(cc.getNvEvasion()));
+			reply+=rd.comNvEvasion(cc.getNvEvasion());
+			// console.log(result.getMemory('nv_evasion_1'));
+			// message.reply(rd.comNvEvasion(cc.getNvEvasion()));
 		} else if (result.getMemory('nv_evasion_2')!=null){
 			cc.setNvEvasion('ISOLE');
-			console.log(result.getMemory('nv_evasion_2'));
-			//message.reply(rd.comNvEvasion(cc.getNvEvasion()));
+			reply+=rd.comNvEvasion(cc.getNvEvasion());
+
+			// console.log(result.getMemory('nv_evasion_2'));
+			// message.reply(rd.comNvEvasion(cc.getNvEvasion()));
 		};
 		if (result.getMemory('activite_1')!=null){
 			var nb = 1;
-			console.log(result.getMemory('activite_1') + result.getMemory('activite_2') + result.getMemory('activite_3'));
+			//console.log(result.getMemory('activite_1').value + result.getMemory('activite_2').value + result.getMemory('activite_3').value);
 			if (result.getMemory('activite_2')!=null){
 				nb = 2;
 				if (result.getMemory('activite_3')!=null){
@@ -211,25 +219,43 @@ const replyMessage = (message) => {
 				};
 			};		
 			cc.setNvActivites('NV_ACTIVITES_' + nb);
-			//message.reply(rd.comNvActivites(cc.getNvActivites()));
+			reply+=rd.comNvActivites(cc.getNvActivites())
+			// message.reply(rd.comNvActivites(cc.getNvActivites()));
 		};
 		if (result.getMemory('decouverte_1')!=null){
-			console.log(result.getMemory('decouverte_1') + result.getMemory('decouverte_2') + result.getMemory('decouverte_3'));
+			//console.log(result.getMemory('decouverte_1').value + result.getMemory('decouverte_2').value + result.getMemory('decouverte_3').value);
 			var nb = 1;
 			if (result.getMemory('decouverte_2')!=null){
 				nb = 2
+				// console.log(2)
 				if (result.getMemory('decouverte_3')!=null){
 					nb = 3;
+					// console.log(3)
 				};
 			};	
 			cc.setNvDecouverte('NV_DECOUVERTE_' + nb);	
-			//message.reply(rd.comNvDecouverte(cc.getNvDecouverte()));
+			reply+=rd.comNvDecouverte(cc.getNvDecouverte())
+			// message.reply(rd.comNvDecouverte(cc.getNvDecouverte()));
 		};
+		reply += '\n c\'est bien ça ?';
+		message.addReply({type : 'text', content : reply});
 	};
 	
-	// appel yseop
+	// appel yseop 	
 	if (result.action && result.action.slug == 'meteo' && result.action.done){
-		console.log(ay.appel());
+		// Call the function with the URL we want to load, but then chain the
+		// promise then() method on to the end of it. This contains two callbacks
+		ay.yseopLoad().then(function(response) {
+			// The first runs when the promise resolves, with the request.reponse
+			// specified within the resolve() method.
+			console.log(response)
+			message.addReply({type : 'text', content : response});
+			// The second runs when the promise
+			// is rejected, and logs the Error specified with the reject() method.
+			}, function(Error) {
+				console.log(Error);
+	  });
+
 	};
 	
 
@@ -242,7 +268,7 @@ const replyMessage = (message) => {
     // If there is not any message return by Recast.AI for this current conversation
     if (!result.replies.length) {
 		// A ENLEVER A LA FIN
-      message.addReply({ type: 'text', content: 'I don\'t have the reply to this yet :)' })
+      //message.addReply({ type: 'text', content: 'I don\'t have the reply to this yet :)' })
     } else {
       // Add each reply received from API to replies stack
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
@@ -253,6 +279,7 @@ const replyMessage = (message) => {
     message.reply()
     .then(() => {
       // Do some code after sending messages
+	  
 	  
     })
     .catch(err => {

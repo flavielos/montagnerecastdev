@@ -74,8 +74,12 @@ exports.comNvPhysique = function(nv){
 	return(reply);
 };
 
-exports.comNvDifficulte = function(a, b){
-	var nvPhysique = a.substring(12);
+exports.comNvDifficulte = function(b){
+	if (this.NV_PHYSIQUE != null){
+		var nvPhysique = this.NV_PHYSIQUE.substring(12);
+	} else {
+		var nvPhysique = 2;
+	};
 	var nvDifficulte = b.substring(14);
 	var delta = nvPhysique - nvDifficulte;
 	var com;
@@ -102,9 +106,8 @@ exports.comNvDifficulte = function(a, b){
 			com = 'Vraiment ? Ces parcours risquent d\'être trop difficiles pour vous...';
 		break;
 	}
-	cc.setNvDifficulte(nvDifficulte.floor());
 	var reply = {type : 'text', content : com};
-	return(reply);
+	return(com);
 	
 };
 
@@ -167,28 +170,45 @@ exports.comNvEquipement = function(){
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
-/*
+
 exports.comNvDecouverte = function(nv){
-	var com = nv.toString();
+	var com;
+	var nb = nv.substring(14);
+	if(nb<=1){
+		com = '\n Vous souhaitez faire quelques découvertes :evergreen_tree:'
+	} else {
+		com = '\n Vous souhaitez faire beaucoup de découvertes :chipmunk:'
+	};
 	var reply = {type : 'text', content : com};
-	return(reply);
+	return(com);
 };
 
 exports.comNvEvasion = function(nv){
-	var com = nv.toString();
+	var com;
+	if (nv == 'ACCESSIBLE'){
+		com = '\n Vous voulez un lieu accessible assez facilement';
+	} else {
+		com = '\n Vous voulez un endroit isolé pour vous ressourcer';
+	};
 	var reply = {type : 'text', content : com};
-	return(reply);
+	return(com);
 };
 
-exports.comNvActivite = function(nv){
-	var com = nv.toString();
+exports.comNvActivites = function(nv){
+	var com;
+	var nb = nv.substring(13);
+	if(nb<=1){
+		com = '\n Vous aimeriez pratiquer quelques activités :bow_and_arrow:'
+	} else {
+		com = '\n Vous aimeriez faire plusieurs activités :rowboat:'
+	};
 	var reply = {type : 'text', content : com};
-	return(reply);
+	return(com);
 };
-*/
-exports.comYseop = function(){
-	var com = ay.appel();
-	var reply = {type : 'text', content : com};
-	return(reply);
-};
+
+// exports.comYseop = function(){
+	// var com = texte;
+	// var reply = {type : 'text', content : com};
+	// return(reply);
+// };
 
