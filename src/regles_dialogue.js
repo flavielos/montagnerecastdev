@@ -141,7 +141,6 @@ exports.comEloignement = function(nv){
 	} else if (delta < 0){
 		com = 'Compte-tenu de votre budget, nous allons devoir faire des compromis. Cependant, je vais faire de mon mieux.';
 	};
-	//com += '\n Comment qualifieriez vous le niveau physique général du groupe ?';
 
 	var reply = {type : 'text', content : com};
 	return(reply);
@@ -159,7 +158,7 @@ exports.comNvRandonneur = function(nv){
 	} else if (nv>3){
 		com = 'Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer ;)';
 	};
-	//com = com + '\n Quel est votre budget par personne pour ce trek ?';
+	console.log(nv);
 	var reply = {type : 'text', content : com};
 	return(reply);
 };

@@ -41,12 +41,12 @@ const replyMessage = (message) => {
 	};
 	
 	// get age_min
-	if (result.action && result.action.slug == 'donner-age' && result.action.done){
+	if (result.action && result.action.slug == 'donner-age-min' && result.action.done){
 		cc.setAgeMin(result.getMemory('age_min').years);
 		message.addReply(rd.comAgeMin(cc.getAgeMin()));
 	};
 	//get age_max
-	if (result.action && result.action.slug == 'donner-age-1' && result.action.done){
+	if (result.action && result.action.slug == 'donner-age-max' && result.action.done){
 		cc.setAgeMax(result.getMemory('age_max').years);
 		message.addReply(rd.comAgeMax(cc.getAgeMax()));
 	};
@@ -118,22 +118,23 @@ const replyMessage = (message) => {
 		message.addReply(rd.comEloignement(cc.getEloignement()));
 	};
 	if (result.action && result.action.slug == 'pas-de-preference-1'){
-		var nb =0;
-		cc.setBudget('NV_ELOIGNEMENT_' + nb.toString());
+		var nb = 0;
+		cc.setEloignement('NV_ELOIGNEMENT_' + nb.toString());
 		console.log('eloignement : ' + cc.getEloignement());
 		message.addReply(rd.comEloignement(cc.getEloignement()));
 	};
 	
 	// get niveau randonneur
 	if (result.action && result.action.slug == 'donner-niveau-1'  && result.action.done){
-
+		console.log('wow');
 		if (result.getMemory('nv_randonneur') != null){
 			cc.setNvRandonneur('NV_RANDONNEUR_' + result.getMemory('nv_randonneur').scalar);
 		} 
 		message.addReply(rd.comNvRandonneur(cc.getNvRandonneur()));
 	};
 	
-	if (result.action &&  result.action.slug == 'donner-niveau-physique-1' && result.action.done){
+	if (result.action &&  result.action.slug == 'donner-niveau-randonneur' && result.action.done){
+		console.log('wow');
 		if (result.getMemory('nv_randonneur_1') != null){
 			cc.setNvRandonneur('NV_RANDONNEUR_1');
 		} else if (result.getMemory('nv_randonneur_2') != null){
@@ -241,21 +242,53 @@ const replyMessage = (message) => {
 		message.addReply({type : 'text', content : reply});
 	};
 	
+	// Reco erronée
+	if(result.action && result.action.slug == 'non'){
+		const reply = {
+        type: 'quickReplies',
+        content: {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulté',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulté',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter découvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activités',
+				title : 'Pas assez d\'activités'
+			}
+          ],
+        },
+      }
+	  return message ? message.reply([reply]) : res.json({ reply: 'Rectification recommandation' })
+
+	};
+	
 	// appel yseop 	
 	if (result.action && result.action.slug == 'meteo' && result.action.done){
 		// Call the function with the URL we want to load, but then chain the
 		// promise then() method on to the end of it. This contains two callbacks
-		ay.yseopLoad().then(function(response) {
+		const texte = ay.yseopLoad().then(function(response) {
 			// The first runs when the promise resolves, with the request.reponse
 			// specified within the resolve() method.
-			console.log(response)
-			message.addReply({type : 'text', content : response});
+			//console.log(response)
+			return(response)
+			//message.addReply({type : 'text', content : response});
 			// The second runs when the promise
 			// is rejected, and logs the Error specified with the reject() method.
 			}, function(Error) {
 				console.log(Error);
 	  });
-
+	  console.log('t');
+		message.addReply({type : 'text', content : texte});
 	};
 	
 

@@ -51,31 +51,39 @@ exports.yseopLoad = function() {
 	// Create new promise with the Promise() constructor;
 	// This has as its argument a function
 	// with two parameters, resolve and reject
-	return new Promise(function(resolve, reject) {
-	  // Standard XHR to load an image
-	  var request = new xhr.XMLHttpRequest();
-	  request.open('POST', 'https://pval2.studio.yseop-hosting.com/yseop-manager/direct/Montagne/dialog.do?command=init-dialog&transformation=bot', true);
-	  // When the request loads, check whether it was successful
-	  request.onload = function() {
-		if (request.status === 200) {
-		// If successful, resolve the promise by passing back the request response
-		  resolve(request.responseText);
-		} else {
-		// If it fails, reject the promise with a error message
-		  reject(Error('Text didn\'t load successfully; error code:' + request.statusText));
-		}
-	  };
-	  request.onerror = function() {
-	  // Also deal with the case when the entire request fails to begin with
-	  // This is probably a network error, so reject the promise with an appropriate message
-		  reject(Error('There was a network error.'));
-	  };
-	  // Send the request
+	var request = new xhr.XMLHttpRequest();
+	new Promise(function(resolve, reject) {
+		
+		request.open('POST', 'https://pval2.studio.yseop-hosting.com/yseop-manager/direct/Montagne/dialog.do?command=init-dialog', true);
+		
+		// When the request loads, check whether it was successful
+		request.onloadend = function(event) {
+			if (request.status === 200) {
+			// If successful, resolve the promise by passing back the request response
+				console.log("youhou");
+				resolve(request.responseText);
+			} else {
+				console.log('presque youhou !');
+				resolve(request.responseText);
+				// If it fails, reject the promise with a error message
+		  
+				reject(Error('Text didn\'t load successfully; error code:' + request.statusText));
+			}
+		};
+		
+		request.onerror = function(event) {
+			// Also deal with the case when the entire request fails to begin with
+			// This is probably a network error, so reject the promise with an appropriate message
+			reject(Error('There was a network error.'));
+		};
+		
+		// Send the request
 		request.setRequestHeader('Content-Type', 'application/soap+xml; charset=UTF-8');
 		request.setRequestHeader('Authorization', 'Basic b3dpOmY1VFRuVmhBbUZmeHlsY2J1YlVNdDl0MlpYNURNTg==');
 		request.setRequestHeader('Accept', 'text/html');
 		var data = xtb.xmlToString();
 		request.send(data);
+		request.onloadend = xhr.onLoadEnd
 	});
   }
 
