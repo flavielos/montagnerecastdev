@@ -1,61 +1,61 @@
 // Commentaire sur age_min
-const cc = require('./carac_client')
-const ay = require('./appel_yseop')
+const randos = require('./randonneurs');
 
+//const ay = require('./appel_yseop')
 
-exports.comAgeMin = function(age){
+exports.comProfil = function(profil) {
+	var com = 'Vous avez choisi le profil ' + profil.toString() + '.';
+	if (profil == 'A'){
+		com += '\n Je me présente, je suis l\'assistant de recommandation P-Val Montagne. Mon travail est de vous faire découvrir le trek de vos rêves.\n Apprenons à nous connaitre, comment vous appelez-vous ?';		
+	} else if (profil == 'C'){
+		com += '\n Bonjour Jacqueline ! \n Ravi que vous et votre mari Robert soyez de nouveau d’attaque pour partir à l’aventure ! \n Comment qualifieriez-vous le niveau physique moyen de votre couple ?';
+	} else if (profil == 'B'){
+		com += '\n Bonjour Michel, ravi de vous revoir ! Votre petite Marie doit avoir 6 ans maintenant, les enfants de cet âge adorent gambader dans la montagne :)';		
+	} else if (profil == 'D'){
+		com += '\n Salut Tom ! \n Heureux de savoir que vous voulez repartir à l’aventure avec Marc, Jeanne, Paul et Marine. Je vais tout faire pour que votre aventure vous convienne autant que la précédente. ;) ';		
+	};
+	var reply = {type : 'text', content : com};
+	return reply;
+};
+
+exports.comAge = function(age){
 	var com;
 	var alt = 0;
 	var nvMax = 4;
 	// Définition des seuils
 	var seuil_1 = 2;
 	var seuil_2 = 10;
+	var seuil_3 = 80;
+	var seuil_4 = 70;
+	
 	if (age < seuil_1){
 		alt = 1500;
 		nvMax = 2
-		com = age.toString() + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune.'
+		com = age.toString() + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
 	} else if (age < seuil_2){
 		alt = 3000;
 		nvMax = 3
-		com = age.toString() + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune.'
-	} else {
-		com = age.toString() + ' ans est l\'âge idéal pour la marche en montagne.'
-	};
-	cc.setAgeMin(age);
-	cc.setNvMax(nvMax);
-	var reply = {type : 'text', content : com};
-	return reply;
-};
-
-exports.comAgeMax = function(age){
-	var com;
-	var alt = 0;
-	var nvMax = 4;
-	// Définition des seuils
-	var seuil_1 = 80;
-	var seuil_2 = 70;
-	if (age > seuil_1){
+		com = age.toString() + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
+	} else if (age > seuil_3){
 		alt = 1500;
 		nvMax = 2
-		com = 'A ' + age.toString() + ' ans, l\'air de la montagne vous fera le plus grand bien.'
-	} else if (age > seuil_2){
+		com = 'A ' + age.toString() + ' ans, l\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
+	} else if (age > seuil_4){
 		alt = 3000;
 		nvMax = 3
-		com = 'A ' + age.toString() + ' ans, l\'air de la montagne vous fera le plus grand bien.'
+		com = 'A ' + age.toString() + ' ans, l\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
 	} else {
 		com = age.toString() + ' ans est l\'âge idéal pour la marche en montagne.'
 	};
-	cc.setAgeMax(age);
-	cc.setNvMax(nvMax);
-	//com += '\n Quel budget par personne avez-vous pour ce voyage ?';
+	randos.setNvMax(nvMax);
+	com += ' \n Comment qualifieriez-vous votre niveau physique personnel ?'
 	var reply = {type : 'text', content : com};
 	return reply;
 };
 
 exports.comNvPhysique = function(nv){
 	var com;
-	nv = nv.substring(12);
-	var nvMax = cc.getNvMax()
+	var nvMax = randos.getNvMax()
 	var alt;
 	if (nv > nvMax){
 		nv = nvMax;
@@ -69,86 +69,82 @@ exports.comNvPhysique = function(nv){
 	} else if (nv>3){
 		com = 'Vous êtes de vrais athlètes ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer ;)';
 	};
-	//com = com + '\n Quel est votre budget par personne pour ce trek ?';
+	com += ' \n Comment qualifieriez-vous votre expérience en randonnée ?'
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
 
-exports.comNvDifficulte = function(b){
-	if (this.NV_PHYSIQUE != null){
-		var nvPhysique = this.NV_PHYSIQUE.substring(12);
-	} else {
-		var nvPhysique = 2;
+
+exports.comNvDifficulte = function(nvDiff){
+	var com = '';
+	switch(nvDiff){
+		case 1 :
+		com += 'Vous désirez un parcours très facile.';
+		break;
+		case 2 :
+		com += 'Vous désirez un parcours moyennement difficile.';
+		break;
+		case 1 :
+		com += 'Vous désirez un parcours difficile.';
+		break;
+		case 1 :
+		com += 'Vous désirez un parcours très d.ifficile.';
+		break;
 	};
-	var nvDifficulte = b.substring(14);
-	var delta = nvPhysique - nvDifficulte;
-	var com;
-	switch(delta){
-		case 3:
-			com = 'Vraiment ? Pour de grands sportifs comme vous ?';
-		break;
-		case 2:
-			com = 'Vous avez raison de vous ménager, ce sont les vacances :sunglasses:';
-		break;
-		case 1:
-			com = 'Vous avez raison de vous ménager, ce sont les vacances :sunglasses:';
-		break;
-		case 0:
-			com = 'Cela me parait parfaitement adapté.';
-		break;
-		case -1:
-			com = 'Vous cherchez le challenge, j\'aime ça :muscle:';
-		break;
-		case -2:
-			com = 'Vous cherchez le challenge, j\'aime ça :muscle:';
-		break;
-		case -3:
-			com = 'Vraiment ? Ces parcours risquent d\'être trop difficiles pour vous...';
-		break;
-	}
-	var reply = {type : 'text', content : com};
 	return(com);
 	
 };
 
 exports.comBudget = function(nv){
-	var nb = nv.substring(10);
 	var com;
-	if (nb == 0){
+	if (nv == 0){
 		com = 'Ok, nous discuterons du prix plus tard.';
-	} else if (nb == 1){
+	} else if (nv <= 100){
 		com = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
-	} else if(nb == 2){
+	} else if(nv <= 500){
 		com = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
 	} else {
 		com = 'En voilà un budget intéressant !';
 	};
-	//com += '\n De quelle distance environ comptez-vous vous éloigner de la France ?';
-
+	com += '\n De quelle distance environ comptez-vous vous éloigner de la France ?';
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
 
 exports.comEloignement = function(nv){
 	var com;
-	var budget = cc.getBudget().substring(10);
-	var nb = nv.substring(15);
-	var delta =  budget - nb;
-	if (nb == 0){
+	var profil = randos.getProfil();
+	/*
+	var budget = randos.getNvBudget();
+	if (budget == 100){
+		budget = 1;
+	} else if(budget == 500){
+		budget = 2;
+	} else if (budget == 5000){
+		budget = 3;
+	};
+	var delta =  budget - nv;
+	if (nv == 0){
 		com = 'Ok, je vais vous trouver un endroit sympa !';
 	} else if ( budget == 0 || delta >= 0){
 		com = 'Ok, je vais vous trouver un endroit sympa !';
 	} else if (delta < 0){
 		com = 'Compte-tenu de votre budget, nous allons devoir faire des compromis. Cependant, je vais faire de mon mieux.';
 	};
-
+	*/
+	com = 'Ok, je vais vous trouver un endroit sympa !';
+	if (profil == 'A' || profil == 'C'){
+		com += '\n Maintenant que l\'on se connait un peu mieux, qu\'est-ce qui vous ferait plaisir pendant cette randonnée ?';
+	} else {
+		//TO DO
+	};
+	
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
 
 exports.comNvRandonneur = function(nv){
 	var com;
-	nv = nv.substring(14);
 	if (nv <= 1){
 		com = 'Je suis ravi de vous faire découvrir mon sport préféré ! \n Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile';
 	} else if (nv<=2){
@@ -158,7 +154,7 @@ exports.comNvRandonneur = function(nv){
 	} else if (nv>3){
 		com = 'Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer ;)';
 	};
-	console.log(nv);
+	com += '\n Que prenez vous dans votre sac de randonneur ?';
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
@@ -166,44 +162,46 @@ exports.comNvRandonneur = function(nv){
 exports.comNvEquipement = function(){
 	var com;
 	com = 'c\'est noté :smile:';
+	com += '\n Quel est votre budget par personne ?'
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
 
-exports.comNvDecouverte = function(nv){
-	var com;
-	var nb = nv.substring(14);
-	if(nb<=1){
+exports.comNvDecouvertes = function(nv){
+	var com = '';
+	if(nv==1){
 		com = '\n Vous souhaitez faire quelques découvertes :evergreen_tree:'
 	} else {
 		com = '\n Vous souhaitez faire beaucoup de découvertes :chipmunk:'
 	};
-	var reply = {type : 'text', content : com};
 	return(com);
 };
 
 exports.comNvEvasion = function(nv){
-	var com;
-	if (nv == 'ACCESSIBLE'){
-		com = '\n Vous voulez un lieu accessible assez facilement';
+	var com = '';
+	if (nv <= 2){
+		com = '\n Vous voulez un lieu accessible assez facilement.';
 	} else {
-		com = '\n Vous voulez un endroit isolé pour vous ressourcer';
+		com = '\n Vous voulez un endroit isolé pour vous ressourcer.';
 	};
-	var reply = {type : 'text', content : com};
 	return(com);
 };
 
 exports.comNvActivites = function(nv){
-	var com;
-	var nb = nv.substring(13);
-	if(nb<=1){
+	var com = '';
+	if(nv == 1){
 		com = '\n Vous aimeriez pratiquer quelques activités :bow_and_arrow:'
 	} else {
 		com = '\n Vous aimeriez faire plusieurs activités :rowboat:'
 	};
-	var reply = {type : 'text', content : com};
 	return(com);
 };
+
+exports.comRecommandationValidee = function(){
+	var com = 'Super ! Si vous souhaitez réserver votre voyage, je vous invite à cliquer ici. \n A bientôt :)';
+	return(com);
+};
+
 
 // exports.comYseop = function(){
 	// var com = texte;

@@ -1,40 +1,806 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<y:input xmlns:y="http://www.yseop.com/engine/3" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" 
-xmlns:ft="http://apache.org/cocoon/forms/1.0#template" xmlns:fi="http://apache.org/cocoon/forms/1.0#instance" 
-xmlns:fd="http://apache.org/cocoon/forms/1.0#definition" xmlns:fb="http://apache.org/cocoon/forms/1.0#binding" >
-	<y:action command="init-dialog" sub-command=""/>
-	<y:data>
-		<y:instance yid="theGeneralData">
-			<traces>true</traces>
-			<reloadedData>true</reloadedData>
-			<saisieDeDonnees yid="SAISIE_1">
-				<nomClient>Maxime</nomClient>
-				<ageMax>55</ageMax>
-				<ageMin>45</ageMin>
-				<dureeDeLaRandonnee>4</dureeDeLaRandonnee>
-				<dureeStricte yid="DUREE_PLUS"/>
-				<isoleAccessible yid="ACCESSIBLE"/>
-				<niveauEloignement yid="NV_ELOIGNEMENT_1"/>
-				<niveauPhysique yid="NV_PHYSIQUE_2"/>
-				<niveauRandonneur yid="NV_RANDONNEUR_2"/>
-				<niveauEquipement yid="NV_EQUIPEMENT_1"/>
-				<niveauDifficulte yid="NV_DIFFICULTE_1"/>
-				<niveauBudget yid="NV_BUDGET_4"/>
-				<niveauActivites yid="NV_ACTIVITES_4"/>
-			</saisieDeDonnees>
-			<reloadedData>false</reloadedData>
-			<dialogId>853880</dialogId>
-			<language yid="LANG_en"/>
-		</y:instance>
-	</y:data>
-	<y:dialog-session>
-		<y:dialog-id>R20170707070825-1</y:dialog-id>
-	</y:dialog-session>
-	<y:misc-in>
-		<y:version dialog="2.19.0.S" manager="2.9.0"/>
-		<y:language id="fr_FR"/>
-		<y:language id="fr"/>
-		<y:language id="en_US"/>
-		<y:language id="en"/>
-	</y:misc-in>
-</y:input>
+<y:output xmlns:y="http://www.yseop.com/engine/3" xmlns:yt="http://www.yseop.com/text/2" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" xmlns:fd="http://apache.org/cocoon/forms/1.0#definition" xmlns:ft="http://apache.org/cocoon/forms/1.0#template" xmlns:fi="http://apache.org/cocoon/forms/1.0#instance" xmlns:fb="http://apache.org/cocoon/forms/1.0#binding">
+    <y:results></y:results>
+    <y:dataset>
+        <y:action command="next-request"></y:action>
+        <y:dialog-session>
+            <y:dialog-id>19B5E-15E37DA5E12</y:dialog-id>
+            <y:request-count>1</y:request-count>
+            <y:start-timestamp>2017-08-31T12:33:31:407</y:start-timestamp>
+            <y:step>TEXT_GENERATION</y:step>
+        </y:dialog-session>
+        <y:data>
+            <y:instance yid="theGeneralData">
+                <client yid="CLIENT">
+                    <ageClient>50</ageClient>
+                    <membres ypos="1" yid="0x3C8E" yclass="Membre">
+                        <nomMembre>Patricia</nomMembre>
+                        <ageMembre>45</ageMembre>
+                    </membres>
+                    <dernierSite yid="SITE_1">
+                        <nomEntite>le Lion&apos;s head</nomEntite>
+                    </dernierSite>
+                    <typeClient>famille</typeClient>
+                    <budget>5000</budget>
+                    <besoinEloignement>15</besoinEloignement>
+                    <nomEntite>Michel</nomEntite>
+                </client>
+                <saisieDeDonnees yid="SAISIE_1">
+                    <niveauPhysique yid="NV_PHYSIQUE_2"></niveauPhysique>
+                    <niveauRandonneur yid="NV_RANDONNEUR_2"></niveauRandonneur>
+                    <niveauEquipement yid="NV_EQUIPEMENT_3"></niveauEquipement>
+                    <recoAutomatique yid="NON"/>
+                    <niveauDifficulte yid="NV_DIFFICULTE_3">
+                        <correctionNiveau>0</correctionNiveau>
+                    </niveauDifficulte>
+                    <niveauEvasion yid="NV_EVASION_3">
+                        <correctionNiveau>0</correctionNiveau>
+                    </niveauEvasion>
+                    <niveauDecouverte yid="NV_DECOUVERTE_0">
+                        <correctionNiveau>0</correctionNiveau>
+                    </niveauDecouverte>
+                    <niveauDivertissement yid="NV_DIVERTISSEMENT_0">
+                        <correctionNiveau>0</correctionNiveau>
+                    </niveauDivertissement>
+                </saisieDeDonnees>
+            </y:instance>
+        </y:data>
+        <y:gathering-store></y:gathering-store>
+    </y:dataset>
+    <fd:ui>
+        <fd:widgets></fd:widgets>
+    </fd:ui>
+    <fi:uiinstance id="template-Answer">
+        <fi:zone id="engine-logs">
+            <fi:styling id="S1"></fi:styling>
+            <fi:group id="G1"></fi:group>
+        </fi:zone>
+        <fi:zone id="engine-notifications">
+            <fi:styling id="S2"></fi:styling>
+            <fi:group id="G2"></fi:group>
+        </fi:zone>
+        <fi:zone id="javascriptMessenger">
+            <fi:styling id="S3"></fi:styling>
+            <fi:group id="G3">
+                <y:txt id="T1" format="xml-dialog">
+                    <div id="javascriptMessenger"></div>
+                </y:txt>
+            </fi:group>
+        </fi:zone>
+        <fi:zone id="situationQualification">
+            <fi:styling id="S4"></fi:styling>
+            <fi:group id="G4"></fi:group>
+        </fi:zone>
+        <fi:zone id="zoneNextButton">
+            <fi:styling id="S5"></fi:styling>
+            <fi:group id="G5">
+                <fi:styling id="S6">
+                    <fi:label format="xml-dialog"></fi:label>
+                    <fi:layout nb-row="1"/>
+                </fi:styling>
+            </fi:group>
+        </fi:zone>
+        <fi:zone id="finalTextZone">
+            <fi:styling id="S7"></fi:styling>
+            <fi:group id="G6">
+                <y:txt id="T2" format="xml-dialog">
+                    <yt:bold>Client
+                        <yt:no-break-space/>:
+                    </yt:bold>
+                    <yt:par/>Évasion
+                    <yt:no-break-space/>: 2,666667
+                    <yt:par/>Divertissement
+                    <yt:no-break-space/>: 1
+                    <yt:par/>Difficulté
+                    <yt:no-break-space/>: 2,888889
+                    <yt:par/>Découverte
+                    <yt:no-break-space/>: 1,375
+                    <yt:par/>
+                    <yt:par/>
+                    <yt:bold>Best
+                        <yt:no-break-space/>:
+                    </yt:bold> La Cité Perdue
+                    <yt:par/>
+                    <yt:underline>Évasion
+                        <yt:no-break-space/>:
+                    </yt:underline>
+                    <yt:par/>2,75 (0,083333)
+                    <yt:par/>[ fréquentation
+                    <yt:no-break-space/>: 10 soit 3,85 ], [ distance jusqu&apos;à la ville la plus proche
+                    <yt:no-break-space/>: 80 soit 2,2 ], [ pics
+                    <yt:no-break-space/>: 0 soit 0 ], [ refuges
+                    <yt:no-break-space/>: 0 soit 0 ],
+                    <yt:par/>
+                    <yt:underline>Divertissement
+                        <yt:no-break-space/>:
+                    </yt:underline>
+                    <yt:par/>1 (0)
+                    <yt:par/>[ activités
+                    <yt:no-break-space/>: 0 soit 1 ],
+                    <yt:par/>
+                    <yt:underline>Difficulté
+                        <yt:no-break-space/>:
+                    </yt:underline>
+                    <yt:par/>3,034112 (0,145223)
+                    <yt:par/>[ altitude
+                    <yt:no-break-space/>: 5775 soit 3,434133 ], [ dénivelé positif
+                    <yt:no-break-space/>: 831 soit 2,119025 ], [ distance du parcous
+                    <yt:no-break-space/>: 8 soit 1,151515 ], [ durée du parcous
+                    <yt:no-break-space/>: 6 soit 3,5 ], [ température maximale
+                    <yt:no-break-space/>: 30 soit 4 ], [ température minimale
+                    <yt:no-break-space/>: -1 soit 4 ], [ obstacles physiques
+                    <yt:no-break-space/>: 0 soit 0 ],
+                    <yt:par/>
+                    <yt:underline>Découverte
+                        <yt:no-break-space/>:
+                    </yt:underline>
+                    <yt:par/>3,875 (2,5)
+                    <yt:par/>[ faune
+                    <yt:no-break-space/>: 0 soit 0 ], [ flore
+                    <yt:no-break-space/>: 4 soit 0,8 ], [ lieux culturels
+                    <yt:no-break-space/>: 5 soit 2,875 ], [ lacs
+                    <yt:no-break-space/>: 1 soit 0,2 ], [ cours d&apos;eau
+                    <yt:no-break-space/>: 0 soit 0 ],
+                    <yt:par/>
+                    <yt:par/>
+                    <yt:par/>-- -------------------------------------------------------------------------
+                    <yt:par/>Pour vous, nous conseillons
+                    <yt:bold>La Cité Perdue</yt:bold>.
+                    <yt:par/>Découvrez les paysages
+                    <yt:bold>forestiers</yt:bold> fabuleux de
+                    <yt:bold>ces vielles montagnes</yt:bold>
+                    <yt:bold>en Colombie</yt:bold>.
+                    <yt:par/>Son intensité se verra challengeante pour les
+                    <yt:bold>sportifs occasionnels</yt:bold> que vous êtes
+                    <yt:no-break-space/>: Certes chaque jour vous devrez gravir
+                    <yt:bold>831 m</yt:bold> et la totalité du parcours s&apos;étend sur la courte distance de
+                    <yt:bold>8 km</yt:bold>, mais il peut faire assez chaud (
+                    <yt:bold>30 °C au maximum</yt:bold>), au plus froid, vous aurez besoin de vous couvrir (
+                    <yt:bold>-1 °C au minimum</yt:bold>), il faut prévoir
+                    <yt:bold>6 jour</yt:bold> de marche et vous culminerez à l&apos;incroyable altitude de
+                    <yt:bold>5775 m</yt:bold>.
+                    <yt:par/>Ce site loin des sentiers battus vous offrira un calme idyllique
+                    <yt:no-break-space/>: le circuit est à
+                    <yt:bold>80 km</yt:bold> de l&apos;agglomération la plus proche (à savoir
+                    <yt:bold>Santa Marta</yt:bold>). Notez cependant que vous n&apos;y croiserez qu&apos;en moyenne
+                    <yt:bold>10 marcheurs</yt:bold> chaque jour.
+                    <yt:par/>
+                    <yt:par/>
+                    <yt:par/>
+                    <yt:par/>Ce circuit est tout à fait dans votre budget. Il vous faudra payer
+                    <yt:bold>1000 euros par personne</yt:bold> pour le voyage
+                    <yt:bold>Paris - Santa Marta</yt:bold>, puis
+                    <yt:bold>1400 euros par personne</yt:bold> pour l&apos;accès au parc et le guide obligatoire pour ce parcours.
+                    <yt:par/>---------------reco alt
+                    <yt:no-break-space/>: le Raid autour des Aiguilles Rouges car difficulté avec distance de -0,018882 contre -0,145223
+                    <yt:par/>Vous pourrez peut être être intéréssé par le site du Raid autour des Aiguilles Rouges. Le point culminant du circuit n&apos;est situé qu&apos;à
+                    <yt:bold>2526 m</yt:bold>.
+                    <yt:par/>
+                </y:txt>
+            </fi:group>
+        </fi:zone>
+    </fi:uiinstance>
+    <fb:dataref></fb:dataref>
+    <y:data-end>
+        <y:logging>
+            <y:log
+				index="1"
+				level="warning"
+				nature="alert"
+				origin-nb-ms="1.40"
+				src-engine-file="/srv/jenkins/workspace/kernel-central-master-linux-new-cmake/kernel/src/nc/xml/readXmlStream.c"
+				src-engine-line="4240">
+                <y:message>The element dialogId is not recognized as an attribute for the class GeneralData. It is ignored (current line = 36)</y:message>
+                <y:alert-type
+					type="external-alert"
+					sub-type-code="35"
+					sub-type-name="xml-read"
+					code="W79"
+					source="external"/>
+                <y:kb-context>
+                    <y:act-previous>doNothing()</y:act-previous>
+                    <y:engine-src
+						file="/srv/jenkins/workspace/kernel-central-master-linux-new-cmake/kernel/src/nc/xml/readXmlStream.c"
+						line="4240"/>
+                </y:kb-context>
+            </y:log>
+            <y:log
+				index="2"
+				level="warning"
+				nature="alert"
+				origin-nb-ms="1.73"
+				src-engine-file="/srv/jenkins/workspace/kernel-central-master-linux-new-cmake/kernel/src/nc/xml/readXmlStream.c"
+				src-engine-line="4240">
+                <y:message>The element language is not recognized as an attribute for the class GeneralData. It is ignored (current line = 37)</y:message>
+                <y:alert-type
+					type="external-alert"
+					sub-type-code="35"
+					sub-type-name="xml-read"
+					code="W79"
+					source="external"/>
+                <y:kb-context>
+                    <y:act-previous>doNothing()</y:act-previous>
+                    <y:engine-src
+						file="/srv/jenkins/workspace/kernel-central-master-linux-new-cmake/kernel/src/nc/xml/readXmlStream.c"
+						line="4240"/>
+                </y:kb-context>
+            </y:log>
+            <y:log
+				index="3"
+				level="info"
+				nature="user-log"
+				origin-nb-ms="3.23"
+				file="_technical/internalWorkflow.yml"
+				line="59">
+                <y:message>setLibActors called</y:message>
+            </y:log>
+            <y:log
+				index="4"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:saisieDeDonnees"
+				ruleset-container="_businessRules:saisieDeDonnees"
+				ruleset-container-dsl="1_ Saisie de Données"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="3.92"></y:log>
+            <y:log
+				index="5"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:setNombreDeValeursEnumerees"
+				dsl="set nombre de valeurs enumerees"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="7.06"></y:log>
+            <y:log
+				index="6"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:setEstAncienVrai"
+				dsl="set est Ancien Vrai"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="7.19"></y:log>
+            <y:log
+				index="7"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:setTailleDuGroupe"
+				dsl="set taille du groupe"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="7.32"></y:log>
+            <y:log
+				index="8"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:setAgeMax"
+				dsl="set Age Max"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="7.67"></y:log>
+            <y:log
+				index="9"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:setAgeMin"
+				dsl="set Age Min"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="7.97"></y:log>
+            <y:log
+				index="10"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauPhysique"
+				dsl="saisie niveau physique"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.10"></y:log>
+            <y:log
+				index="11"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauRandonneur1"
+				dsl="saisie niveau randonneur"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.23"></y:log>
+            <y:log
+				index="12"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauEquipement12"
+				dsl="saisie niveau equipement"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.36"></y:log>
+            <y:log
+				index="13"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauDifficulte1"
+				dsl="saisie niveau difficulte"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.50"></y:log>
+            <y:log
+				index="14"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauDivertissement"
+				dsl="saisie niveau divertissement"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.64"></y:log>
+            <y:log
+				index="15"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauDecouverte"
+				dsl="saisie niveau découverte"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.77"></y:log>
+            <y:log
+				index="16"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:saisieNiveauEvasion"
+				dsl="saisie niveau evasion"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="8.91"></y:log>
+            <y:log
+				index="17"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:ignorerNiveauDecouverte"
+				dsl="ignorer niveau decouverte"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="9.03"></y:log>
+            <y:log
+				index="18"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:saisieDeDonnees:ignorerNiveauDivertissement"
+				dsl="ignorer niveau divertissement"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="9.15"></y:log>
+            <y:log
+				index="19"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:saisieDeDonnees"
+				ruleset-container="_businessRules:saisieDeDonnees"
+				ruleset-container-dsl="1_ Saisie de Données"
+				step="round-begin"
+				round-index="2"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="9.28"></y:log>
+            <y:log
+				index="20"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:saisieDeDonnees"
+				ruleset-container="_businessRules:saisieDeDonnees"
+				ruleset-container-dsl="1_ Saisie de Données"
+				step="end"
+				rule-success-with-kb-changes-count="14"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="9.54"></y:log>
+            <y:log
+				index="21"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:computeIntels"
+				ruleset-container="_businessRules:computeIntels"
+				ruleset-container-dsl="2_Calcule des Scores et Distances"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="9.67"></y:log>
+            <y:log
+				index="22"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeScore"
+				dsl="compute score par thematique site"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="39.16"></y:log>
+            <y:log
+				index="23"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeScoreClient2"
+				dsl="compute score par thematique client"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="41.33"></y:log>
+            <y:log
+				index="24"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeDistanceParThematique"
+				dsl="compute distance par thematique"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="95.42"></y:log>
+            <y:log
+				index="25"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeDistance"
+				dsl="compute distance client"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="132.02"></y:log>
+            <y:log
+				index="26"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeDistanceDernierSite"
+				dsl="compute distance dernier site"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="172.36"></y:log>
+            <y:log
+				index="27"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeMoyenMatching"
+				dsl="set matching"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="174.17"></y:log>
+            <y:log
+				index="28"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeTauxDeMarchingParThematiqueClient"
+				dsl="compute taux de matching par thematique client"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="175.38"></y:log>
+            <y:log
+				index="29"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:computeIntels:computeTauxDeMatching"
+				dsl="compute taux de matching"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="175.75"></y:log>
+            <y:log
+				index="30"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:computeIntels"
+				ruleset-container="_businessRules:computeIntels"
+				ruleset-container-dsl="2_Calcule des Scores et Distances"
+				step="round-begin"
+				round-index="2"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="175.87"></y:log>
+            <y:log
+				index="31"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:computeIntels"
+				ruleset-container="_businessRules:computeIntels"
+				ruleset-container-dsl="2_Calcule des Scores et Distances"
+				step="end"
+				rule-success-with-kb-changes-count="8"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="176.10"></y:log>
+            <y:log
+				index="32"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:eliminationDeRecommandations"
+				ruleset-container="_businessRules:eliminationDeRecommandations"
+				ruleset-container-dsl="3_ Règles dElimination de Recommandations"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="176.23"></y:log>
+            <y:log
+				index="33"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_businessRules:eliminationDeRecommandations:eliminationDernierSite"
+				dsl="elimination dernier site"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="177.72"></y:log>
+            <y:log
+				index="34"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:eliminationDeRecommandations"
+				ruleset-container="_businessRules:eliminationDeRecommandations"
+				ruleset-container-dsl="3_ Règles dElimination de Recommandations"
+				step="round-begin"
+				round-index="2"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="177.84"></y:log>
+            <y:log
+				index="35"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:eliminationDeRecommandations"
+				ruleset-container="_businessRules:eliminationDeRecommandations"
+				ruleset-container-dsl="3_ Règles dElimination de Recommandations"
+				step="end"
+				rule-success-with-kb-changes-count="1"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="179.36"></y:log>
+            <y:log
+				index="36"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__dialogRules:profilingDuClient"
+				ruleset-container="_dialogRules:profilingDuClient"
+				ruleset-container-dsl="Toutes les règles de dialogue"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="179.53"></y:log>
+            <y:log
+				index="37"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_dialogRules:profilingDuClient:collecterCaracteristiquesObjectives"
+				dsl="collecter caracteristiques objectives "
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="179.74"></y:log>
+            <y:log
+				index="38"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_dialogRules:profilingDuClient:collecterCaracteristiquesSubjectives"
+				dsl="collecter caracteristiques subjectives"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="179.98"></y:log>
+            <y:log
+				index="39"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_dialogRules:profilingDuClient:collecterBesoinsDiscriminants"
+				dsl="collecter besoins discriminants"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="180.16"></y:log>
+            <y:log
+				index="40"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_dialogRules:profilingDuClient:DemanderSiRecoAutomatique"
+				dsl="Demander si reco automatique"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="180.30"></y:log>
+            <y:log
+				index="41"
+				level="trace"
+				nature="run-rule"
+				step="result"
+				yid="_dialogRules:profilingDuClient:collecterBesoinsScorants"
+				dsl="collecter besoins scorants"
+				result="success-with-KB-changes"
+				counter="0"
+				origin-nb-ms="181.04"></y:log>
+            <y:log
+				index="42"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__dialogRules:profilingDuClient"
+				ruleset-container="_dialogRules:profilingDuClient"
+				ruleset-container-dsl="Toutes les règles de dialogue"
+				step="round-begin"
+				round-index="2"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="181.16"></y:log>
+            <y:log
+				index="43"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__dialogRules:profilingDuClient"
+				ruleset-container="_dialogRules:profilingDuClient"
+				ruleset-container-dsl="Toutes les règles de dialogue"
+				step="end"
+				rule-success-with-kb-changes-count="5"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="181.39"></y:log>
+            <y:log
+				index="44"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:saisieDeDonnees"
+				ruleset-container="_businessRules:saisieDeDonnees"
+				ruleset-container-dsl="1_ Saisie de Données"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="182.27"></y:log>
+            <y:log
+				index="45"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:saisieDeDonnees"
+				ruleset-container="_businessRules:saisieDeDonnees"
+				ruleset-container-dsl="1_ Saisie de Données"
+				step="end"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="182.51"></y:log>
+            <y:log
+				index="46"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:computeIntels"
+				ruleset-container="_businessRules:computeIntels"
+				ruleset-container-dsl="2_Calcule des Scores et Distances"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="182.63"></y:log>
+            <y:log
+				index="47"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:computeIntels"
+				ruleset-container="_businessRules:computeIntels"
+				ruleset-container-dsl="2_Calcule des Scores et Distances"
+				step="end"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="182.86"></y:log>
+            <y:log
+				index="48"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:eliminationDeRecommandations"
+				ruleset-container="_businessRules:eliminationDeRecommandations"
+				ruleset-container-dsl="3_ Règles dElimination de Recommandations"
+				step="begin"
+				round-index="1"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="182.99"></y:log>
+            <y:log
+				index="49"
+				level="trace"
+				nature="run-ruleset"
+				yid="__RULESET__businessRules:eliminationDeRecommandations"
+				ruleset-container="_businessRules:eliminationDeRecommandations"
+				ruleset-container-dsl="3_ Règles dElimination de Recommandations"
+				step="end"
+				rule-success-with-kb-changes-count="0"
+				rule-success-without-kb-changes-count="0"
+				origin-nb-ms="183.23"></y:log>
+        </y:logging>
+        <y:synthesis>
+            <y:language
+				id="fr"/>
+            <y:process
+				id="19B5E"
+				port-number="17555"
+				start-runtime="2017-08-31T12:33:31:389"
+				runtime="zerunbc"
+				engine-version="6.0.0"
+				os="UNIX 0.0"
+				computer-name="6a056ce987f4"
+				random-seed="752087806"/>
+            <y:key-user
+				name="pour usage sur docker-prod - le 06/04/2017"
+				email="ebrocard@yseop.com"
+				creation-date="2017-04-11"
+				expiration-date="2018-04-06"/>
+            <y:request-exec-time
+				begin="2017-08-31T12:33:31:407"
+				end="2017-08-31T12:33:32:012"/>
+            <y:stat
+				errors="0"
+				warnings="2"
+				success-rule-fire="28"
+				text-write="1"
+				main-words="0"
+				main-chars="0"/>
+        </y:synthesis>
+        <y:profiling
+			xmlns:yp="http://www.yseop.com/profiling/1">
+            <yp:workflow
+				request-elapsed-ms="605.01">
+                <yp:step
+					id="SC_REQUEST_MANAGER_INITIALIZE"
+					name="rq-initialize"
+					start="6295121469187672"
+					end="6295121469194646"
+					elapsed-ms="0.01">
+                    <yp:engine-time-counters>
+                        <yp:cnt id="internal-kb-assertions" cnt="1"/>
+                    </yp:engine-time-counters>
+                </yp:step>
+                <yp:step
+					id="SC_REQUEST_MANAGER_PROCESS"
+					name="rq-process"
+					start="6295121480284538"
+					end="6295121660186582"
+					elapsed-ms="179.90">
+                    <yp:engine-time-counters>
+                        <yp:tc id="symbolic-new" elapsed-ms="11.815" cnt="299" small="true"/>
+                        <yp:tc id="ruleset-fire" elapsed-ms="178.639" cnt="7"/>
+                        <yp:cnt id="internal-kb-assertions" cnt="104874"/>
+                        <yp:tc id="domains-checks" elapsed-ms="43.810" cnt="18386" small="true"/>
+                    </yp:engine-time-counters>
+                    <yp:engine-time-counters>
+                        <yp:tc id="dialog-step-run" elapsed-ms="179.889"/>
+                        <yp:tc id="--dialog-step-run-data-gather" elapsed-ms="2.049"/>
+                    </yp:engine-time-counters>
+                </yp:step>
+                <yp:step
+					id="SC_REQUEST_MANAGER_WRITE"
+					name="rq-write"
+					start="6295121660389045"
+					end="6295122081932808"
+					elapsed-ms="421.54">
+                    <yp:engine-time-counters>
+                        <yp:tc id="symbolic-new" elapsed-ms="11.079" cnt="347" small="true"/>
+                        <yp:tc id="write-text-method" elapsed-ms="1220.574" cnt="4"></yp:tc>
+                        <yp:cnt id="internal-kb-assertions" cnt="62975"/>
+                        <yp:tc id="domains-checks" elapsed-ms="28.397" cnt="11770" small="true"/>
+                    </yp:engine-time-counters>
+                    <yp:engine-time-counters>
+                        <yp:tc id="init-end" elapsed-ms="6295121660.535" small="true"/>
+                    </yp:engine-time-counters>
+                </yp:step>
+                <yp:misc>17.797</yp:misc>
+            </yp:workflow>
+        </y:profiling>
+    </y:data-end>
+</y:output>
