@@ -11,9 +11,9 @@
  * The Recast.AI SDK will handle the message and call your reply bot function (ie. replyMessage function)
  */
 
-const recastai = require('recastai').default
+const recastai = require('recastai').default;
 
-const replyMessage = require('./message')
+const replyMessage = require('./message');
 
 // Instantiate Recast.AI SDK
 const client = new recastai(process.env.REQUEST_TOKEN)
@@ -50,21 +50,21 @@ export const bot = (body, response, callback) => {
     * ie curl -X "POST" "https://localhost:5000" -d '{"text": "YOUR_TEXT"}' -H "Content-Type: application/json; charset=utf-8"
     * It just sends it to Recast.AI and returns replies
     */
-    /*client.request.converseText(body.text, { conversationToken: process.env.CONVERSATION_TOKEN || null })
+    client.request.converseText(body.text, { conversationToken: process.env.CONVERSATION_TOKEN || null })
       .then((res) => {
-        if (res.reply()) {*/
+        if (res.reply()) {
           /*
            * If response received from Recast.AI contains a reply
            */
-          /*callback(null, {
+          callback(null, {
             reply: res.reply(),
             conversationToken: res.conversationToken,
           })
-        } else {*/
+        } else {
           /*
            * If response received from Recast.AI does not contain any reply
            */
-          /*callback(null, {
+          callback(null, {
             reply: 'No reply :(',
             conversationToken: res.conversationToken,
           })
@@ -72,7 +72,7 @@ export const bot = (body, response, callback) => {
       })
       .catch((err) => {
         callback(err)
-      })*/
+      })
 	  replyMessage(null, body.text, response)
   } else {
     callback('No text provided')
