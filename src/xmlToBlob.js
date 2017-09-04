@@ -8,9 +8,7 @@ exports.genererXml = function(){
 	var xml;
 	//var profil = randos.getProfil()
 	var profil = 'A';
-	console.log(profil);
 	if(profil=='A'){
-		console.log('A')
 		xml = '<?xml version="1.0" encoding="UTF-8"?>'+
 '<y:input xmlns:y="http://www.yseop.com/engine/3" xmlns:i18n="http://apache.org/cocoon/i18n/2.1" xmlns:fi="http://apache.org/cocoon/forms/1.0#instance" xmlns:ft="http://apache.org/cocoon/forms/1.0#template" xmlns:fd="http://apache.org/cocoon/forms/1.0#definition" xmlns:fb="http://apache.org/cocoon/forms/1.0#binding">'+
 '<y:action command="init-dialog" sub-command=""/>'+

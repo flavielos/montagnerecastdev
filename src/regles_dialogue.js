@@ -179,7 +179,7 @@ exports.comNvDecouvertes = function(nv){
 
 exports.comNvEvasion = function(nv){
 	var com = '';
-	if (nv <= 2){
+	if (nv == 1){
 		com = '\n Vous voulez un lieu accessible assez facilement.';
 	} else {
 		com = '\n Vous voulez un endroit isolé pour vous ressourcer.';

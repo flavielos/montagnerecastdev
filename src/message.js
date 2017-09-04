@@ -211,7 +211,7 @@ const replyMessage = (message) => {
 			dist = Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111;
 		};
 
-		randos.setNvEloignement(dist);
+		randos.setNvEloignement(Math.floor(dist));
 		message.addReply(rd.comEloignement(randos.getNvEloignement()));
 	};
 	if (result.action && result.action.slug == 'pas-de-preference-1'){
@@ -370,11 +370,11 @@ const replyMessage = (message) => {
 		// Specification niveau activites
 	
 		if (result.getMemory('activite_1')!=null){
-			var nb = 1;
+			var nb = 2;
 			if (result.getMemory('activite_2')!=null){
-				nb = 2;
+				nb = 3;
 				if (result.getMemory('activite_3')!=null){
-					nb = 3;
+					nb = 4;
 				};
 			};		
 			randos.setNvActivites(nb);
@@ -383,18 +383,18 @@ const replyMessage = (message) => {
 		
 		// Specification niveau découvertes
 		if (result.getMemory('decouverte_1')!=null){
-			var nb = 1;
+			var nb = 2;
 			if (result.getMemory('decouverte_2')!=null){
-				nb = 2
+				nb = 3
 				if (result.getMemory('decouverte_3')!=null){
-					nb = 3;
+					nb = 4;
 				};
 			};	
 			randos.setNvDecouvertes(nb);	
 			reply+=rd.comNvDecouvertes(randos.getNvDecouvertes())
 		};
 		
-		reply += ay.requete();
+		reply += '\n\n' + ay.requete();
 		
 		message.addReply({type : 'text', content : reply});
 
@@ -449,24 +449,24 @@ const replyMessage = (message) => {
 	
 	// Get ajustement
 	if (result.action && result.action.slug == 'demander-ajustement'){
-		var ajustement = result.getMemory('ajustement')
+		var ajustement = result.getMemory('ajustement').value;
 		if (ajustement == 'Diminuer evasion'){
 			
 		} else if (ajustement == 'Augmenter evasion'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.3');
+			randos.setAjustNvEvasion('0.8');
+		} else if (ajustement == 'Augmenter difficulte'){
+			console.log(ajustement);
+			randos.setAjustNvEvasion('0.8');
 		} else if (ajustement == 'Diminuer difficulte'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('-0.3');
-		} else if (ajustement == 'Diminuer difficulte'){
-			console.log(ajustement);
-			randos.setAjustNvEvasion('0.3');
+			randos.setAjustNvEvasion('-0.8');
 		} else if (ajustement == 'Augmenter activites'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.3');
+			randos.setAjustNvEvasion('0.8');
 		} else if (ajustement == 'Augmenter decouvertes'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.3');
+			randos.setAjustNvEvasion('0.8');
 		};
 		var reply = ay.requete();
 		message.addReply({type : 'text', content : reply});

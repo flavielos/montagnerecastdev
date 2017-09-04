@@ -23,16 +23,17 @@ exports.requete = function(){
 		//var xml = new xmldoc.XmlDocument(res);
 		//console.log(xml);
 		
-		var texte = xml.childNamed('recommandationIntro').val;
-		//texte += '\n';
+		var texte = '\n';
+		texte = xml.childNamed('recommandationIntro').val;
+		texte += '\n';
 		texte += xml.childNamed('recommandationDifficulte').val;
-		//texte += '\n';
+		texte += '\n';
 		texte += xml.childNamed('recommandationEvasion').val;
-		//texte += '\n';
+		texte += '\n';
 		texte += xml.childNamed('recommandationDecouverte').val;
-		//texte += '\n';
+		texte += '\n';
 		texte += xml.childNamed('recommandationDivertissement').val;
-		//texte += '\n';
+		texte += '\n';
 		texte += xml.childNamed('recommandationPrix').val;
 		texte += '\n Est-ce que ce trek vous convient ?';
 		return(texte);
