@@ -178,25 +178,18 @@ const replyMessage = (message) => {
 	};
 	// get budget
 	if (result.action && result.action.slug == 'donner-budget' && result.action.done){
-		var nb;
-		var euro = result.getMemory('budget').dollars*0.858;
-		if (euro<=100){
-			nb = 100;
-		} else if (euro<=500){
-			nb = 500;
-		} else {
-			nb = 5000;
-		};
-		randos.setNvBudget(nb);
+		var euro = Math.floor(result.getMemory('budget').dollars*0.858);
+		randos.setNvBudget(euro);
 		message.addReply(rd.comBudget(randos.getNvBudget()));
 	};
 	if (result.action && result.action.slug == 'pas-de-preference'){
-		randos.setNvBudget(0);
+		randos.setNvBudget(1000000);
 		message.addReply(rd.comBudget(randos.getNvBudget()));
 	};
 	
 	// get eloignement
 	if (result.action && result.action.slug == 'donner-lieu' && result.action.done){
+		
 		var dist;
 		if(result.getMemory('distance')!=null){
 			dist = result.getMemory('distance').meters;
@@ -213,6 +206,7 @@ const replyMessage = (message) => {
 
 		randos.setNvEloignement(Math.floor(dist));
 		message.addReply(rd.comEloignement(randos.getNvEloignement()));
+		
 	};
 	if (result.action && result.action.slug == 'pas-de-preference-1'){
 		var nb = 0;
@@ -332,8 +326,9 @@ const replyMessage = (message) => {
 	*/
 
 	//get détails
-	//TO DO  : meilleure estimation (si on en parle, c'est au moins niveau 2 voire 3)
 	if (result.action && result.action.slug == 'donner-details'  && result.action.done){
+		
+		//var reply = rd.comRecap();
 		
 		// Etats non spécifiés
 		randos.setNvDecouvertes(0);
@@ -342,19 +337,19 @@ const replyMessage = (message) => {
 		randos.setNvEvasion(0);
 		
 		//Spécification niveau difficulte
-		var reply = '';
+
 		if(result.getMemory('nv_difficulte_1')!=null){
 			randos.setNvDifficulte(1);
-			reply+=rd.comNvDifficulte(randos.getNvDifficulte())
+			//reply+=rd.comNvDifficulte(randos.getNvDifficulte())
 		} else if(result.getMemory('nv_difficulte_2')!=null){
 			randos.setNvDifficulte(2);	
-			reply+=rd.comNvDifficulte( randos.getNvDifficulte())
+			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())
 		} else if(result.getMemory('nv_difficulte_3')!=null){
 			randos.setNvDifficulte(3);
-			reply+=rd.comNvDifficulte( randos.getNvDifficulte())		
+			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())		
 		} else if(result.getMemory('nv_difficulte_4')!=null){
 			randos.setNvDifficulte(4);
-			reply+=rd.comNvDifficulte( randos.getNvDifficulte())	
+			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())	
 		};
 		
 		// Specifictation niveau evasion
@@ -364,7 +359,7 @@ const replyMessage = (message) => {
 			reply+=rd.comNvEvasion(randos.getNvEvasion());
 		} else if (result.getMemory('nv_evasion_2')!=null){
 			randos.setNvEvasion(4);
-			reply+=rd.comNvEvasion(randos.getNvEvasion());
+			//reply+=rd.comNvEvasion(randos.getNvEvasion());
 		};
 		
 		// Specification niveau activites
@@ -378,7 +373,7 @@ const replyMessage = (message) => {
 				};
 			};		
 			randos.setNvActivites(nb);
-			reply+=rd.comNvActivites(randos.getNvActivites())
+			//reply+=rd.comNvActivites(randos.getNvActivites())
 		};
 		
 		// Specification niveau découvertes
@@ -391,11 +386,13 @@ const replyMessage = (message) => {
 				};
 			};	
 			randos.setNvDecouvertes(nb);	
-			reply+=rd.comNvDecouvertes(randos.getNvDecouvertes())
+			//reply+=rd.comNvDecouvertes(randos.getNvDecouvertes())
 		};
 		
-		reply += '\n\n' + ay.requete();
+		var reply = rd.comRecap();
 		
+		//reply += '\n\n' + ay.requete();
+		reply += '\n Ces données sont-elles exactes ?';
 		message.addReply({type : 'text', content : reply});
 
 		/*
@@ -404,13 +401,131 @@ const replyMessage = (message) => {
 		*/
 	};
 	
-	// Reco validée
-	if (result.action && result.action.slug == 'recommandation-validee'){
-	message.addReply({type : 'text', content : rd.comRecommandationValidee()});
+	// Recap validée
+	if (result.action && result.action.slug == 'recap-valide'){
+		var texte = ay.requete();
+		message.addReply({type : 'text', content : texte});
 	};
 	
+	// Recap invalidée
+	if (result.action && result.action.slug == 'recap-invalide'){
+		const reply = {
+			type : 'quickReplies',
+			content : 
+			{
+				title : 'Zut...qu\'est-ce que j\'ai mal compris ?',
+				buttons :[
+					{
+						title : 'Niveau physique',
+						value : 'niveau physique'
+					},
+					{
+						title : 'Expérience en trek',
+						value : 'niveau randonneur'
+					},
+					{
+						title : 'Eloignement',
+						value : 'niveau eloignement'
+					},
+					{
+						title : 'Difficulté',
+						value : 'niveau difficulte'
+					},
+					{
+						title : 'Désir d\'évasion',
+						value : 'niveau evasion'
+					}
+				]
+			}
+		};
+		return message ? message.reply([reply]) : res.json({ reply: 'Rectification recap' })
+	};
+	
+	// Ajustement données client
+	if (result.action && result.action.slug == 'selectionner-ajustement-donnees'){
+		var choix = result.getMemory('choix').value;
+		if (choix == 'niveau physique'){
+			var question = 'Quel sportif êtes-vous ?';
+			var value1 = 'Débutant';
+			var title1 = 'Débutant';
+			var value2 = 'Sportif occasionnel';
+			var title2 = 'Occasionnel';
+			var value3 = 'Sportif régulier';
+			var title3 = 'Régulier';
+			var value4 = 'Athlète';
+			var title4 = 'Athlète';
+		} else if (choix == 'niveau randonneur'){
+			var question = 'Par le passé, combien de randonnées avez-vous faites ?';
+			var value1 = 'Débutant';
+			var title1 = 'Aucune';
+			var value2 = 'Sportif occasionnel';
+			var title2 = 'Quelques unes';
+			var value3 = 'Sportif régulier';
+			var title3 = 'Plusieurs';
+			var value4 = 'Athlète';
+			var title4 = 'Beaucoup';
+		} else if (choix == 'niveau difficulte'){
+			var question = 'Quelle difficulté souhaitez-vous rencontrer pendant votre trek ?';
+			var value1 = 'Très facile';
+			var title1 = 'Très facile';
+			var value2 = 'Assez facile';
+			var title2 = 'Assez facile';
+			var value3 = 'Assez difficile';
+			var title3 = 'Assez difficile';
+			var value4 = 'Très difficile';
+			var title4 = 'Très difficile';
+		} else if (choix == 'niveau eloignement'){
+			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
+			var value1 = '0 km';
+			var title1 = 'France';
+			var value2 = '100 km';
+			var title2 = 'Europe';
+			var value3 = '1000 km';
+			var title3 = 'Monde';
+			var value4 = '0 km';
+			var title4 = 'Peu importe';
+		} else if (choix == 'niveau evasion'){
+			var question = 'Quel type de site aimeriez-vous en terme d\isolement ?';
+			var value1 = 'Facilement accessible';
+			var title1 = 'Facilement accessible';
+			var value2 = 'Accessible';
+			var title2 = 'Accessible';
+			var value3 = 'Isolé';
+			var title3 = 'Isolé';
+			var value4 = 'Très isolé';
+			var title4 = 'Très isolé';
+		};
+		reply = {
+				type: 'quickReplies',
+				content: {
+				  title: question,
+				  buttons: [
+					{
+						value: value1,
+						title: title1,
+					},
+					{
+						value: value2,
+						title: title2,
+					},
+					{
+						value : value3,
+						title : title3
+					},
+					{
+						value : value4,
+						title : title4
+					}
+				  ]
+				},
+			}
+
+		return message ? message.reply([reply]) : res.json({ reply: 'Rectification' })
+	};	
+	
 	// Reco erronée
-	if(result.action && result.action.slug == 'recommandation-non-validee'){
+	if (result.action && result.action.slug == 'recommandation-non-validee'){
+		// TO DO : dépasser la limite de 5 boutons ?
 		const reply = {
         type: 'quickReplies',
         content: {
@@ -447,31 +562,90 @@ const replyMessage = (message) => {
 
 	};
 	
+	// Reco validée
+	if (result.action && result.action.slug == 'reco-valide'){
+		var texte = 'Bien, si vous souhaitez réserver votre trek dès maintenant, cliquez ici :sunglasses:'
+		message.addReply({type : 'text', content : texte});
+	};
+	
 	// Get ajustement
-	if (result.action && result.action.slug == 'demander-ajustement'){
+	if (result.action && result.action.slug == 'ajuster-thematique'){
 		var ajustement = result.getMemory('ajustement').value;
 		if (ajustement == 'Diminuer evasion'){
-			
+			console.log(ajustement);
+			randos.setAjustNvEvasion('-0.8');			
 		} else if (ajustement == 'Augmenter evasion'){
 			console.log(ajustement);
 			randos.setAjustNvEvasion('0.8');
 		} else if (ajustement == 'Augmenter difficulte'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.8');
+			randos.setAjustNvDifficulte('0.8');
 		} else if (ajustement == 'Diminuer difficulte'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('-0.8');
+			randos.setAjustNvDifficulte('-0.8');
 		} else if (ajustement == 'Augmenter activites'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.8');
+			randos.setAjustNvActivites('0.8');
 		} else if (ajustement == 'Augmenter decouvertes'){
 			console.log(ajustement);
-			randos.setAjustNvEvasion('0.8');
+			randos.setAjustNvDecouvertes('0.8');
 		};
 		var reply = ay.requete();
 		message.addReply({type : 'text', content : reply});
 	};
 	
+	if (result.action && result.action.slug == 'rectifier-lieu' && result.action.done){
+		var dist;
+		dist = result.getMemory('distance_rectif').meters;
+		dist = dist/1000;
+		randos.setNvEloignement(Math.floor(dist));
+		var reply = rd.comRecap();
+	};
+	
+	if (result.action && result.action.slug == 'rectifier-details' && result.action.done){
+		if (result.getMemory('choix').value == 'niveau difficulte'){
+			if(result.getMemory('nv_difficulte_1_rectif')!=null){
+				randos.setNvDifficulte(1);
+			} else if(result.getMemory('nv_difficulte_2_rectif')!=null){
+				randos.setNvDifficulte(2);	
+			} else if(result.getMemory('nv_difficulte_3_rectif')!=null){
+				randos.setNvDifficulte(3);
+			} else if(result.getMemory('nv_difficulte_4_rectif')!=null){
+				randos.setNvDifficulte(4);
+			};
+		} else if (result.getMemory('choix') == 'niveau evasion'){
+			if (result.getMemory('nv_evasion_1_rectif')!=null){
+				randos.setNvEvasion(1);
+			} else if (result.getMemory('nv_evasion_2_rectif')!=null){
+				randos.setNvEvasion(4);
+			};	
+		};
+		
+	};
+	
+	if (result.action && result.action.slug == 'rectifier-niveau' && result.action.done){
+		if (result.getMemory('choix').value == 'niveau physique'){
+			if (result.getMemory('nv_1_rectif') != null){
+				randos.setNvPhysique(1);
+			} else if (result.getMemory('nv_2_rectif') != null){
+				randos.setNvPhysique(2);
+			} else if (result.getMemory('nv_3_rectif') != null){
+				randos.setNvPhysique(3);
+			} else if (result.getMemory('nv_4_rectif') != null){
+				randos.setNvPhysique(4);
+			};
+		} else if (result.getMemory('choix').value == 'niveau randonneur'){
+			if (result.getMemory('nv_1_rectif') != null){
+				randos.setNvRandonneur(1);
+			} else if (result.getMemory('nv_2_rectif') != null){
+				randos.setNvRandonneur(2);
+			} else if (result.getMemory('nv_3_rectif') != null){
+				randos.setNvRandonneur(3);
+			} else if (result.getMemory('nv_4_rectif') != null){
+				randos.setNvRandonneur(4);
+			};
+		};
+	};
 	
 	// appel yseop 	
 	if (result.action && result.action.slug == 'meteo' && result.action.done){
