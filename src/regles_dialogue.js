@@ -1,5 +1,6 @@
 // Commentaire sur age_min
 const randos = require('./randonneurs');
+const rando = require('./randonneur');
 
 //const ay = require('./appel_yseop')
 
@@ -76,19 +77,19 @@ exports.comNvPhysique = function(nv){
 
 
 exports.comNvDifficulte = function(nvDiff){
-	var com = '';
+	var com = '\n';
 	switch(nvDiff){
 		case 1 :
 		com += 'Vous désirez un parcours très facile.';
 		break;
 		case 2 :
-		com += 'Vous désirez un parcours moyennement difficile.';
+		com += 'Vous désirez un parcours assez facile.';
 		break;
 		case 1 :
-		com += 'Vous désirez un parcours difficile.';
+		com += 'Vous désirez un parcours assez difficile.';
 		break;
 		case 1 :
-		com += 'Vous désirez un parcours très d.ifficile.';
+		com += 'Vous désirez un parcours très difficile.';
 		break;
 	};
 	return(com);
@@ -201,6 +202,54 @@ exports.comRecommandationValidee = function(){
 	var com = 'Super ! Si vous souhaitez réserver votre voyage, je vous invite à cliquer ici. \n A bientôt :)';
 	return(com);
 };
+
+exports.comRecap = function(){
+	var com = '';
+	com += 'D\'accord ' + rando.getPrenom() +', je résume :\n'
+	// niveau physique
+	var nvPhysique = randos.getNvPhysique();
+	if(nvPhysique == 1){
+		nvPhysique = 'débutant';
+	} else if(nvPhysique == 2){
+		nvPhysique = 'occasionnel';
+	} else if(nvPhysique == 3){
+		nvPhysique = 'régulier';
+	} else if(nvPhysique == 4){
+		nvPhysique = 'de haut niveau';
+	};
+	com += 'Vous êtes un sportif ' + nvPhysique;
+	// niveau randonneur
+	var nvRandonneur = randos.getNvRandonneur();
+	if(nvRandonneur == 1){
+		nvRandonneur = 'part en randonnée pour la première fois';
+	} else if(nvRandonneur == 2){
+		nvRandonneur = 'a déjà fait quelques randonnées';
+	} else if(nvRandonneur == 3){
+		nvRandonneur = 'a déjà fait plusieurs randonnées';
+	} else if(nvRandonneur == 4){
+		nvRandonneur = 'a déjà fait de multiples randonnées';
+	};
+	com += ' qui ' + nvRandonneur + '.';
+	// budget et eloignement
+	com += '\nVous avez un budget de quelques ' + randos.getNvBudget() + ' euros ';
+	com += 'pour partir à environ ' + randos.getNvEloignement() + ' kilomètres.'
+	if (randos.getNvDifficulte() != null){
+		com += '\n' + comNvDifficulte(randos.getNvDifficulte());
+	};
+	if (randos.getNvDecouvertes() != null){
+		com += '\n' + comNvDecouvertes(randos.getNvDecouvertes());
+	};
+	if (randos.getNvEvasion() != null){
+		com += '\n' + comNvEvasion(randos.getNvEvasion());
+	};
+	if (randos.getNvActivites() != null){
+		com += '\n' + comNvActivites(randos.getNvEvasion());
+	};
+	return(com);
+};
+
+
+
 
 
 // exports.comYseop = function(){
