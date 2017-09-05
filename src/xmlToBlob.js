@@ -1,6 +1,6 @@
 // var xhr = require('w3c-xmlhttprequest');
-var xmldom = require('simple-xml-dom')
-var xmldoc = require('xmldoc');
+//Zvar xmldom = require('simple-xml-dom')
+//Zvar xmldoc = require('xmldoc');
 //Zvar randos = require('./randonneurs');
 //Zvar rando = require('./randonneur');
 
