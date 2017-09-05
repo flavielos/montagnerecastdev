@@ -31,7 +31,10 @@
     "eslint": "^3.2.0",
     "eslint-config-zavatta": "^4.2.0",
     "eslint-plugin-import": "^1.6.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+	"sync-request" : "^4.1.0",
+	"simple-xml-dom" : "^1.0.0",
+	"xmldoc" : "^1.1.0"
   },
   "babel": {
     "presets": [
