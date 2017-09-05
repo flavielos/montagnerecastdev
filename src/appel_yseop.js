@@ -1,16 +1,16 @@
 //var xhr = require('w3c-xmlhttprequest');
-//var xtb = require ('./xmlToBlob');
-//var rq = require('sync-request');
-//var xmldoc = require('xmldoc');
+var xtb = require ('./xmlToBlob');
+var rq = require('sync-request');
+var xmldoc = require('xmldoc');
 
 //var message = require('./message');
 
 exports.requete = function(){
 	
 		var body = new String();
-		//body = xtb.genererXml();
+		body = xtb.genererXml();
 		//console.log(body);
-		/*
+		
 		var res = rq('POST','https://pval2.studio.yseop-hosting.com/yseop-manager/direct/Montagne/dialog.do?command=init-dialog&transformation=bot', {
 			'headers':{
 				'Content-Type': 'application/soap+xml; charset=UTF-8',
@@ -38,8 +38,8 @@ exports.requete = function(){
 		texte += xml.childNamed('recommandationPrix').val;
 		texte += '\n Est-ce que ce trek vous convient ?';
 		return(texte);
-		*/
-		return('texte');
+		
+		//return('texte');
 }; 
 
 // exports.appel = function(){
