@@ -13,7 +13,7 @@ const randos = require('./randonneurs');
 const rando = require('./randonneur');
 const rq = require('sync-request');
 const xtb = require('./xmlToBlob');
-const xts = require('./xmlToString');
+//const xts = require('./xmlToString');
 var xmldoc = require('xmldoc');
 
 

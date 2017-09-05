@@ -1,6 +1,6 @@
 var xhr = require('w3c-xmlhttprequest');
 var xtb = require ('./xmlToBlob');
-var rq = require('sync-request');
+//var rq = require('sync-request');
 var xmldoc = require('xmldoc');
 
 //var message = require('./message');
