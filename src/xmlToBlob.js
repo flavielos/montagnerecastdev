@@ -1,8 +1,8 @@
 // var xhr = require('w3c-xmlhttprequest');
 var xmldom = require('simple-xml-dom')
 var xmldoc = require('xmldoc');
-var randos = require('./randonneurs');
-var rando = require('./randonneur');
+//Zvar randos = require('./randonneurs');
+//Zvar rando = require('./randonneur');
 
 exports.genererXml = function(){
 	var xml;
