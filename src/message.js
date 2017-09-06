@@ -99,10 +99,42 @@ const replyMessage = (message) => {
 	};
 	
 	// get age
-	if (result.action && result.action.slug == 'donner-age' && result.action.done){
-		if (result.getMemory('age') != null){
-			rando.setAge(result.getMemory('age').years);
-			message.addReply(rd.comAge(rando.getAge()));			
+	if (result.action && result.action.slug == 'donner-age'){
+		if (result.action.done){
+			if (result.getMemory('age') != null){
+				rando.setAge(result.getMemory('age').years);
+				message.addReply(rd.comAge(rando.getAge()));			
+			};
+		} else {
+			const reply = {
+			type: 'quickReplies',
+			content: {
+			  title: 'Je ne suis qu\'un jeune bot, est-ce que vous pourriez choisir une tranche d\'âge ?',
+			  buttons: [
+				{
+					title: '- de 2 ans',
+					value: '2 ans',
+				},
+				{
+					title: '3 - 10 ans',
+					value: '5 ans',
+				},
+				{
+					title : '11 - 70 ans',
+					value : '50 ans'
+				},
+				{
+					title : '71 - 80 ans',
+					value : '75 ans'
+				},
+				{
+					title : '+ de 80 ans',
+					value : '90 ans'
+				}
+			  ],
+			},
+		  }
+		  return message ? message.reply([reply]) : res.json({ reply: 'Niveau choisi' })			
 		};
 	};
 	if (result.action && result.action.slug == 'donner-nombre-age' && result.action.done){
@@ -190,11 +222,39 @@ const replyMessage = (message) => {
 		};
 	};
 	// get budget
-	if (result.action && result.action.slug == 'donner-budget' && result.action.done){
-		if (result.getMemory('budget') != null){
-			var euro = Math.floor(result.getMemory('budget').amount);
-			randos.setNvBudget(euro);
-			message.addReply(rd.comBudget(randos.getNvBudget()));
+	if (result.action && result.action.slug == 'donner-budget'){
+		if (result.action.done){
+			if (result.getMemory('budget') != null){
+				var euro = Math.floor(result.getMemory('budget').amount);
+				randos.setNvBudget(euro);
+				message.addReply(rd.comBudget(randos.getNvBudget()));
+			};
+		} else {
+			const reply = {
+			type: 'quickReplies',
+			content: {
+			  title: 'Je ne suis pas sûr d\'avoir bien saisi :confused: Dans quel tranche se situe votre budget par personne ? ',
+			  buttons: [
+				{
+					value: '100€',
+					title: '- de 100€',
+				},
+				{
+					value: '500€',
+					title: '101 - 500€',
+				},
+				{
+					value : '1000€',
+					title : '501 - 1000€'
+				},
+				{
+					value : '2000€',
+					title : '+ de 1000€'
+				}
+			  ],
+			},
+		  }
+		  return message ? message.reply([reply]) : res.json({ reply: 'Niveau choisi' })	
 		};
 	};
 	if (result.action && result.action.slug == 'donner-nombre-budget' && result.action.done){
@@ -209,25 +269,54 @@ const replyMessage = (message) => {
 	};
 	
 	// get eloignement
-	if (result.action && result.action.slug == 'donner-lieu' && result.action.done){
-		
-		var dist;
-		if(result.getMemory('distance')!=null){
-			dist = result.getMemory('distance').meters;
-			dist = dist/1000;
-		} else if (result.getMemory('lieu')!=null){
-			var latP = 49.9;
-			var lonP = 2.3;
-			var lat = result.getMemory('lieu').lat;
-			var lon = result.getMemory('lieu').lng;
-			var deltaLat = (latP-lat);
-			var deltaLon = (lonP-lon);
-			dist = Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111;
+	if (result.action && result.action.slug == 'donner-lieu'){
+		if(result.action.done){
+			var dist;
+			if(result.getMemory('distance')!=null){
+				dist = result.getMemory('distance').meters;
+				dist = dist/1000;
+			} else if (result.getMemory('lieu')!=null){
+				console.log('lieu');
+				var latP = 49.9;
+				var lonP = 2.3;
+				var lat = result.getMemory('lieu').lat;
+				var lon = result.getMemory('lieu').lng;
+				var deltaLat = (latP-lat);
+				var deltaLon = (lonP-lon);
+				dist = Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111;
+			} else if (result.getMemory('duree') != null){
+				var duree = result.getMemory('duree').hours;
+				dist = 900 * duree;
+			};
+			randos.setNvEloignement(Math.floor(dist));
+			message.addReply(rd.comEloignement(randos.getNvEloignement()));
+		} else {
+			const reply = {
+			type: 'quickReplies',
+			content: {
+			  title: 'Oups...Je n\'ai pas compris. Pourriez-vous choisir l\'éloignement qui vous conviendrait le mieux parmi ces propositions ?',
+			  buttons: [
+				{
+					value: 'France',
+					title: 'France',
+				},
+				{
+					value: 'Europe',
+					title: 'Europe',
+				},
+				{
+					value : 'Monde',
+					title : 'Monde'
+				},
+				{
+					value : 'Peu importe',
+					title : 'Peu importe'
+				}
+			  ],
+			},
+		  }
+		  return message ? message.reply([reply]) : res.json({ reply: 'Niveau choisi' })		
 		};
-
-		randos.setNvEloignement(Math.floor(dist));
-		message.addReply(rd.comEloignement(randos.getNvEloignement()));
-		
 	};
 	if (result.action && result.action.slug == 'pas-de-preference-lieu'){
 		var nb = 0;
@@ -349,79 +438,106 @@ const replyMessage = (message) => {
 	*/
 
 	//get détails
-	if (result.action && result.action.slug == 'donner-details'  && result.action.done){
-		
-		//var reply = rd.comRecap();
-		
-		// Etats non spécifiés
-		randos.setNvDecouvertes(0);
-		randos.setNvDifficulte(0);
-		randos.setNvActivites(0);
-		randos.setNvEvasion(0);
-		
-		//Spécification niveau difficulte
+	if (result.action && result.action.slug == 'donner-details'){
+		if (result.action.done){
+			//var reply = rd.comRecap();
+			
+			// Etats non spécifiés
+			randos.setNvDecouvertes(0);
+			randos.setNvDifficulte(0);
+			randos.setNvActivites(0);
+			randos.setNvEvasion(0);
+			
+			//Spécification niveau difficulte
 
-		if(result.getMemory('nv_difficulte_1')!=null){
-			randos.setNvDifficulte(1);
-			//reply+=rd.comNvDifficulte(randos.getNvDifficulte())
-		} else if(result.getMemory('nv_difficulte_2')!=null){
-			randos.setNvDifficulte(2);	
-			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())
-		} else if(result.getMemory('nv_difficulte_3')!=null){
-			randos.setNvDifficulte(3);
-			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())		
-		} else if(result.getMemory('nv_difficulte_4')!=null){
-			randos.setNvDifficulte(4);
-			//reply+=rd.comNvDifficulte( randos.getNvDifficulte())	
-		};
+			if(result.getMemory('nv_difficulte_1')!=null){
+				randos.setNvDifficulte(1);
+				//reply+=rd.comNvDifficulte(randos.getNvDifficulte())
+			} else if(result.getMemory('nv_difficulte_2')!=null){
+				randos.setNvDifficulte(2);	
+				//reply+=rd.comNvDifficulte( randos.getNvDifficulte())
+			} else if(result.getMemory('nv_difficulte_3')!=null){
+				randos.setNvDifficulte(3);
+				//reply+=rd.comNvDifficulte( randos.getNvDifficulte())		
+			} else if(result.getMemory('nv_difficulte_4')!=null){
+				randos.setNvDifficulte(4);
+				//reply+=rd.comNvDifficulte( randos.getNvDifficulte())	
+			};
+			
+			// Specifictation niveau evasion
+			// TO DO : 4 niveaux pour l'évasion
+			if (result.getMemory('nv_evasion_1')!=null){
+				randos.setNvEvasion(1);
+				reply+=rd.comNvEvasion(randos.getNvEvasion());
+			} else if (result.getMemory('nv_evasion_2')!=null){
+				randos.setNvEvasion(4);
+				//reply+=rd.comNvEvasion(randos.getNvEvasion());
+			};
+			
+			// Specification niveau activites
 		
-		// Specifictation niveau evasion
-		// TO DO : 4 niveaux pour l'évasion
-		if (result.getMemory('nv_evasion_1')!=null){
-			randos.setNvEvasion(1);
-			reply+=rd.comNvEvasion(randos.getNvEvasion());
-		} else if (result.getMemory('nv_evasion_2')!=null){
-			randos.setNvEvasion(4);
-			//reply+=rd.comNvEvasion(randos.getNvEvasion());
-		};
-		
-		// Specification niveau activites
-	
-		if (result.getMemory('activite_1')!=null){
-			var nb = 2;
-			if (result.getMemory('activite_2')!=null){
-				nb = 3;
-				if (result.getMemory('activite_3')!=null){
-					nb = 4;
-				};
-			};		
-			randos.setNvActivites(nb);
-			//reply+=rd.comNvActivites(randos.getNvActivites())
-		};
-		
-		// Specification niveau découvertes
-		if (result.getMemory('decouverte_1')!=null){
-			var nb = 2;
-			if (result.getMemory('decouverte_2')!=null){
-				nb = 3
-				if (result.getMemory('decouverte_3')!=null){
-					nb = 4;
-				};
-			};	
-			randos.setNvDecouvertes(nb);	
-			//reply+=rd.comNvDecouvertes(randos.getNvDecouvertes())
-		};
-		
-		var reply = rd.comRecap();
-		
-		//reply += '\n\n' + ay.requete();
-		reply += '\n Ces données sont-elles exactes ?';
-		message.addReply({type : 'text', content : reply});
+			if (result.getMemory('activite_1')!=null){
+				var nb = 2;
+				if (result.getMemory('activite_2')!=null){
+					nb = 3;
+					if (result.getMemory('activite_3')!=null){
+						nb = 4;
+					};
+				};		
+				randos.setNvActivites(nb);
+				//reply+=rd.comNvActivites(randos.getNvActivites())
+			};
+			
+			// Specification niveau découvertes
+			if (result.getMemory('decouverte_1')!=null){
+				var nb = 2;
+				if (result.getMemory('decouverte_2')!=null){
+					nb = 3
+					if (result.getMemory('decouverte_3')!=null){
+						nb = 4;
+					};
+				};	
+				randos.setNvDecouvertes(nb);	
+				//reply+=rd.comNvDecouvertes(randos.getNvDecouvertes())
+			};
+			
+			var reply = rd.comRecap();
+			
+			//reply += '\n\n' + ay.requete();
+			reply += '\n Ces données sont-elles exactes ?';
+			message.addReply({type : 'text', content : reply});
 
-		/*
-		var texte = ay.requete();
-		message.addReply({type : 'text', content : texte});
-		*/
+			/*
+			var texte = ay.requete();
+			message.addReply({type : 'text', content : texte});
+			*/
+		} else {
+			const reply = {
+			type: 'quickReplies',
+			content: {
+			  title: 'Zut, cette phrase est trop ompliquée pour moi :flushed: Commencez par exemple par choisir la difficulté de votre trek :',
+			  buttons: [
+				{
+					value: 'très facile',
+					title: 'randonnée très facile',
+				},
+				{
+					value: 'assez facile',
+					title: 'randonnée assez facile',
+				},
+				{
+					value : 'assez difficile',
+					title : 'randonnée assez difficile'
+				},
+				{
+					value : 'très difficile',
+					title : 'randonnée très difficile'
+				}
+			  ],
+			},
+		  }
+		  return message ? message.reply([reply]) : res.json({ reply: 'Niveau choisi' })		
+		};
 	};
 	
 	// Recap validée
