@@ -58,7 +58,7 @@ const replyMessage = (message) => {
             {
 				value: 'A',
 				title: 'Jeune célibataire',
-            },
+            }/*,
             {
 				value: 'B',
 				title: 'Famille',
@@ -70,7 +70,7 @@ const replyMessage = (message) => {
 			{
 				value : 'D',
 				title : 'Groupe de jeunes'
-			}
+			}*/
           ],
         },
       }
@@ -90,13 +90,26 @@ const replyMessage = (message) => {
 	
 	// get prenom
 	if (result.action && result.action.slug == 'donner-nom' && result.action.done){
-		rando.setPrenom(result.getMemory('prenom').raw);
+		if(result.getMemory('prenom') != null){
+			rando.setPrenom(result.getMemory('prenom').raw);
+		} else if (result.getMemory('personne') != null){
+			rando.setPrenom(result.getMemory('personne').fullname);
+		};
+		message.addReply(rd.comPrenom(rando.getPrenom()));
 	};
 	
 	// get age
 	if (result.action && result.action.slug == 'donner-age' && result.action.done){
-		rando.setAge(result.getMemory('age').years);
-		message.addReply(rd.comAge(rando.getAge()));
+		if (result.getMemory('age') != null){
+			rando.setAge(result.getMemory('age').years);
+			message.addReply(rd.comAge(rando.getAge()));			
+		};
+	};
+	if (result.action && result.action.slug == 'donner-nombre-age' && result.action.done){
+		if (result.getMemory('age_nombre') != null){
+			rando.setAge(result.getMemory('age_nombre').scalar);
+			message.addReply(rd.comAge(rando.getAge()));			
+		};
 	};
 
 	// get niveau physique
@@ -178,11 +191,19 @@ const replyMessage = (message) => {
 	};
 	// get budget
 	if (result.action && result.action.slug == 'donner-budget' && result.action.done){
-		var euro = Math.floor(result.getMemory('budget').dollars*0.858);
-		randos.setNvBudget(euro);
-		message.addReply(rd.comBudget(randos.getNvBudget()));
+		if (result.getMemory('budget') != null){
+			var euro = Math.floor(result.getMemory('budget').amount);
+			randos.setNvBudget(euro);
+			message.addReply(rd.comBudget(randos.getNvBudget()));
+		};
 	};
-	if (result.action && result.action.slug == 'pas-de-preference'){
+	if (result.action && result.action.slug == 'donner-nombre-budget' && result.action.done){
+		if (result.getMemory('budget_nombre') != null){
+			randos.setNvBudget(result.getMemory('budget_nombre').scalar);
+			message.addReply(rd.comBudget(randos.getNvBudget()));
+		};
+	};
+	if (result.action && result.action.slug == 'pas-de-preference-budget'){
 		randos.setNvBudget(1000000);
 		message.addReply(rd.comBudget(randos.getNvBudget()));
 	};
@@ -208,7 +229,7 @@ const replyMessage = (message) => {
 		message.addReply(rd.comEloignement(randos.getNvEloignement()));
 		
 	};
-	if (result.action && result.action.slug == 'pas-de-preference-1'){
+	if (result.action && result.action.slug == 'pas-de-preference-lieu'){
 		var nb = 0;
 		randos.setNvEloignement(nb);
 		message.addReply(rd.comEloignement(randos.getNvEloignement()));
@@ -267,6 +288,7 @@ const replyMessage = (message) => {
 		};
 	};
 
+	/* equipement
 	//get niveau equipement
 	if (result.action && result.action.slug == 'donner-equipement'){
 		if(result.action.done){
@@ -314,6 +336,7 @@ const replyMessage = (message) => {
 		};
 	};
 	
+	*/
 	/*
 	if (result.action && result.action.slug == 'donner-niveau-2'  && result.action.done){
 

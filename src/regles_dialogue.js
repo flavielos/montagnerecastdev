@@ -7,7 +7,7 @@ const rando = require('./randonneur');
 exports.comProfil = function(profil) {
 	var com = 'Vous avez choisi le profil ' + profil.toString() + '.';
 	if (profil == 'A'){
-		com += '\n Je me présente, je suis l\'assistant de recommandation P-Val Montagne. Mon travail est de vous faire découvrir le trek de vos rêves.\n Apprenons à nous connaitre, comment vous appelez-vous ?';		
+		com += '\n Je me présente, je suis l\'assistant de recommandation P-Val Montagne. Mon travail est de vous faire découvrir le trek de vos rêves.\n J\'aimerais apprendre à mieux vous connaitre, comment vous appelez-vous ?';		
 	} else if (profil == 'C'){
 		com += '\n Bonjour Jacqueline ! \n Ravi que vous et votre mari Robert soyez de nouveau d’attaque pour partir à l’aventure ! \n Comment qualifieriez-vous le niveau physique moyen de votre couple ?';
 	} else if (profil == 'B'){
@@ -15,6 +15,13 @@ exports.comProfil = function(profil) {
 	} else if (profil == 'D'){
 		com += '\n Salut Tom ! \n Heureux de savoir que vous voulez repartir à l’aventure avec Marc, Jeanne, Paul et Marine. Je vais tout faire pour que votre aventure vous convienne autant que la précédente. ;) ';		
 	};
+	var reply = {type : 'text', content : com};
+	return reply;
+};
+
+exports.comPrenom = function(prenom){
+	var com = 'Enchanté ' + prenom + ', je suis toujours heureux de rencontrer de nouveaux passionnés de randonnée.';
+	com += '\n Quel âge avez-vous ?';
 	var reply = {type : 'text', content : com};
 	return reply;
 };
@@ -104,6 +111,8 @@ exports.comBudget = function(nv){
 		com = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
 	} else if(nv <= 500){
 		com = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
+	} else if (nv == 1000000) {
+		com = 'Ok, j\'aime avoir carte blanche ! :money_mouth_face:';
 	} else {
 		com = 'En voilà un budget intéressant !';
 	};
@@ -155,11 +164,13 @@ exports.comNvRandonneur = function(nv){
 	} else if (nv>3){
 		com = 'Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer ;)';
 	};
-	com += '\n Que prenez vous dans votre sac de randonneur ?';
+	//com += '\n Que prenez vous dans votre sac de randonneur ?';
+	com += '\n Quel est votre budget par personne ?'	
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
 
+/*
 exports.comNvEquipement = function(){
 	var com;
 	com = 'c\'est noté :smile:';
@@ -167,11 +178,14 @@ exports.comNvEquipement = function(){
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
+*/
 
 exports.comNvDecouvertes = function(nv){
 	var com = '';
 	if(nv==1){
 		com = '\n Vous souhaitez faire quelques découvertes :evergreen_tree:'
+	} else if (nv == 0) {
+		com = '';
 	} else {
 		com = '\n Vous souhaitez faire beaucoup de découvertes :chipmunk:'
 	};
@@ -182,6 +196,8 @@ exports.comNvEvasion = function(nv){
 	var com = '';
 	if (nv == 1){
 		com = '\n Vous voulez un lieu accessible assez facilement.';
+	} else if (nv == 0) {
+		com = '';
 	} else {
 		com = '\n Vous voulez un endroit isolé pour vous ressourcer.';
 	};
@@ -192,6 +208,8 @@ exports.comNvActivites = function(nv){
 	var com = '';
 	if(nv == 1){
 		com = '\n Vous aimeriez pratiquer quelques activités :bow_and_arrow:'
+	} else if (nv == 0) {
+		com = '';
 	} else {
 		com = '\n Vous aimeriez faire plusieurs activités :rowboat:'
 	};
@@ -231,19 +249,23 @@ exports.comRecap = function(){
 	};
 	com += ' qui ' + nvRandonneur + '.';
 	// budget et eloignement
-	com += '\nVous avez un budget de quelques ' + randos.getNvBudget() + ' euros ';
-	com += 'pour partir à environ ' + randos.getNvEloignement() + ' kilomètres.'
+	if (randos.getNvBudget() != 1000000){
+		com += '\nVous avez un budget de quelques ' + randos.getNvBudget() + ' euros.';
+	};
+	if (randos.getNvEloignement() != 0){
+		com += '\nVous aimeriez partir à environ ' + randos.getNvEloignement() + ' kilomètres.';
+	}
 	if (randos.getNvDifficulte() != null){
-		com += '\n' + comNvDifficulte(randos.getNvDifficulte());
+		com += '\n' + exports.comNvDifficulte(randos.getNvDifficulte());
 	};
 	if (randos.getNvDecouvertes() != null){
-		com += '\n' + comNvDecouvertes(randos.getNvDecouvertes());
+		com += '\n' + exports.comNvDecouvertes(randos.getNvDecouvertes());
 	};
 	if (randos.getNvEvasion() != null){
-		com += '\n' + comNvEvasion(randos.getNvEvasion());
+		com += '\n' + exports.comNvEvasion(randos.getNvEvasion());
 	};
 	if (randos.getNvActivites() != null){
-		com += '\n' + comNvActivites(randos.getNvEvasion());
+		com += '\n' + exports.comNvActivites(randos.getNvEvasion());
 	};
 	return(com);
 };

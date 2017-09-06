@@ -1,7 +1,7 @@
 var profil;
 var nvPhysique;
 var nvRandonneur;
-var nvEquipement;
+var nvEquipement = 2;
 var nvDifficulte;
 var nvActivites;
 var nvDecouvertes;
