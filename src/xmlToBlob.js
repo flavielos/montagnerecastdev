@@ -57,7 +57,7 @@ exports.genererXml = function(){
 '				<saisieDeDonnees yid="SAISIE_1">'+
 '					<niveauPhysique yid="NV_PHYSIQUE_'+randos.getNvPhysique()+'"></niveauPhysique>'+
 '					<niveauRandonneur yid="NV_RANDONNEUR_' + randos.getNvRandonneur() +'"></niveauRandonneur>'+
-'					<niveauEquipement yid="NV_EQUIPEMENT_'+ randos.getNvEquipement() +'"></niveauEquipement>'+
+'					<niveauEquipement yid="NV_EQUIPEMENT_2"></niveauEquipement>'+
 '					<recoAutomatique yid="NON"/>'+
 '					<niveauDifficulte yid="NV_DIFFICULTE_'+randos.getNvDifficulte()+'">'+
 '					     <correctionNiveau>'+ randos.getAjustNvDifficulte() +'</correctionNiveau>'+

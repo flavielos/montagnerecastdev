@@ -605,13 +605,13 @@ const replyMessage = (message) => {
 			var title4 = 'Beaucoup';
 		} else if (choix == 'niveau difficulte'){
 			var question = 'Quelle difficulté souhaitez-vous rencontrer pendant votre trek ?';
-			var value1 = 'Très facile';
+			var value1 = 'randonnée très facile';
 			var title1 = 'Très facile';
-			var value2 = 'Assez facile';
+			var value2 = 'randonnée cool';
 			var title2 = 'Assez facile';
-			var value3 = 'Assez difficile';
+			var value3 = 'randonnée assez difficile';
 			var title3 = 'Assez difficile';
-			var value4 = 'Très difficile';
+			var value4 = 'randonnée de malade';
 			var title4 = 'Très difficile';
 		} else if (choix == 'niveau eloignement'){
 			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
@@ -625,13 +625,13 @@ const replyMessage = (message) => {
 			var title4 = 'Peu importe';
 		} else if (choix == 'niveau evasion'){
 			var question = 'Quel type de site aimeriez-vous en terme d\isolement ?';
-			var value1 = 'Facilement accessible';
+			var value1 = 'une randonnée facilement accessible';
 			var title1 = 'Facilement accessible';
-			var value2 = 'Accessible';
+			var value2 = 'une randonnée facilement accessible';
 			var title2 = 'Accessible';
-			var value3 = 'Isolé';
+			var value3 = 'loin de la ville';
 			var title3 = 'Isolé';
-			var value4 = 'Très isolé';
+			var value4 = 'loin de la ville';
 			var title4 = 'Très isolé';
 		};
 		reply = {
@@ -738,7 +738,9 @@ const replyMessage = (message) => {
 		dist = result.getMemory('distance_rectif').meters;
 		dist = dist/1000;
 		randos.setNvEloignement(Math.floor(dist));
-		var reply = rd.comRecap();
+		//ar reply = rd.comRecap();
+		var texte = ay.requete();
+		message.addReply({type : 'text', content : reply});
 	};
 	
 	if (result.action && result.action.slug == 'rectifier-details' && result.action.done){
@@ -759,7 +761,9 @@ const replyMessage = (message) => {
 				randos.setNvEvasion(4);
 			};	
 		};
-		
+		//var reply = rd.comRecap();
+		var texte = ay.requete();
+		message.addReply({type : 'text', content : reply});
 	};
 	
 	if (result.action && result.action.slug == 'rectifier-niveau' && result.action.done){
@@ -784,6 +788,9 @@ const replyMessage = (message) => {
 				randos.setNvRandonneur(4);
 			};
 		};
+		var texte = ay.requete();
+		//var reply = rd.comRecap();
+		message.addReply({type : 'text', content : reply});
 	};
 	
 	// appel yseop 	

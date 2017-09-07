@@ -116,7 +116,7 @@ exports.comBudget = function(nv){
 	} else {
 		com = 'En voilà un budget intéressant !';
 	};
-	com += '\n De quelle distance environ comptez-vous vous éloigner de la France ?';
+	com += '\n De quelle distance environ comptez-vous vous éloigner de Paris ?';
 	var reply = {type : 'text', content : com};
 	return(reply);
 };
@@ -265,7 +265,7 @@ exports.comRecap = function(){
 		com += '\n' + exports.comNvEvasion(randos.getNvEvasion());
 	};
 	if (randos.getNvActivites() != null){
-		com += '\n' + exports.comNvActivites(randos.getNvEvasion());
+		com += '\n' + exports.comNvActivites(randos.getNvActivites());
 	};
 	return(com);
 };
