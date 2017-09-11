@@ -69,7 +69,6 @@ const replyMessage = (message) => {
 			
 			case 'nombre-age':
 			entity = result.getMemory('age_nombre').scalar;
-			console.log(entity);
 			break;
 			
 			case 'niveau-physique':
@@ -94,7 +93,6 @@ const replyMessage = (message) => {
 			} else if (result.getMemory('nv_physique_4') != null){
 				entity = 4;
 			};
-			console.log('message : ' + entity);
 			break;
 			
 			case 'budget':

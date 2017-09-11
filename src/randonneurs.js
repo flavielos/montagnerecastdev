@@ -31,7 +31,7 @@ exports.randonneurs = function(a)
 		this.nvPhysique = 1;
 		this.nvRandonneur = 2;
 		this.dernierSite = 'SITE_12';
-		this.rando = new modRandonnee.randonnee(1, 3, 1, 4);
+		this.rando = new modRandonnee.randonnee(1, 4, 1, 4);
 		break;
 		
 		case 'C':
@@ -46,8 +46,8 @@ exports.randonneurs = function(a)
 		this.membres[3] = new modRandonneur.randonneur('Inès', 23);
 		this.nvPhysique = 3;
 		this.nvRandonneur = 3;
-		this.dernierSite = SITE_4;
-		this.rando = new modRandonnee.randonnee(3, 2, 4, 0);
+		this.dernierSite = 'SITE_4';
+		this.rando = new modRandonnee.randonnee(3, 1, 4, 1);
 		break;
 	};
 };

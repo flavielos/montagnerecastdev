@@ -13,8 +13,20 @@ exports.reponseActionDone = function(slug, client, choix)
           buttons: [
             {
 				value: 'A',
-				title: 'Jeune célibataire',
-            }
+				title: 'Célibataire',
+            },
+			{
+				value : 'C',
+				title: 'Couple retraité'
+			},
+			{
+				value : 'B',
+				title : 'Famille'
+			},
+			{
+				value : 'D',
+				title : 'Groupe de potes'
+			}
           ],
         };
 		break;
@@ -25,10 +37,26 @@ exports.reponseActionDone = function(slug, client, choix)
 			case 'A':
 			content = 'Je suis toujours ravi de rencontrer de nouveaux passionnés de montagne !';
 			content += '\nJ\'aimerais faire votre connaissance, comment vous-appelez vous ?';
+			break;
 			
-			case 'B':	
-			case 'C':
+			case 'C':	
+			content = 'Heureux de vous revoir ' + client.membres[0].prenom + ' !';
+			content += '\nJe vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.'
+			content += '\nFaisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple.';
+			content += '\nComment qualifieriez-vous votre niveau physique ?'
+			break;
+			
+			case 'B':
+			content = 'Bonjour ' + client.membres[0].prenom + ' ! Ravi de vous revoir !';
+			content += '\nJe vois que la petite Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
+			content += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure en famille ?';
+			break;
+			
 			case 'D':
+			content = 'Salut ' + client.membres[0].prenom + ' !';
+			content += '\nJe vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière.';
+			content += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure entre amis ?';
+			break;
 		};
 		break;
 		
@@ -120,98 +148,134 @@ exports.reponseActionDone = function(slug, client, choix)
 		var profil = client.profil;
 		if (profil == 'A' || profil == 'C'){
 			content += '\n Maintenant que l\'on se connait un peu mieux, qu\'est-ce qui vous ferait plaisir pendant cette randonnée ?';
-		} else {
-			//TO DO
+			break;
 		};
-		break;	
 		
 		case 'details':
-		content = 'D\'accord ' + client.membres[0].prenom + ', je résume :';
-		//niveau physique
-		content += '\nVous êtes un sportif ';
+		var adjNvP;
 		switch(client.nvPhysique){
 			case 1:
-			content += 'débutant'
+			adjNvP = 'débutant';
 			break;
 			case 2:
-			content += 'occasionnel'
+			adjNvP = 'occasionnel';
 			break;
 			case 3:
-			content += 'régulier'
+			adjNvP = 'régulier';
 			break;
 			case 4:
-			content += 'de haut niveau'
+			adjNvP = 'performant';
 			break;			
 		};
-		// niveau randonneur
-		content += ' qui ';
+		var adjNvR;
 		switch(client.nvRandonneur){
 			case 1:
-			content += 'part en randonnée pour la première fois.'
+			adjNvR = 'très peu';
 			break;
 			case 2:
-			content += 'a déjà fait quelques randonnées.'
+			adjNvR = 'quelques';
 			break;
 			case 3:
-			content += 'a déjà fait plusieurs randonnées.'
+			adjNvR = 'plusieurs';
 			break;
 			case 4:
-			content += 'a déjà fait de multiples randonnées.'
+			adjNvR = 'de multiples';
 			break
 		};
-		//niveau budget
-		if (client.nvBudget != 1000000){
-			content += '\nVous avez un budget d\'environ ' + client.nvBudget + ' euros.';
+		//niveau difficulte
+		var adjNvDi;
+		switch(client.rando.nvDifficulte)
+		{
+			case 1:
+			adjNvDi = 'très facile.'
+			break;
+			case 2:
+			adjNvDi = 'assez facile.'
+			break;
+			case 3:
+			adjNvDi = 'moyennement difficile.'
+			break;
+			case 4:
+			adjNvDi = 'très difficile.'
+			break;
 		};
+		//niveau evasion
+		var adjNvEv;
+		switch(client.rando.nvEvasion)
+		{
+			case 1:
+			adjNvEv = 'accessible facilement'
+			break;
+			case 4:
+			adjNvEv = 'isolé'
+			break;
+		};
+		// niveau activites
+		var adjNvAc;
+		if (client.rando.nvActivites == 2){
+			adjNvAc = 'quelques';
+		} else if(client.rando.nvActivites >2){
+			adjNvAc = 'beaucoup';
+		};
+		// niveau decouvertes
+		var adjNvDe;
+		if (client.rando.nvDecouvertes == 2){
+			adjNvDe = 'quelques';
+		} else if(client.rando.nvDecouvertes >2){
+			adjNvDe = 'beaucoup';
+		};
+		
+		// recap
+		content = '\nD\'accord '+ client.membres[0].prenom +', je résume:'
+		switch(client.profil){
+			case 'A':
+			case 'C ':
+			if (client.profil == 'A'){
+				content += '\nVous êtes un sportif ' + adjNvP +' qui a fait '+ adjNvR +' randonnées par le passé.';
+			} else if (client.profil == 'C'){
+				content += '\nVous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
+			};
+			if (adjNvDi != null){
+				content += '\nVous souhaitez un trek ' + adjNvDi + '.';
+			};
+			if (adjNvEv != null){
+				content += '\nVous aimeriez un lieu ' + adjNvEv +'.';
+			};
+			if (adjNvAc != null){
+				content += '\nVous désirez pratiquer ' + adjNvAc +' activités.';
+			};
+			if (adjNvDe != null){
+				content += '\nVous voulez faire ' + adjNvDe +' découvertes.';
+			};
+			if (client.nvBudget != 1000000){
+				content += '\nVous avez un budget d\'environ ' + client.nvBudget + ' euros.';
+			};
+			break;
+			
+			case 'B':
+			case 'D':
+			content += '\nJe me souviens que vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +'randonnées par le passé.';
+			content += '\nVotre dernier trek était ' + adjNvDi +' et dans un lieu ' + adjNvEv + '.';
+			content += '\nVous aviez fait ' + adjNvDe + ' activités et pratiqué '+ adjNvDe +' activités.';
+			if (client.nvBudget != 1000000){
+				content += '\nVous avez, cette fois-ci, un budget d\'environ ' + client.nvBudget + ' euros.';
+			};
+			break;
+		};
+		
+
 		// niveau eloignement
 		if (client.nvEloignement != 0){
 			content += '\nVous aimeriez partir ';
 			if (client.nvEloignement <= 500){
-				content += 'en France :flag-cp:'
+				content += 'en France.'
 			} else if (client.nvEloignement <= 2000){
-				content += 'en Europe :flag-eu:'
+				content += 'en Europe.'
 			} else {
-				content += 'à la découverte du monde :airplane:'
+				content += 'à la découverte du monde.'
 			};
 		};
-		//niveau difficulte
-		switch(client.rando.nvDifficulte)
-		{
-			case 1:
-			content += '\nVous désirez un parcours très facile.'
-			break;
-			case 2:
-			content += '\nVous désirez un parcours assez facile.'
-			break;
-			case 3:
-			content += '\nVous désirez un parcours moyennement difficile.'
-			break;
-			case 4:
-			content += '\nVous désirez un parcours très difficile.'
-			break;
-		};
-		//niveau evasion
-		switch(client.rando.nvEvasion)
-		{
-			case 1:
-			content += '\nVous voulez un lieu accessible facilement'
-			break;
-			case 4:
-			content += '\nVous voulez un lieu isolé pour vous ressourcer.'
-			break;
-		};
-		// niveau activites
-		if (client.rando.nvActivites == 2){
-			content += '\nVous aimeriez pratiquer quelques activites :bow_and_arrow:'
-		} else if(client.rando.nvActivites >2){
-			content += '\nVous aimeriez pratiquer beaucoup d\'activites :rowboat:'
-		};
-		// niveau decouvertes
-		if (client.rando.nvDecouvertes == 2){
-			content += '\nVous souhaitez faire quelques découvertes :evergreen_tree:'
-		} else if(client.rando.nvDecouvertes >2){
-			content += '\nVous souhaitez faire beaucoup de découvertes :chipmunk:'
-		};
+
 		content += '\nCe résumé vous correspond-il ?'
 		break;
 		
