@@ -9,7 +9,7 @@ exports.comProfil = function(profil) {
 	if (profil == 'A'){
 		com += '\n Je me présente, je suis l\'assistant de recommandation P-Val Montagne. Mon travail est de vous faire découvrir le trek de vos rêves.\n J\'aimerais apprendre à mieux vous connaitre, comment vous appelez-vous ?';		
 	} else if (profil == 'C'){
-		com += '\n Bonjour Jacqueline ! \n Ravi que vous et votre mari Robert soyez de nouveau d’attaque pour partir à l’aventure ! \n Comment qualifieriez-vous le niveau physique moyen de votre couple ?';
+		com += '\n Bonjour Jeannine ! \n Ravi que vous et votre mari Robert soyez de nouveau d’attaque pour partir à l’aventure ! \n Comment qualifieriez-vous le niveau physique moyen de votre couple ?';
 	} else if (profil == 'B'){
 		com += '\n Bonjour Michel, ravi de vous revoir ! Votre petite Marie doit avoir 6 ans maintenant, les enfants de cet âge adorent gambader dans la montagne :)';		
 	} else if (profil == 'D'){
@@ -92,10 +92,10 @@ exports.comNvDifficulte = function(nvDiff){
 		case 2 :
 		com += 'Vous désirez un parcours assez facile.';
 		break;
-		case 1 :
+		case 3 :
 		com += 'Vous désirez un parcours assez difficile.';
 		break;
-		case 1 :
+		case 4 :
 		com += 'Vous désirez un parcours très difficile.';
 		break;
 	};
@@ -170,15 +170,6 @@ exports.comNvRandonneur = function(nv){
 	return(reply);
 };
 
-/*
-exports.comNvEquipement = function(){
-	var com;
-	com = 'c\'est noté :smile:';
-	com += '\n Quel est votre budget par personne ?'
-	var reply = {type : 'text', content : com};
-	return(reply);
-};
-*/
 
 exports.comNvDecouvertes = function(nv){
 	var com = '';

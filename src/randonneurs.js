@@ -1,139 +1,54 @@
+const modRandonnee = require('./randonnee');
+const modRandonneur = require('./randonneur');
+
+var membres;
+var rando;
 var profil;
+
+var dernierSite;
+var sitesDejaRecommandes;
+
 var nvPhysique;
 var nvRandonneur;
-var nvEquipement = 2;
-var nvDifficulte;
-var nvActivites;
-var nvDecouvertes;
-var nvEloignement;
-var nvBudget;
-var nvEvasion;
-var nvMax;
-var ajustNvDifficulte;
-var ajustNvEvasion;
-var ajustNvActivites;
-var ajustNvDecouvertes;
 
-
-exports.setProfil = function(a){
+exports.randonneurs = function(a)
+{
 	this.profil = a;
-};
+	this.membres = ['client'];
+	this.rando = new modRandonnee.randonnee(0,0,0,0);
 
-exports.getProfil = function(){
-	return(this.profil);
-};
-
-exports.setNvPhysique = function(a){
-	this.nvPhysique = a;
-};
-
-exports.getNvPhysique = function(){
-	return(this.nvPhysique);
-};
-
-exports.setNvRandonneur = function(a){
-	this.nvRandonneur = a;
-};
-
-exports.getNvRandonneur = function(){
-	return(this.nvRandonneur);
-};
-
-exports.setNvEquipement = function(a){
-	this.nvEquipement = a;
-};
-
-exports.getNvEquipement = function(){
-	return(this.nvEquipement);
-};
-
-exports.setNvDifficulte = function(a){
-	this.nvDifficulte = a;
-};
-
-exports.getNvDifficulte = function(){
-	return(this.nvDifficulte);
-};
-
-exports.setNvActivites = function(a){
-	this.nvActivites = a;
-};
-
-exports.getNvActivites = function(){
-	return(this.nvActivites);
-};
-
-
-exports.setNvDecouvertes = function(a){
-	this.nvDecouvertes = a;
-};
-
-exports.getNvDecouvertes = function(){
-	return(this.nvDecouvertes);
-};
-
-exports.setNvEloignement = function(a){
-	this.nvEloignement = a;
-};
-
-exports.getNvEloignement = function(){
-	return(this.nvEloignement);
-};
-
-exports.setNvEvasion = function(a){
-	this.nvEvasion = a;
-};
-
-exports.getNvEvasion = function(){
-	return(this.nvEvasion);
-};
-
-
-exports.setNvBudget = function(a){
-	this.nvBudget = a;
-};
-
-exports.getNvBudget = function(){
-	return(this.nvBudget);
-};
-
-exports.setNvMax = function(a){
-	this.nvMax = a;
-};
-
-exports.getNvMax = function(){
-	return(this.nvMax);
-};
-
-exports.setAjustNvDifficulte = function(a){
-	this.ajustNvDifficulte = a;
-};
-
-exports.getAjustNvDifficulte = function(){
-	return(this.ajustNvDifficulte);
-};
-
-exports.setAjustNvEvasion = function(a){
-	this.ajustNvEvasion = a;
-};
-
-exports.getAjustNvEvasion = function(){
-	return(this.ajustNvEvasion);
-};
-
-exports.setAjustNvDecouvertes = function(a){
-	this.ajustNvDecouvertes = a;
-};
-
-exports.getAjustNvDecouvertes = function(){
-	return(this.ajustNvDecouvertes);
-};
-
-exports.setAjustNvActivites = function(a){
-	this.ajustNvActivites = a;
-};
-
-exports.getAjustNvActivites = function(){
-	return(this.ajustNvActivites);
+	switch(a){
+		
+		case 'A':
+		this.membres[0] = new modRandonneur.randonneur('Tom', 30);
+		break;
+		
+		case 'B':
+		this.membres[0] = new modRandonneur.randonneur('Michel', 50);
+		this.membres[1] = new modRandonneur.randonneur('Patricia', 52);
+		this.membres[2] = new modRandonneur.randonneur('Pierre', 15);
+		this.membres[3] = new modRandonneur.randonneur('Marie', 6);
+		this.nvPhysique = 1;
+		this.nvRandonneur = 2;
+		this.dernierSite = 'SITE_12';
+		this.rando = new modRandonnee.randonnee(1, 3, 1, 4);
+		break;
+		
+		case 'C':
+		this.membres[0] = new modRandonneur.randonneur('Jeannine', 75);
+		this.membres[1] = new modRandonneur.randonneur('Jeannot', 78);
+		break;
+		
+		case 'D':
+		this.membres[0] = new modRandonneur.randonneur('Paul', 25);
+		this.membres[1] = new modRandonneur.randonneur('Jean', 22);
+		this.membres[2] = new modRandonneur.randonneur('Marine', 26);
+		this.membres[3] = new modRandonneur.randonneur('Inès', 23);
+		this.nvPhysique = 3;
+		this.nvRandonneur = 3;
+		this.dernierSite = SITE_4;
+		this.rando = new modRandonnee.randonnee(3, 2, 4, 0);
+		break;
+	};
 };
 
