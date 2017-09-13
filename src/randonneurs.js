@@ -4,6 +4,8 @@ const modRandonneur = require('./randonneur');
 var membres;
 var rando;
 var profil;
+var senderId;
+var origin;
 
 var dernierSite;
 var sitesDejaRecommandes;
@@ -11,11 +13,13 @@ var sitesDejaRecommandes;
 var nvPhysique;
 var nvRandonneur;
 
-exports.randonneurs = function(a)
+exports.randonneurs = function(a, id, canal)
 {
 	this.profil = a;
 	this.membres = ['client'];
 	this.rando = new modRandonnee.randonnee(0,0,0,0);
+	this.senderId = id;
+	this.origin = canal;
 
 	switch(a){
 		

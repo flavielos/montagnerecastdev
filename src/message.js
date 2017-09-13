@@ -22,6 +22,7 @@ const replyMessage = (message) => {
 
   // Get senderId to catch unique conversation_token
   const senderId = message.senderId
+  const origin = message.origin
 
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
@@ -46,12 +47,25 @@ const replyMessage = (message) => {
 		  switch(result.action.slug)
 		  {
 			case 'greetings':
-			entity = '';
+			/*
+			if(message.origin == 'microsoft')
+			{
+				entity = message.senderId;
+				message.setMemory({
+					profil:{
+						value: message.senderId
+					}					
+				});
+			} else if(message.origin == 'slack')
+			{
+				
+			};
+			*/
 			break;
 			
 			case 'choisir-profil-type':
 			entity = result.getMemory('profil').raw;
-			client = new rando.randonneurs(entity);
+			client = new rando.randonneurs(entity, message.senderId, message.origin);
 			break;
 			
 			case 'nom':
@@ -84,13 +98,13 @@ const replyMessage = (message) => {
 			break;
 			
 			case 'niveau-randonneur':
-			if (result.getMemory('nv_physique_1') != null){
+			if (result.getMemory('nv_randonneur_1') != null){
 				entity = 1;
-			} else if (result.getMemory('nv_physique_2') != null){
+			} else if (result.getMemory('nv_randonneur_2') != null){
 				entity = 2;
-			} else if (result.getMemory('nv_physique_3') != null){
+			} else if (result.getMemory('nv_randonneur_3') != null){
 				entity = 3;
-			} else if (result.getMemory('nv_physique_4') != null){
+			} else if (result.getMemory('nv_randonneur_4') != null){
 				entity = 4;
 			};
 			break;
@@ -216,7 +230,12 @@ const replyMessage = (message) => {
 		  
 		  [type, content] = dial.reponseActionNotDone(result.action.slug, client);
 	  };
-	  message.addReply({type : type, content : content});
+		console.log('type : ' + type);
+		console.log('content : ' + content);	  
+	  for(var i=0; i<type.length; i++)
+	  {
+		message.addReply({type : type[i], content : content[i]});
+	  };
     }
 
     // If there is not any message return by Recast.AI for this current conversation

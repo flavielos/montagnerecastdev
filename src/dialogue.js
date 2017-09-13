@@ -2,67 +2,67 @@ const ly = require('./lien_yseop');
 
 exports.reponseActionDone = function(slug, client, choix)
 {
-	var type = 'text';
-	var content = '';
+	var type = ['text'];
+	var content = [];
 	switch(slug)
 	{
 		case 'greetings':
-		type = 'quickReplies';
-		content = {
-          title: 'Bonjour ! Choisissez un profil type ;)',
+		type = ['quickReplies'];
+		content = [{
+          title: 'Bonjour ! Choisissez un profil type.',
           buttons: [
             {
 				value: 'A',
 				title: 'Célibataire',
             },
 			{
-				value : 'C',
-				title: 'Couple retraité'
-			},
-			{
 				value : 'B',
 				title : 'Famille'
+			},
+			{
+				value : 'C',
+				title: 'Couple retraité'
 			},
 			{
 				value : 'D',
 				title : 'Groupe de potes'
 			}
           ],
-        };
+        }];
 		break;
 		
 		case 'choisir-profil-type':
 		switch(client.profil)
 		{
 			case 'A':
-			content = 'Je suis toujours ravi de rencontrer de nouveaux passionnés de montagne !';
-			content += '\nJ\'aimerais faire votre connaissance, comment vous-appelez vous ?';
+			content = ['Je suis toujours ravi de rencontrer de nouveaux passionnés de montagne !'];
+			content[0] += '\nJ\'aimerais faire votre connaissance, comment vous-appelez vous ?';
 			break;
 			
 			case 'C':	
-			content = 'Heureux de vous revoir ' + client.membres[0].prenom + ' !';
-			content += '\nJe vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.'
-			content += '\nFaisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple.';
-			content += '\nComment qualifieriez-vous votre niveau physique ?'
+			content = ['Heureux de vous revoir ' + client.membres[0].prenom + ' !'];
+			content[0] += '\nJe vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.'
+			content[0] += '\nFaisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple.';
+			content[0] += '\nComment qualifieriez-vous votre niveau physique ?'
 			break;
 			
 			case 'B':
-			content = 'Bonjour ' + client.membres[0].prenom + ' ! Ravi de vous revoir !';
-			content += '\nJe vois que la petite Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
-			content += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure en famille ?';
+			content = ['Bonjour ' + client.membres[0].prenom + ' ! Ravi de vous revoir !'];
+			content[0] += '\nJe vois que la petite Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
+			content[0] += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure en famille ?';
 			break;
 			
 			case 'D':
-			content = 'Salut ' + client.membres[0].prenom + ' !';
-			content += '\nJe vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière.';
-			content += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure entre amis ?';
+			content = ['Salut ' + client.membres[0].prenom + ' !'];
+			content[0] += '\nJe vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière.';
+			content[0] += '\nDites-moi, quel est votre budget par personne pour cette nouvelle aventure entre amis ?';
 			break;
 		};
 		break;
 		
 		case 'nom':
-		content = 'Enchanté ' + client.membres[0].prenom + ' !';
-		content += '\nQuel âge avez-vous ?';
+		content[0] = 'Enchanté ' + client.membres[0].prenom + ' !';
+		content[0] += '\nQuel âge avez-vous ?';
 		break;
 		
 		
@@ -71,17 +71,17 @@ exports.reponseActionDone = function(slug, client, choix)
 		var seuil =[2, 10, 80, 70];
 		var age = client.membres[0].age;
 		if (age < seuil[0]){
-			content = age + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
+			content = ['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.']
 		} else if (age < seuil[1]){
-			content = age + ' ans ! Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
+			content =['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.']
 		} else if (age > seuil[2]){
-			content = 'A ' + age + ' ans, l\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
+			content =['L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.']
 		} else if (age > seuil[3]){
-			content = 'A ' + age + ' ans, l\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
+			content =['L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.']
 		} else {
-			content = age + ' ans est l\'âge idéal pour la marche en montagne.'
+			content = [age + 'Vous avez l\'âge idéal pour la marche en montagne.']
 		};
-		content += '\nComment qualifieriez-vous votre niveau physique ?';
+		content[0] += '\nComment qualifieriez-vous votre niveau physique général?';
 		break;
 		
 		case 'niveau-physique':
@@ -89,19 +89,19 @@ exports.reponseActionDone = function(slug, client, choix)
 		switch(nv)
 		{
 			case 1:
-			content = 'La marche en montagne sera pour vous une bonne reprise du sport :wink: \n Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile';
+			content = ['La marche en montagne sera pour vous une bonne reprise du sport. \n Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile'];
 			break;
 			case 2:
-			content = 'En tant que sportifs occasionnels, vous allez apprécier mon sport préféré.';
+			content = ['En tant que sportifs occasionnels, vous allez apprécier mon sport préféré.'];
 			break;
 			case 3:
-			content = 'En tant que sportifs réguliers, vous allez apprécier mon sport préféré.';
+			content = ['En tant que sportifs réguliers, vous allez apprécier mon sport préféré.'];
 			break;
 			case 4:
-			content = 'Vous êtes de vrais athlètes ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:';
+			content = ['Vous êtes de vrais athlètes ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:'];
 			break;
 		};
-		content +='\n Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
+		content[0] +='\n Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
 		break;
 		
 		case 'niveau-randonneur':
@@ -109,19 +109,19 @@ exports.reponseActionDone = function(slug, client, choix)
 		switch(nv)
 		{
 			case 1:
-			content = 'Je suis ravi de vous faire découvrir mon sport préféré ! \n Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile';
+			content = ['Je suis ravi de vous faire découvrir mon sport préféré ! \n Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile'];
 			break;
 			case 2:
-			content = 'J\'espère que ce trek confirmera votre amour pour la montagne';
+			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
 			break;
 			case 3:
-			content = 'J\'espère que ce trek confirmera votre amour pour la montagne';
+			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
 			break;
 			case 4:
-			content = 'Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:';
+			content = ['Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:'];
 			break;
 		};
-		content +='\nQuel est votre budget par personne ?';
+		content[0] +='\nQuel est votre budget par personne ?';
 		break;
 		
 		case 'nombre-budget':
@@ -129,25 +129,29 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'budget':
 		var nv = client.nvBudget;
 		if (nv == 0){
-			content = 'Ok, nous discuterons du prix plus tard.';
+			content[0] = 'Ok, nous discuterons du prix plus tard.';
+			content[0] += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
 		} else if (nv <= 100){
-			content = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
+			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
+			content[0] += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ?';	
 		} else if(nv <= 500){
-			content = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
+			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
+			content[0] += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ?';
 		} else if (nv == 1000000) {
-			content = 'Ok, j\'aime avoir carte blanche ! :money_mouth_face:';
+			content[0] = 'Ok, j\'aime avoir carte blanche !';
+			content[0] += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
 		} else {
-			content = 'En voilà un budget intéressant !';
+			content[0] = 'En voilà un budget intéressant !';
+			content[0] += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
 		};
-		content += '\nCette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
 		break;
 
 		case 'pas-de-preference-eloignement' :
 		case 'eloignement':
-		content = 'Ok, je vais vous trouver un endroit sympa !';
+		content[0] = 'Ok, je vais vous trouver un endroit sympa !';
 		var profil = client.profil;
 		if (profil == 'A' || profil == 'C'){
-			content += '\n Maintenant que l\'on se connait un peu mieux, qu\'est-ce qui vous ferait plaisir pendant cette randonnée ?';
+			content[0] += '\n Maintenant que l\'on se connait un peu mieux, qu\'est-ce qui vous ferait plaisir pendant cette randonnée ?';
 			break;
 		};
 		
@@ -170,7 +174,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		var adjNvR;
 		switch(client.nvRandonneur){
 			case 1:
-			adjNvR = 'très peu';
+			adjNvR = 'une ou deux';
 			break;
 			case 2:
 			adjNvR = 'quelques';
@@ -187,16 +191,16 @@ exports.reponseActionDone = function(slug, client, choix)
 		switch(client.rando.nvDifficulte)
 		{
 			case 1:
-			adjNvDi = 'très facile.'
+			adjNvDi = 'très facile'
 			break;
 			case 2:
-			adjNvDi = 'assez facile.'
+			adjNvDi = 'assez facile'
 			break;
 			case 3:
-			adjNvDi = 'moyennement difficile.'
+			adjNvDi = 'moyennement difficile'
 			break;
 			case 4:
-			adjNvDi = 'très difficile.'
+			adjNvDi = 'très difficile'
 			break;
 		};
 		//niveau evasion
@@ -215,50 +219,51 @@ exports.reponseActionDone = function(slug, client, choix)
 		if (client.rando.nvActivites == 2){
 			adjNvAc = 'quelques';
 		} else if(client.rando.nvActivites >2){
-			adjNvAc = 'beaucoup';
+			adjNvAc = 'plusieurs';
 		};
 		// niveau decouvertes
 		var adjNvDe;
 		if (client.rando.nvDecouvertes == 2){
 			adjNvDe = 'quelques';
 		} else if(client.rando.nvDecouvertes >2){
-			adjNvDe = 'beaucoup';
+			adjNvDe = 'plusieurs';
 		};
 		
 		// recap
-		content = '\nD\'accord '+ client.membres[0].prenom +', je résume:'
+		content[0] = '\nD\'accord '+ client.membres[0].prenom +', je résume:'
 		switch(client.profil){
 			case 'A':
-			case 'C ':
+			case 'C':
 			if (client.profil == 'A'){
-				content += '\nVous êtes un sportif ' + adjNvP +' qui a fait '+ adjNvR +' randonnées par le passé.';
-			} else if (client.profil == 'C'){
-				content += '\nVous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
+				content[0] += '\nVous êtes un sportif ' + adjNvP +' qui a fait '+ adjNvR +' randonnées par le passé.';
+			}; 
+			if (client.profil == 'C'){
+				content[0] += '\nVous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
 			};
 			if (adjNvDi != null){
-				content += '\nVous souhaitez un trek ' + adjNvDi + '.';
+				content[0] += '\nVous souhaitez un trek ' + adjNvDi + '.';
 			};
 			if (adjNvEv != null){
-				content += '\nVous aimeriez un lieu ' + adjNvEv +'.';
+				content[0] += '\nVous aimeriez un lieu ' + adjNvEv +'.';
 			};
 			if (adjNvAc != null){
-				content += '\nVous désirez pratiquer ' + adjNvAc +' activités.';
+				content[0] += '\nVous désirez pratiquer ' + adjNvAc +' activités.';
 			};
 			if (adjNvDe != null){
-				content += '\nVous voulez faire ' + adjNvDe +' découvertes.';
+				content[0] += '\nVous voulez faire ' + adjNvDe +' découvertes.';
 			};
 			if (client.nvBudget != 1000000){
-				content += '\nVous avez un budget d\'environ ' + client.nvBudget + ' euros.';
+				content[0] += '\nVous avez un budget de maximum ' + client.nvBudget + ' euros.';
 			};
 			break;
 			
 			case 'B':
 			case 'D':
-			content += '\nJe me souviens que vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +'randonnées par le passé.';
-			content += '\nVotre dernier trek était ' + adjNvDi +' et dans un lieu ' + adjNvEv + '.';
-			content += '\nVous aviez fait ' + adjNvDe + ' activités et pratiqué '+ adjNvDe +' activités.';
+			content[0] += '\nJe me souviens que vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
+			content[0] += '\nVotre dernier trek était ' + adjNvDi +' et dans un lieu ' + adjNvEv + '.';
+			content[0] += '\nVous aviez fait ' + adjNvDe + ' découvertes et pratiqué '+ adjNvDe +' activités.';
 			if (client.nvBudget != 1000000){
-				content += '\nVous avez, cette fois-ci, un budget d\'environ ' + client.nvBudget + ' euros.';
+				content[0] += '\nVous avez, cette fois-ci, un budget d\'environ ' + client.nvBudget + ' euros.';
 			};
 			break;
 		};
@@ -266,17 +271,17 @@ exports.reponseActionDone = function(slug, client, choix)
 
 		// niveau eloignement
 		if (client.nvEloignement != 0){
-			content += '\nVous aimeriez partir ';
+			content[0] += '\nVous aimeriez partir ';
 			if (client.nvEloignement <= 500){
-				content += 'en France.'
+				content[0] += 'en France.'
 			} else if (client.nvEloignement <= 2000){
-				content += 'en Europe.'
+				content[0] += 'en Europe.'
 			} else {
-				content += 'à la découverte du monde.'
+				content[0] += 'à la découverte du monde.'
 			};
 		};
 
-		content += '\nCe résumé vous correspond-il ?'
+		content[0] += '\nCe résumé vous correspond-il ?'
 		break;
 		
 		case 'ajuster-reco':
@@ -285,14 +290,18 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'rectifier-lieu':		
 		case 'recap-valide' :
 		var site;
-		[content, site] = ly.requete(client);
-		content += '\nCe trek vous plairait-il ?';
+		var imageURL;
+		var reco;
+		[reco, site, imageURL] = ly.requete(client);
+		content[0] += reco + '\nCe trek vous plairait-il ?';
+		content[1]=imageURL;
+		type[1]='picture';
 		client.dernierSite = site;
 		break;
 		
 		case 'recap-invalide':
-		type = 'quickReplies';
-		content = {
+		type = ['quickReplies'];
+		content[0] = {
 				title : 'Zut...qu\'est-ce que j\'ai mal compris ?',
 				buttons :[
 					{
@@ -371,8 +380,8 @@ exports.reponseActionDone = function(slug, client, choix)
 			var value4 = 'loin de la ville';
 			var title4 = 'Très isolé';
 		};
-		type = 'quickReplies';
-		content = {
+		type = ['quickReplies'];
+		content[0] = {
 				  title: question,
 				  buttons: [
 					{
@@ -396,8 +405,8 @@ exports.reponseActionDone = function(slug, client, choix)
 		break;
 		
 		case 'reco-invalide':
-		type = 'quickReplies';
-		content = {
+		type = ['quickReplies'];
+		content[0] = {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -429,24 +438,24 @@ exports.reponseActionDone = function(slug, client, choix)
 		break;
 		
 		case 'reco-valide':
-		content = 'Bien, si vous souhaitez réserver dès maintenant, cliquez ici.'
-		content = '\nJ\'espère vous revoir bientôt !';
+		content[0] = 'Bien, si vous souhaitez réserver dès maintenant, cliquez ici.'
+		content[0] += '\nJ\'espère vous revoir bientôt !';
 		break;
 		
 		case 'goodbye':
-		content = 'Au revoir !'
+		content[0] = 'Au revoir !';
 		break;
 		
 		case 'insultes':
-		content = 'Ce n\'est pas très gentil de dire ça';
+		content[0] = 'Ce n\'est pas très gentil de dire ça';
 		break;
 		
 		case 'help':
-		content = 'Réponds à mes questions pour que je te recommande le trek de tes rêves !';
+		content[0] = 'Réponds à mes questions pour que je te recommande le trek de tes rêves !';
 		break;
 		
 		case 'none':
-		content = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
+		content[0] = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
 		break;
 	};
 	
@@ -456,12 +465,12 @@ exports.reponseActionDone = function(slug, client, choix)
 
 exports.reponseActionNotDone = function(slug, client)
 {
-	var type = 'quickReplies';
-	var content = '';
+	var type = ['quickReplies'];
+	var content = [];
 	switch(slug)
 	{
 		case 'age':
-		content = {
+		content[0] = {
 			  title: 'Je ne suis qu\'un jeune bot, est-ce que vous pourriez choisir une tranche d\'âge ?',
 			  buttons: [
 				{
@@ -489,7 +498,7 @@ exports.reponseActionNotDone = function(slug, client)
 		break;
 		
 		case 'niveau-physique':
-		content = {
+		content[0] = {
 			title: 'Oups...Je n\'ai pas compris. Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
 			buttons: [
 			{
@@ -513,7 +522,7 @@ exports.reponseActionNotDone = function(slug, client)
 		break;
 		
 		case 'niveau-randonneur':
-		content = {
+		content[0] = {
 			title: 'Oups...Je n\'ai pas compris. Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
 			buttons: [
 			{
@@ -537,8 +546,8 @@ exports.reponseActionNotDone = function(slug, client)
 		break;
 		
 		case 'budget':
-		content = {
-			  title: 'Je ne suis pas sûr d\'avoir bien saisi :confused: Dans quel tranche se situe votre budget par personne ? ',
+		content[0] = {
+			  title: 'Je ne suis pas sûr d\'avoir bien saisi... Dans quel tranche se situe votre budget par personne ? ',
 			  buttons: [
 				{
 					value: '100€',
@@ -553,7 +562,7 @@ exports.reponseActionNotDone = function(slug, client)
 					title : '501 - 1000€'
 				},
 				{
-					value : '2000€',
+					value : '5000€',
 					title : '+ de 1000€'
 				}
 			  ],
@@ -561,7 +570,7 @@ exports.reponseActionNotDone = function(slug, client)
 		break;
 		
 		case 'eloignement':
-		content = {
+		content[0] = {
 			  title: 'Oups...Je n\'ai pas compris. Pourriez-vous choisir l\'éloignement qui vous conviendrait le mieux parmi ces propositions ?',
 			  buttons: [
 				{
@@ -573,11 +582,11 @@ exports.reponseActionNotDone = function(slug, client)
 					title: 'Europe',
 				},
 				{
-					value : 'Monde',
+					value : 'Asie',
 					title : 'Monde'
 				},
 				{
-					value : 'Peu importe',
+					value : 'France',
 					title : 'Peu importe'
 				}
 			  ],
