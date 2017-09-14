@@ -224,11 +224,13 @@ const replyMessage = (message) => {
 		  [type, content] = dial.reponseActionNotDone(result.action.slug, client);
 	  };
 		console.log('type : ' + type);
-		console.log('content : ' + content);	  
-	  for(var i=0; i<type.length; i++)
-	  {
-		message.addReply({type : type[i], content : content[i]});
-	  };
+		console.log('content : ' + content);
+		if(content !=[]){	
+		  for(var i=0; i<type.length; i++)
+		  {
+			message.addReply({type : type[i], content : content[i]});
+		  };
+		}
     }
 
     // If there is not any message return by Recast.AI for this current conversation

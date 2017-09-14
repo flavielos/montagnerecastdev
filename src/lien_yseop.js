@@ -33,26 +33,28 @@ exports.requete = function(client){
 		{
 			case 'slack':
 			var texte = xml.childNamed('recommandationIntro').val;
-			texte += '\n';
+			texte += '</br>';
 			texte += xml.childNamed('recommandationDifficulte').val;
-			texte += '\n';
+			texte += '</br>';
 			texte += xml.childNamed('recommandationEvasion').val;
-			texte += '\n';
+			texte += '</br>';
 			texte += xml.childNamed('recommandationDecouverte').val;
-			texte += '\n';
+			texte += '</br>';
 			texte += xml.childNamed('recommandationDivertissement').val;
-			texte += '\n';
+			texte += '</br>';
 			texte += xml.childNamed('recommandationPrix').val;
 			break;
 			
 			case 'microsoft':
 			var textes = xml.childrenNamed('div');
 			var i;
-			texte = textes[0];
+			texte = '<div style="display:initial;">';
+			texte += textes[0];
 			for (i=2;i<5;i++)
 			{
-				texte += '\n' + textes[i];
+				texte += '</br>' + textes[i];
 			};
+			texte += '</div>';
 			break;
 		};
 		
