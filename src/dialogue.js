@@ -9,12 +9,12 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'greetings':
 		type = ['quickReplies'];
 		content = [{
-          title: 'Bonjour ! Choisissez un profil type.',
-          buttons: [
-            {
+		  title: 'Bonjour ! Choisissez un profil type.',
+		  buttons: [
+			{
 				value: 'A',
 				title: 'Célibataire',
-            },
+			},
 			{
 				value : 'B',
 				title : 'Famille'
@@ -27,10 +27,10 @@ exports.reponseActionDone = function(slug, client, choix)
 				value : 'D',
 				title : 'Groupe de potes'
 			}
-          ],
-        }];
+		  ],
+		}];
 		break;
-		
+	
 		case 'choisir-profil-type':
 		switch(client.profil)
 		{
@@ -79,7 +79,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		} else if (age > seuil[3]){
 			content =['L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.']
 		} else {
-			content = [age + 'Vous avez l\'âge idéal pour la marche en montagne.']
+			content = ['Vous avez l\'âge idéal pour la marche en montagne.']
 		};
 		content[0] += '\nComment qualifieriez-vous votre niveau physique général?';
 		break;
@@ -230,7 +230,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		};
 		
 		// recap
-		content[0] = '\nD\'accord '+ client.membres[0].prenom +', je résume:'
+		content[0] = 'D\'accord '+ client.membres[0].prenom +', je résume:'
 		switch(client.profil){
 			case 'A':
 			case 'C':
@@ -293,8 +293,8 @@ exports.reponseActionDone = function(slug, client, choix)
 		var imageURL;
 		var reco;
 		[reco, site, imageURL] = ly.requete(client);
-		content[0] += reco + '\nCe trek vous plairait-il ?';
-		content[1]=imageURL;
+		content[0] = reco + '\nCe trek vous plairait-il ?';
+		content[1]= imageURL;
 		type[1]='picture';
 		client.dernierSite = site;
 		break;

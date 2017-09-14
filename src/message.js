@@ -43,25 +43,10 @@ const replyMessage = (message) => {
 	  {
 		  var entity = '';
 		  var choix = '';
-		  
-		  switch(result.action.slug)
+		  var slug = result.action.slug;
+		  switch(slug)
 		  {
-			case 'greetings':
-			/*
-			if(message.origin == 'microsoft')
-			{
-				entity = message.senderId;
-				message.setMemory({
-					profil:{
-						value: message.senderId
-					}					
-				});
-			} else if(message.origin == 'slack')
-			{
-				
-			};
-			*/
-			break;
+
 			
 			case 'choisir-profil-type':
 			entity = result.getMemory('profil').raw;
@@ -86,15 +71,23 @@ const replyMessage = (message) => {
 			break;
 			
 			case 'niveau-physique':
-			if (result.getMemory('nv_physique_1') != null){
-				entity = 1;
-			} else if (result.getMemory('nv_physique_2') != null){
-				entity = 2;
-			} else if (result.getMemory('nv_physique_3') != null){
-				entity = 3;
-			} else if (result.getMemory('nv_physique_4') != null){
-				entity = 4;
+			if(client.nvPhysique != null)
+			{
+				slug = 'niveau-randonneur';
 			};
+			
+			if (result.getMemory('nv_physique_1') != null && client.nvPhysique != 1){
+				entity = 1;
+			} else if (result.getMemory('nv_physique_2') != null && client.nvPhysique != 1){
+				entity = 2;
+			} else if (result.getMemory('nv_physique_3') != null && client.nvPhysique != 1){
+				entity = 3;
+			} else if (result.getMemory('nv_physique_4') != null && client.nvPhysique != 1){
+				entity = 4;
+			} else {
+				entity = client.nvPhysique;
+			}
+			
 			break;
 			
 			case 'niveau-randonneur':
@@ -224,8 +217,8 @@ const replyMessage = (message) => {
 			break;
 
 		  };
-		  md.save(result.action.slug, entity, client, choix);
-		  [type, content] = dial.reponseActionDone(result.action.slug, client, choix);
+		  md.save(slug, entity, client, choix);
+		  [type, content] = dial.reponseActionDone(slug, client, choix);
 	  } else {
 		  
 		  [type, content] = dial.reponseActionNotDone(result.action.slug, client);

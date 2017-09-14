@@ -28,12 +28,11 @@ exports.requete = function(client){
 		
 		var site = xml.childNamed('site').val;
 		
-		var texte = '\n';
 		
 		switch(client.origin)
 		{
 			case 'slack':
-			texte = xml.childNamed('recommandationIntro').val;
+			var texte = xml.childNamed('recommandationIntro').val;
 			texte += '\n';
 			texte += xml.childNamed('recommandationDifficulte').val;
 			texte += '\n';
@@ -49,7 +48,7 @@ exports.requete = function(client){
 			case 'microsoft':
 			var textes = xml.childrenNamed('div');
 			var i;
-			texte += textes[0];
+			texte = textes[0];
 			for (i=2;i<5;i++)
 			{
 				texte += '\n' + textes[i];
