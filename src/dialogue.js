@@ -1,4 +1,3 @@
-const ly = require('./lien_yseop');
 
 exports.reponseActionDone = function(slug, client, choix)
 {
@@ -47,7 +46,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			break;
 			
 			case 'B':
-			content = ['Bonjour ' + client.membres[0].prenom + ' ! Ravi de vous revoir !'];
+			content = ['Bonjour ' + client.membres[0].prenom + ', ravi de vous revoir !'];
 			content[0] += '</br>Je vois que la petite Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
 			content[0] += '</br>Dites-moi, quel est votre budget par personne pour cette nouvelle aventure en famille ?';
 			break;
@@ -289,16 +288,42 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'rectifier-niveau':
 		case 'rectifier-lieu':		
 		case 'recap-valide' :
-		var site;
-		var imageURL;
-		var reco;
-		[reco, site, imageURL] = ly.requete(client);
-		content[1] = reco + '</br>Ce trek vous plairait-il ?';
-		content[0]= imageURL;
-		type[0]='picture';
-		type[1]='text';
-		client.dernierSite = site;
+		//carte
+		/* content[0] = {
+			title : client.rando.siteTitre,
+			subtitle : client.rando.recoIntro,
+			imageUrl : client.rando.imageUrl,
+			buttons : [
+			{
+				title : 'En savoir plus',
+				value : 'Oui'
+			},
+			{
+				title : 'Autre site',
+				value : 'Non'
+			}
+			]
+		};
+		type[0] = ['card'];
+		 */
+		//temporaire
+		type = ['quickReplies'];
+		content = [{
+		  title: client.rando.recoIntro,
+		  buttons: [
+			{
+				value: 'Oui',
+				title: 'En savoir plus',
+			},
+			{
+				value : 'Non',
+				title : 'Je n\'aime pas'
+			}
+		  ],
+		}];
 		break;
+		
+		
 		
 		case 'recap-invalide':
 		type = ['quickReplies'];
@@ -405,6 +430,148 @@ exports.reponseActionDone = function(slug, client, choix)
 				};
 		break;
 		
+		case 'intro-valide':
+		var listeButtons = [];
+		if(client.rando.nvDifficulte != 0)
+		{
+			listeButtons.push({
+				title : 'La difficulté',
+				value : 'niveau difficulte'
+			});
+		};
+		if(client.rando.nvEvasion != 0)
+		{
+			listeButtons.push({
+				title : 'La fréquentation',
+				value : 'niveau evasion'
+			});
+		};
+		if(client.rando.nvActivites != 0)
+		{
+			listeButtons.push({
+				title : 'Les activités',
+				value : 'niveau activites'
+			});
+		};
+		if(client.rando.nvDecouvertes != 0)
+		{
+			listeButtons.push({
+				title : 'Les découvertes',
+				value : 'niveau decouvertes'
+			});
+		};
+		
+		type = ['quickReplies'];
+		content = [{
+			title : 'Que voulez-vous développer ?',
+			buttons : listeButtons
+		}];
+		break;
+		
+		
+		case 'en-savoir-plus':
+		var titre;
+		switch(choix)
+		{
+			case 'niveau difficulte':
+			titre = client.rando.recoDifficulte;
+			break;
+			case 'niveau evasion':
+			titre = client.rando.recoEvasion;
+			break;
+			case 'niveau activites':
+			titre = client.rando.recoActivites;
+			break;
+			case 'niveau decouvertes':
+			titre = client.rando.recoDecouvertes;
+			break;
+		};
+		var listeButtons = [];
+		listeButtons[0] = {
+			title : 'Ca me plait',
+			value : 'oui'
+		};
+		
+		listeButtons[1] = {
+			title : 'Je n\'aime pas',
+			value : 'non'
+		};
+		if(client.rando.nvDifficulte != 0 && choix != 'niveau difficulte')
+		{
+			listeButtons.push({
+				title : 'La difficulté',
+				value : 'niveau difficulte'
+			});
+		};
+		if(client.rando.nvEvasion != 0 && choix != 'niveau evasion')
+		{
+			listeButtons.push({
+				title : 'La fréquentation',
+				value : 'niveau evasion'
+			});
+		};
+		if(client.rando.nvActivites != 0 && choix != 'niveau activites')
+		{
+			listeButtons.push({
+				title : 'Les activités',
+				value : 'niveau activites'
+			});
+		};
+		if(client.rando.nvDecouvertes != 0 && choix != 'niveau decouvertes')
+		{
+			listeButtons.push({
+				title : 'Les découvertes',
+				value : 'niveau decouvertes'
+			});
+		};
+		
+		
+		
+		type = ['quickReplies'];
+		content = [{
+			title : titre,
+			buttons : listeButtons
+		}];
+		
+		break;
+
+		case 'en-savoir-encore-plus':
+		var titre;
+		switch(choix)
+		{
+			case 'niveau difficulte':
+			titre = client.rando.recoDifficulte;
+			break;
+			case 'niveau evasion':
+			titre = client.rando.recoEvasion;
+			break;
+			case 'niveau activites':
+			titre = client.rando.recoActivites;
+			break;
+			case 'niveau decouvertes':
+			titre = client.rando.recoDecouvertes;
+			break;
+		};
+		var listeButtons = [];
+		listeButtons[0] = {
+			title : 'Ca me plait',
+			value : 'oui'
+		};
+		
+		listeButtons[1] = {
+			title : 'Je n\'aime pas',
+			value : 'non'
+		};
+		
+		type = ['quickReplies'];
+		content = [{
+			title : titre,
+			buttons : listeButtons
+		}];
+		
+		break;
+		
+		case 'intro-invalide':
 		case 'reco-invalide':
 		type = ['quickReplies'];
 		content[0] = {
@@ -439,7 +606,8 @@ exports.reponseActionDone = function(slug, client, choix)
 		break;
 		
 		case 'reco-valide':
-		content[0] = 'Bien, si vous souhaitez réserver dès maintenant, cliquez ici.'
+		content[0] = client.rando.recoConclusion;
+		content[0] = '</br>Si vous souhaitez réserver dès maintenant, cliquez ici.'
 		content[0] += '</br>J\'espère vous revoir bientôt !';
 		break;
 		

@@ -11,6 +11,15 @@ var ajustNvEvasion;
 var ajustNvActivites;
 var ajustNvDecouvertes;
 
+var recoIntro;
+var recoDifficulte;
+var recoEvasion;
+var recoActivites;
+var recoDecouvertes;
+var recoConclusion;
+var siteTitre;
+var siteNum
+var imageUrl;
 
 exports.randonnee = function(diff, evasion, acti, decouverte)
 {

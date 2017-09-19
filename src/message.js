@@ -212,6 +212,15 @@ const replyMessage = (message) => {
 			};	
 			break;
 			
+			case 'en-savoir-plus':
+			choix = result.getMemory('sujet').value;
+			break;
+			
+			case 'en-savoir-encore-plus':
+			choix = result.getMemory('info').value;
+			break;
+
+			
 			case 'ajuster-reco':
 			entity = result.getMemory('ajustement').value;
 			break;

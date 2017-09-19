@@ -1,4 +1,6 @@
  const rando = require('./randonneurs');
+ const ly = require('./lien_yseop');
+
 
 exports.save = function(slug, data, client, choix)
 {
@@ -98,6 +100,9 @@ exports.save = function(slug, data, client, choix)
 			client.rando.ajustNvDecouvertes = 0.8;
 			break;
 		};
+		
+		case 'recap-valide':
+		[client.rando.siteNum, client.rando.siteTitre, client.rando.imageURL, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
 		break;
 		
 	}

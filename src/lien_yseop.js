@@ -26,9 +26,28 @@ exports.requete = function(client){
 
 		var xml = new xmldoc.XmlDocument(res.getBody());
 		
-		var site = xml.childNamed('site').val;
+		var siteNum = xml.childNamed('siteId').val;
+		var siteTitre = xml.childNamed('siteTitre').val;
+		var imageURL = xml.childNamed('imageURL').val;
+		//var imageURL = 'http://www.france-montagnes.com/sites/default/files/pages/7132679751_7675d430bf_k.jpg';
 		
+		var recoIntro = xml.childWithAttribute('class', 'recommandationIntro').toString();
+		var recoDifficulte = xml.childWithAttribute('class', 'recommandationDifficulte').toString();
+		var recoEvasion = xml.childWithAttribute('class', 'recommandationEvasion').toString();
+		var recoActivites = xml.childWithAttribute('class', 'recommandationActivites').toString();
+		var recoDecouvertes = xml.childWithAttribute('class', 'recommandationDecouvertes').toString();
+		var recoConclusion = xml.childWithAttribute('class', 'recommandationConclusion').toString();
 		
+		/*
+		var recoIntro = xml.childWithAttribute('div', 'recommandationIntro').val;
+		var recoDifficulte = xml.childNamed('recommandationDifficulte').val;
+		var recoEvasion = xml.childNamed('recommandationEvasion').val;
+		var recoActivites = xml.childNamed('recommandationDivertissement').val;
+		var recoDecouvertes = xml.childNamed('recommandationDecouverte').val;
+		var recoConclusion = xml.childNamed('recommandationPrix').val;
+		*/
+		return([siteNum, siteTitre, imageURL, recoIntro, recoDifficulte, recoEvasion, recoActivites, recoDecouvertes, recoConclusion]);
+		/*
 		switch(client.origin)
 		{
 			case 'slack':
@@ -58,8 +77,7 @@ exports.requete = function(client){
 			break;
 		};
 		
-		var imageURL = 'http://www.france-montagnes.com/sites/default/files/pages/7132679751_7675d430bf_k.jpg';
 		return([texte, site, imageURL]);
-		
+		*/
 		//return('texte');
 }; 
