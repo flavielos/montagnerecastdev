@@ -91,10 +91,10 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['La marche en montagne sera pour vous une bonne reprise du sport. </br> Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile'];
 			break;
 			case 2:
-			content = ['En tant que sportifs occasionnels, vous allez apprécier mon sport préféré.'];
+			content = ['En tant que sportifs occasionnels, vous allez apprécier la randonnée.'];
 			break;
 			case 3:
-			content = ['En tant que sportifs réguliers, vous allez apprécier mon sport préféré.'];
+			content = ['En tant que sportifs réguliers, vous allez apprécier la randonnée.'];
 			break;
 			case 4:
 			content = ['Vous êtes de vrais athlètes ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:'];
@@ -257,10 +257,13 @@ exports.reponseActionDone = function(slug, client, choix)
 			break;
 			
 			case 'B':
+			content[0] += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
+			content[0] += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+			break;
+			
 			case 'D':
-			content[0] += '</br>Je me souviens que vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
-			content[0] += '</br>Votre dernier trek était ' + adjNvDi +' et dans un lieu ' + adjNvEv + '.';
-			content[0] += '</br>Vous aviez fait ' + adjNvDe + ' découvertes et pratiqué '+ adjNvDe +' activités.';
+			content[0] += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
+			content[0] += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
 			if (client.nvBudget != 1000000){
 				content[0] += '</br>Vous avez, cette fois-ci, un budget d\'environ ' + client.nvBudget + ' euros.';
 			};
@@ -607,7 +610,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		
 		case 'reco-valide':
 		content[0] = client.rando.recoConclusion;
-		content[0] = '</br>Si vous souhaitez réserver dès maintenant, cliquez ici.'
+		content[0] += '</br>Si vous souhaitez réserver dès maintenant, cliquez <a href="'+client.rando.imageUrl+'"><u><font color="blue">ici</font></u></a>.'
 		content[0] += '</br>J\'espère vous revoir bientôt !';
 		break;
 		
@@ -752,7 +755,7 @@ exports.reponseActionNotDone = function(slug, client)
 				},
 				{
 					value : 'en Asie',
-					title : 'Monde'
+					title : 'Plus loin'
 				},
 				{
 					value : 'en France',
