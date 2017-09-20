@@ -36,7 +36,7 @@ const replyMessage = (message) => {
     */
 	
 	if (result.action) {
-      console.log('The conversation action is: ', result.action.slug)
+      console.log('The conversation action is: ', result.action.slug + ' and it is ' + result.action.done)
 	  var type;
 	  var content;
 	  if(result.action.done)
@@ -46,7 +46,20 @@ const replyMessage = (message) => {
 		  var slug = result.action.slug;
 		  switch(slug)
 		  {
-
+			
+			case 'greetings':
+			result.setMemory(
+			{
+			  profil: {
+				value: senderId,
+				raw : senderId
+			  },
+			  prenom : null
+			}
+			);
+			entity = senderId;
+			client = new rando.randonneurs(entity, message.senderId, message.origin);
+			break;
 			
 			case 'choisir-profil-type':
 			entity = result.getMemory('profil').raw;

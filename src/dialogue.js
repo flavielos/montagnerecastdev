@@ -6,6 +6,7 @@ exports.reponseActionDone = function(slug, client, choix)
 	switch(slug)
 	{
 		case 'greetings':
+		/*
 		type = ['quickReplies'];
 		content = [{
 		  title: 'Bonjour ! Choisissez un profil type.',
@@ -28,7 +29,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			}
 		  ],
 		}];
-		break;
+		*/
 	
 		case 'choisir-profil-type':
 		switch(client.profil)
@@ -239,49 +240,59 @@ exports.reponseActionDone = function(slug, client, choix)
 			if (client.profil == 'C'){
 				content[0] += '</br>Vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
 			};
+			content[0] += '</br>Vous souhaitez un trek '
 			if (adjNvDi != null){
-				content[0] += '</br>Vous souhaitez un trek ' + adjNvDi + '.';
+				content[0] += adjNvDi;
 			};
 			if (adjNvEv != null){
-				content[0] += '</br>Vous aimeriez un lieu ' + adjNvEv +'.';
+				content[0] += ', dans un lieu ' + adjNvEv +', ';
 			};
-			if (adjNvAc != null){
-				content[0] += '</br>Vous désirez pratiquer ' + adjNvAc +' activités.';
-			};
-			if (adjNvDe != null){
-				content[0] += '</br>Vous voulez faire ' + adjNvDe +' découvertes.';
+			if (adjNvAc != null || adjNvDe != null){
+				content[0] += 'où vous pourrez '
+				if (adjNvAc != null && adjNvDe == null){
+					content[0] += 'pratiquer ' + adjNvAc +' activités.';
+				};
+				if (adjNvDe != null && adjNvAc == null){
+					content[0] += 'faire ' + adjNvDe +' découvertes.';
+				};
+				if (adjNvDe != null && adjNvAc != null){
+					content[0] += 'faire ' + adjNvDe +' découvertes et pratiquer ' + adjNvAc +' activités.';
+				};
 			};
 			if (client.nvBudget != 1000000){
-				content[0] += '</br>Vous avez un budget de maximum ' + client.nvBudget + ' euros.';
+				content[0] += '</br>Votre budget maximum est de ' + client.nvBudget + ' euros.';
 			};
 			break;
 			
 			case 'B':
 			content[0] += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
 			content[0] += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+			if (client.nvBudget != 1000000){
+				content[0] += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
+			};
 			break;
 			
 			case 'D':
 			content[0] += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
 			content[0] += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
 			if (client.nvBudget != 1000000){
-				content[0] += '</br>Vous avez, cette fois-ci, un budget d\'environ ' + client.nvBudget + ' euros.';
+				content[0] += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
 			};
 			break;
 		};
 		
 
 		// niveau eloignement
-		if (client.nvEloignement != 0){
-			content[0] += '</br>Vous aimeriez partir ';
-			if (client.nvEloignement <= 500){
-				content[0] += 'en France.'
-			} else if (client.nvEloignement <= 2000){
-				content[0] += 'en Europe.'
-			} else {
-				content[0] += 'à la découverte du monde.'
-			};
+
+		content[0] += '</br>Vous aimeriez partir ';
+		if (client.nvEloignement <= 500 && client.nvEloignement != 0){
+			content[0] += 'en France.'
+		} else if (client.nvEloignement <= 2000){
+			content[0] += 'en Europe.'
+		} else {
+			content[0] += 'à la découverte du monde.'
 		};
+		
 
 		content[0] += '</br>Ce résumé vous correspond-il ?'
 		break;
@@ -630,7 +641,26 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'none':
 		content[0] = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
 		break;
+		
+		case 'meteo' :
+	type = ['card'];
+		content = [{
+			title : 'Meteo',
+			subtitle : 'Il fera beau toute ta vie, top nan ?',
+			imageUrl : 'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
+			buttons : [
+			{
+				title : 'En savoir plus',
+				value : 'Oui'
+			},
+			{
+				title : 'Autre site',
+				value : 'Non'
+			}
+			]
+		}];
 	};
+	
 	
 	
 	return([type, content]);
@@ -642,6 +672,11 @@ exports.reponseActionNotDone = function(slug, client)
 	var content = [];
 	switch(slug)
 	{
+		case 'nom' :
+		type = ['text'];
+		content[0] = 'Ah le bolosse il a pas compris mon nom :o';
+		break;
+		
 		case 'age':
 		content[0] = {
 			  title: 'Je ne suis qu\'un jeune bot, est-ce que vous pourriez choisir une tranche d\'âge ?',

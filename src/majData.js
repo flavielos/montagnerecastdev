@@ -6,6 +6,7 @@ exports.save = function(slug, data, client, choix)
 {
 	switch(slug)
 	{
+		case 'greetings':
 		case 'choisir-profil-type':
 		client.profil = data;
 		break;
