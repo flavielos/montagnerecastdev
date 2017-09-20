@@ -291,8 +291,9 @@ exports.reponseActionDone = function(slug, client, choix)
 		case 'rectifier-niveau':
 		case 'rectifier-lieu':		
 		case 'recap-valide' :
-		//carte
-		/* content[0] = {
+		//
+		type = ['card'];
+		content = [{
 			title : client.rando.siteTitre,
 			subtitle : client.rando.recoIntro,
 			imageUrl : client.rando.imageUrl,
@@ -306,11 +307,11 @@ exports.reponseActionDone = function(slug, client, choix)
 				value : 'Non'
 			}
 			]
-		};
-		type[0] = ['card'];
-		 */
+		}];
+		
+		 
 		//temporaire
-		type = ['quickReplies'];
+		/* type = ['quickReplies'];
 		content = [{
 		  title: client.rando.recoIntro,
 		  buttons: [
@@ -323,7 +324,7 @@ exports.reponseActionDone = function(slug, client, choix)
 				title : 'Je n\'aime pas'
 			}
 		  ],
-		}];
+		}]; */
 		break;
 		
 		

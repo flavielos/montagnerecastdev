@@ -28,7 +28,7 @@ exports.requete = function(client){
 		
 		var siteNum = xml.childNamed('siteId').val;
 		var siteTitre = xml.childNamed('siteTitre').val;
-		var imageURL = xml.childNamed('imageURL').val;
+		var imageUrl = xml.childNamed('imageUrl').val;
 		//var imageURL = 'http://www.france-montagnes.com/sites/default/files/pages/7132679751_7675d430bf_k.jpg';
 		
 		var recoIntro = xml.childWithAttribute('class', 'recommandationIntro').toString();
@@ -46,7 +46,7 @@ exports.requete = function(client){
 		var recoDecouvertes = xml.childNamed('recommandationDecouverte').val;
 		var recoConclusion = xml.childNamed('recommandationPrix').val;
 		*/
-		return([siteNum, siteTitre, imageURL, recoIntro, recoDifficulte, recoEvasion, recoActivites, recoDecouvertes, recoConclusion]);
+		return([siteNum, siteTitre, imageUrl, recoIntro, recoDifficulte, recoEvasion, recoActivites, recoDecouvertes, recoConclusion]);
 		/*
 		switch(client.origin)
 		{
