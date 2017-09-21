@@ -9,6 +9,7 @@ var origin;
 
 var dernierSite;
 var sitesDejaRecommandes;
+var indicateurNouveauSite;
 
 var nvPhysique;
 var nvRandonneur;
@@ -20,6 +21,7 @@ exports.randonneurs = function(a, id, canal)
 	this.rando = new modRandonnee.randonnee(0,0,0,0);
 	this.senderId = id;
 	this.origin = canal;
+	this.indicateurNouveauSite = false;
 
 	switch(a){
 		

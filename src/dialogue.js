@@ -36,7 +36,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		{
 			case 'A':
 			content = ['Je suis toujours ravi de rencontrer de nouveaux passionnés de montagne !'];
-			content[0] += '</br>J\'aimerais faire votre connaissance, comment vous-appelez vous ?';
+			content[0] += '</br>J\'aimerais faire votre connaissance, comment vous appelez-vous ?';
 			break;
 			
 			case 'C':	
@@ -71,9 +71,9 @@ exports.reponseActionDone = function(slug, client, choix)
 		var seuil =[2, 10, 80, 70];
 		var age = client.membres[0].age;
 		if (age < seuil[0]){
-			content = ['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.']
+			content = ['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour sa santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.']
 		} else if (age < seuil[1]){
-			content =['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.']
+			content =['Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour sa santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.']
 		} else if (age > seuil[2]){
 			content =['L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.']
 		} else if (age > seuil[3]){
@@ -89,7 +89,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		switch(nv)
 		{
 			case 1:
-			content = ['La marche en montagne sera pour vous une bonne reprise du sport. </br> Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile'];
+			content = ['Rassurez-vous, la marche en montagne est un sport adapté à tous les niveaux. </br> Je vais vous proposer une randonnée accessible à tous.'];
 			break;
 			case 2:
 			content = ['En tant que sportifs occasionnels, vous allez apprécier la randonnée.'];
@@ -98,7 +98,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['En tant que sportifs réguliers, vous allez apprécier la randonnée.'];
 			break;
 			case 4:
-			content = ['Vous êtes de vrais athlètes ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:'];
+			content = ['Vous êtes de vrais athlètes ! Je vais vous proposer un trek de bonne difficulté pour que vous ne vous ennuyiez pas.'];
 			break;
 		};
 		content[0] +='</br> Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
@@ -109,7 +109,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		switch(nv)
 		{
 			case 1:
-			content = ['Je suis ravi de vous faire découvrir mon sport préféré ! </br> Je vous conseille cependant de ne pas vous lancer dans un trek trop difficile'];
+			content = ['Je suis ravi de vous faire découvrir mon sport préféré !'];
 			break;
 			case 2:
 			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
@@ -118,7 +118,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
 			break;
 			case 4:
-			content = ['Vous êtes des experts ! Je vous conseille de choisir un trek de bonne difficulté pour ne pas vous ennuyer :wink:'];
+			content = ['Vous êtes des experts ! Je vais vous faire découvrir un parcours que vous n\{avez jamais fait.'];
 			break;
 		};
 		content[0] +='</br>Quel est votre budget par personne ?';
@@ -131,10 +131,10 @@ exports.reponseActionDone = function(slug, client, choix)
 		if (nv == 0){
 			content[0] = 'Ok, nous discuterons du prix plus tard.';
 			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
-		} else if (nv <= 100){
+		} else if (nv <= 200){
 			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
 			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ?';	
-		} else if(nv <= 500){
+		} else if(nv <= 800){
 			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
 			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ?';
 		} else if (nv == 1000000) {
@@ -230,7 +230,22 @@ exports.reponseActionDone = function(slug, client, choix)
 		};
 		
 		// recap
-		content[0] = 'D\'accord '+ client.membres[0].prenom +', je résume:'
+		var a = Math.floor(Math.random());
+		var b = Math.floor(Math.random());
+		var ab = a + b;
+		switch(ab) 
+		{
+			case 0:
+			content[0] = 'Ok '+ client.membres[0].prenom +', pour résumer :'
+			break;
+			case 1:
+			content[0] = 'D\'accord '+ client.membres[0].prenom +', je résume :'
+			break;
+			case 2:
+			content[0] = 'C\'est noté '+ client.membres[0].prenom +', en résumé :'
+			break;
+		};
+		
 		switch(client.profil){
 			case 'A':
 			case 'C':
@@ -265,16 +280,43 @@ exports.reponseActionDone = function(slug, client, choix)
 			break;
 			
 			case 'B':
-			content[0] += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
-			content[0] += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+			switch(ab) 
+			{
+				case 0:
+				content[0] += '</br>Avec les enfants, vous préférez généralement des randonnées familiales assez faciles';
+				content[0] += '</br>Lors de vos derniers treks, vous aviez apprécié des promenades pleines de découvertes dans la nature.';
+				break;
+				case 1:
+				content[0] += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
+				content[0] += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+				break;
+				case 2:
+				content[0] += '</br>Je me souviens que Patricia et vous aimez vous détendre loin de la ville en pleine nature.';
+				content[0] += '</br>Il est important pour vous la promenade soit sans risque afin que vos enfants, Pierre et Marie, puissent découvrir la faune et la flore librement.';
+				break;
+			};
+			
 			if (client.nvBudget != 1000000){
 				content[0] += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
 			};
 			break;
 			
 			case 'D':
-			content[0] += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
-			content[0] += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
+			switch(ab) 
+			{
+				case 0:
+				content[0] += '</br>D\'après mes souvenirs, les treks sont, pour vos amis et vous, des défis pendant lesquels vous aimez vous challenger.';
+				content[0] += '</br>Vous adorez pratiquer des activités sportives variées et faire des rencontres sur votre chemin.';
+				break;
+				case 1:
+				content[0] += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
+				content[0] += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
+				break;
+				case 2:
+				content[0] += '</br>Lors de votre dernier trek difficile, vous aviez aimé la variété d\activités sportives.';
+				content[0] += '</br>Vous aviez fait beaucoup de nouvelles rencontres enrichissantes dans les gîtes disponibles sur votre parcours.';
+				break;
+			};
 			if (client.nvBudget != 1000000){
 				content[0] += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
 			};
@@ -287,7 +329,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		content[0] += '</br>Vous aimeriez partir ';
 		if (client.nvEloignement <= 500 && client.nvEloignement != 0){
 			content[0] += 'en France.'
-		} else if (client.nvEloignement <= 2000){
+		} else if (client.nvEloignement <= 2000 && client.nvEloignement != 0){
 			content[0] += 'en Europe.'
 		} else {
 			content[0] += 'à la découverte du monde.'
@@ -314,7 +356,7 @@ exports.reponseActionDone = function(slug, client, choix)
 				value : 'Oui'
 			},
 			{
-				title : 'Autre site',
+				title : 'Je n\'aime pas',
 				value : 'Non'
 			}
 			]
@@ -404,14 +446,14 @@ exports.reponseActionDone = function(slug, client, choix)
 			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
 			var value1 = '0 km';
 			var title1 = 'France';
-			var value2 = '100 km';
+			var value2 = '500 km';
 			var title2 = 'Europe';
-			var value3 = '1000 km';
+			var value3 = '2000 km';
 			var title3 = 'Monde';
 			var value4 = '0 km';
 			var title4 = 'Peu importe';
 		} else if (choix == 'niveau evasion'){
-			var question = 'Quel type de site aimeriez-vous en terme d\isolement ?';
+			var question = 'Quel type de site aimeriez-vous en terme d\'évasion ?';
 			var value1 = 'une randonnée facilement accessible';
 			var title1 = 'Facilement accessible';
 			var value2 = 'une randonnée facilement accessible';

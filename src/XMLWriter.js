@@ -62,6 +62,7 @@ exports.clientXML = function(client)
 	xml += '<dernierSite yid="'
 	if(client.dernierSite != null){ xml += client.dernierSite};
 	xml += '"/>';
+	xml += '<indicateurNouveauSite>' + client.indicateurNouveauSite + '</indicateurNouveauSite>';
 	xml += '</client>';
 	return(xml);
 };

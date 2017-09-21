@@ -80,6 +80,11 @@ exports.save = function(slug, data, client, choix)
 		break;
 		
 		case 'ajuster-reco':
+		client.indicateurNouveauSite = true;
+		client.rando.ajustNvActivites = 0;
+		client.rando.ajustNvDecouvertes = 0;
+		client.rando.ajustNvDifficulte = 0;
+		client.rando.ajustNvEvasion = 0;
 		switch(data)
 		{
 			case 'Augmenter evasion':

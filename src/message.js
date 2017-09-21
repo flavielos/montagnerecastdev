@@ -91,11 +91,11 @@ const replyMessage = (message) => {
 			
 			if (result.getMemory('nv_physique_1') != null && client.nvPhysique != 1){
 				entity = 1;
-			} else if (result.getMemory('nv_physique_2') != null && client.nvPhysique != 1){
+			} else if (result.getMemory('nv_physique_2') != null && client.nvPhysique != 2){
 				entity = 2;
-			} else if (result.getMemory('nv_physique_3') != null && client.nvPhysique != 1){
+			} else if (result.getMemory('nv_physique_3') != null && client.nvPhysique != 3){
 				entity = 3;
-			} else if (result.getMemory('nv_physique_4') != null && client.nvPhysique != 1){
+			} else if (result.getMemory('nv_physique_4') != null && client.nvPhysique != 4){
 				entity = 4;
 			} else {
 				entity = client.nvPhysique;
