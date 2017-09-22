@@ -716,7 +716,7 @@ exports.reponseActionNotDone = function(slug, client)
 	{
 		case 'nom' :
 		type = ['text'];
-		content[0] = 'Ah le bolosse il a pas compris mon nom :o';
+		content[0] = 'Je n\'ai pas compris votre nom, pourriez-vous reformuler ?';
 		break;
 		
 		case 'age':
@@ -866,6 +866,27 @@ exports.reponseActionNotDone = function(slug, client)
 			  ],
 			}
 		break;
+		
+		case 'goodbye':
+		type[0] = 'text';
+		content[0] = 'Au revoir !';
+		break;
+		
+		case 'insultes':
+		type[0] = 'text';
+		content[0] = 'Ce n\'est pas très gentil de dire ça';
+		break;
+		
+		case 'help':
+		type[0] = 'text';		
+		content[0] = 'Réponds à mes questions pour que je te recommande le trek de tes rêves !';
+		break;
+		
+		case 'none':		
+		type[0] = 'text';
+		content[0] = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
+		break;
+		
 
 		
 	};

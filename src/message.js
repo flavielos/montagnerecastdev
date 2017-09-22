@@ -137,6 +137,7 @@ const replyMessage = (message) => {
 			} else if (result.getMemory('duree') != null){
 				entity = ['duree', result.getMemory('duree').hours];
 			};
+			console.log('duree : ' + entity);
 			break;
 			
 			case 'pas-de-preference-eloignement':

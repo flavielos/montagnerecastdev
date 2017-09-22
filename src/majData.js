@@ -44,7 +44,7 @@ exports.save = function(slug, data, client, choix)
 			break;
 			
 			case 'duree':
-			client.nvELoignement = Math.floor(data*900);
+			client.nvEloignement = Math.floor(data[1]*900);
 			break;
 			
 			case 'lieu':
