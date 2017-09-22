@@ -109,6 +109,7 @@ exports.save = function(slug, data, client, choix)
 		
 		case 'recap-valide':
 		[client.rando.siteNum, client.rando.siteTitre, client.rando.imageUrl, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
+		client.dernierSite = client.rando.siteNum;
 		break;
 		
 	}

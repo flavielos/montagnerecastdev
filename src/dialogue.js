@@ -118,7 +118,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
 			break;
 			case 4:
-			content = ['Vous êtes des experts ! Je vais vous faire découvrir un parcours que vous n\{avez jamais fait.'];
+			content = ['Vous êtes des experts ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.'];
 			break;
 		};
 		content[0] +='</br>Quel est votre budget par personne ?';
@@ -263,7 +263,7 @@ exports.reponseActionDone = function(slug, client, choix)
 				content[0] += ', dans un lieu ' + adjNvEv +', ';
 			};
 			if (adjNvAc != null || adjNvDe != null){
-				content[0] += 'où vous pourrez '
+				content[0] += ' où vous pourrez '
 				if (adjNvAc != null && adjNvDe == null){
 					content[0] += 'pratiquer ' + adjNvAc +' activités.';
 				};
@@ -838,6 +838,30 @@ exports.reponseActionNotDone = function(slug, client)
 				{
 					value : 'en France',
 					title : 'Peu importe'
+				}
+			  ],
+			}
+		break;
+		
+		case 'details' : 
+		content[0] = {
+			  title: 'Quel type de trek vous plairait le plus ?',
+			  buttons: [
+				{
+					value: 'un trek facile, loin de la ville',
+					title: 'Facile et dépaysant',
+				},
+				{
+					value: 'Un trek facile, voir des animaux comme des marmottes et des lacs',
+					title: 'Assez facile et plein de découvertes',
+				},
+				{
+					value : 'Un trek plutôt difficile pour faire du kayak, du rafting',
+					title : 'Plutôt difficile avec des activités'
+				},
+				{
+					value : 'un trek  difficile, loin de la ville',
+					title : 'De niveau moyen, loin de la civilisation'
 				}
 			  ],
 			}

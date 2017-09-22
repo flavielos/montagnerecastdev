@@ -27,8 +27,8 @@ const replyMessage = (message) => {
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
   .then(result => {
-	  //console.log(result.getMemory());
-    /*
+	console.log(rando);
+	/*
     * YOUR OWN CODE
     * Here, you can add your own process.
     * Ex: You can call any external API
@@ -145,7 +145,7 @@ const replyMessage = (message) => {
 			
 			case 'details':
 			// Etats non spécifiés
-			entity = [0, 0, 0, 0];
+			entity = [0, 0, 2, 2];
 			//Spécification niveau difficulte
 			if(result.getMemory('nv_difficulte_1')!=null){
 				entity[0] = 1;

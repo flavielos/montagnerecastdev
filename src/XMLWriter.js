@@ -45,6 +45,9 @@ exports.clientXML = function(client)
 	xml += '<typeClient>';
 	switch(client.profil)
 	{
+		case 'A':
+		xml += 'solo';
+		break;
 		case 'B' : 
 		xml += 'famille';
 		break;
