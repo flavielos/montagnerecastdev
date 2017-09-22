@@ -27,6 +27,7 @@ const replyMessage = (message) => {
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
   .then(result => {
+	  //console.log(result.getMemory());
     /*
     * YOUR OWN CODE
     * Here, you can add your own process.
@@ -51,13 +52,13 @@ const replyMessage = (message) => {
 			result.setMemory(
 			{
 			  profil: {
-				value: senderId,
-				raw : senderId
+				value: senderId[0],
+				raw : senderId[0]
 			  },
 			  prenom : null
 			}
 			);
-			entity = senderId;
+			entity = senderId[0];
 			client = new rando.randonneurs(entity, message.senderId, message.origin);
 			break;
 			
