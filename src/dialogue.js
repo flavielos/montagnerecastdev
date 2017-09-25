@@ -70,10 +70,19 @@ exports.reponseActionDone = function(slug, result, profil)
 			content = ['Rassurez-vous, la marche en montagne est un sport adapté à tous les niveaux. </br> Je vais vous proposer une randonnée accessible à tous.'];
 			break;
 			case 2:
-			content = ['En tant que sportifs occasionnels, vous allez apprécier la randonnée.'];
+			if(client.profil == 'A'){
+				content = ['En tant que sportif occasionnel, vous allez apprécier la randonnée.'];				
+			} else {
+				content = ['En tant que sportifs occasionnels, vous allez apprécier la randonnée.'];
+			};
 			break;
 			case 3:
-			content = ['En tant que sportifs réguliers, vous allez apprécier la randonnée.'];
+			if(client.profil == 'A'){
+				content = ['En tant que sportif régulier, vous allez apprécier la randonnée.'];				
+			} else {
+				content = ['En tant que sportifs réguliers, vous allez apprécier la randonnée.'];
+			};
+			break;
 			break;
 			case 4:
 			if(client.profil == 'A'){
@@ -658,7 +667,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		case 'reco-valide':
 		content[0] = client.rando.recoConclusion;
 		content[0] += '</br><a type="button" href="'+client.rando.imageUrl+'" class="btn btn-success">Je réserve !</a>.'
-		content[0] += '</br>J\'espère vous revoir bientôt !';
+		content[0] += '</br></br>J\'espère vous revoir bientôt !';
 		break;
 		
 		case 'goodbye':
@@ -674,11 +683,11 @@ exports.reponseActionDone = function(slug, result, profil)
 		break;
 		
 		case 'none':
-		content[0] = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
+		content[0] = 'Je ne sais pas répondre à cette question. Pourriez-vous répondre à la mienne ?';
 		break;
 		
 		case 'meteo' :
-	type = ['card'];
+		type = ['card'];
 		content = [{
 			title : 'Meteo',
 			subtitle : 'Il fera beau toute ta vie, top nan ?',
@@ -701,7 +710,7 @@ exports.reponseActionDone = function(slug, result, profil)
 	return([type, content]);
 };
 
-exports.reponseActionNotDone = function(slug, client)
+exports.reponseActionNotDone = function(slug)
 {
 
 	var type = ['quickReplies'];
@@ -714,6 +723,7 @@ exports.reponseActionNotDone = function(slug, client)
 		break;
 		
 		case 'age':
+		case 'nombre-age':		
 		content[0] = {
 			  title: 'Je ne suis qu\'un jeune bot, est-ce que vous pourriez choisir une tranche d\'âge ?',
 			  buttons: [
@@ -743,7 +753,7 @@ exports.reponseActionNotDone = function(slug, client)
 		
 		case 'niveau-physique':
 		content[0] = {
-			title: 'Oups...Je n\'ai pas compris. Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
+			title: 'Oups...Je ne suis pas sûr d\'avoir bien saisi. </br>Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
 			buttons: [
 			{
 				value: 'Débutant',
@@ -789,6 +799,7 @@ exports.reponseActionNotDone = function(slug, client)
 		};
 		break;
 		
+		case 'nombre-budget':
 		case 'budget':
 		content[0] = {
 			  title: 'Je ne suis pas sûr d\'avoir bien saisi... Dans quel tranche se situe votre budget par personne ? ',

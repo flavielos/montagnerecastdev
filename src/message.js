@@ -27,7 +27,6 @@ const replyMessage = (message) => {
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
   .then(result => {
-	console.log(rando);
 	/*
     * YOUR OWN CODE
     * Here, you can add your own process.
@@ -64,23 +63,23 @@ const replyMessage = (message) => {
 		  };
 		  [type, content] = dial.reponseActionDone(slug, result, profil);
 	  } else {
-		  
 		  [type, content] = dial.reponseActionNotDone(result.action.slug);
 	  };
 		console.log('type : ' + type);
 		console.log('content : ' + content);
-		if(content !=[]){	
-		  for(var i=0; i<type.length; i++)
-		  {
-			message.addReply({type : type[i], content : content[i]});
-		  };
+		if(content[0] !=null){	
+			for(var i=0; i<type.length; i++)
+			{
+				message.addReply({type : type[i], content : content[i]});
+			};
+		} else {
+			message.addReply({type : 'text', content : 'Message vide'});
 		}
     }
 
     // If there is not any message return by Recast.AI for this current conversation
     if (!result.replies.length) {
-		// A ENLEVER A LA FIN
-      //message.addReply({ type: 'text', content: 'I don\'t have the reply to this yet :)' })
+      message.addReply({ type: 'text', content: 'Message vide' })
     } else {
       // Add each reply received from API to replies stack
       result.replies.forEach(replyContent => message.addReply({ type: 'text', content: replyContent }))
