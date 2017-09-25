@@ -1,91 +1,164 @@
  const rando = require('./randonneurs');
  const ly = require('./lien_yseop');
+ const recastai = require('recastai')
 
 
-exports.save = function(slug, data, client, choix)
+exports.save = function(result, profil)
 {
-	switch(slug)
+	// Instanciation client
+	var client = new rando.randonneurs(profil, 'microsoft')
+	
+	//A : prenom
+	if(result.getMemory('prenom') != null)
 	{
-		case 'greetings':
-		case 'choisir-profil-type':
-		client.profil = data;
-		break;
-		
-		case 'nom':
-		client.membres[0].prenom = data;
-		break;
-		
-		case 'nombre-age':
-		case 'age':
-		client.membres[0].age = data;
-		break;
-		
-		
-		case 'niveau-physique':
-		client.nvPhysique = data;
-		break;
-		
-		case 'niveau-randonneur':
-		client.nvRandonneur = data;
-		break;
-		
-		case 'pas-de-preference-budget':
-		case 'nombre-budget':
-		case 'budget':
-		client.nvBudget = data;
-		break;
-
-		case 'rectifier-lieu':
-		case 'eloignement':
-		switch(data[0])
-		{
-			case 'dist':
-			client.nvEloignement = Math.floor(data[1]/1000);
-			break;
-			
-			case 'duree':
-			client.nvEloignement = Math.floor(data[1]*900);
-			break;
-			
-			case 'lieu':
-			var latP = 49.9;
-			var lonP = 2.3;
-			var lat = data[1];
-			var lon = data[2];
-			var deltaLat = (latP-lat);
-			var deltaLon = (lonP-lon);
-			client.nvEloignement = Math.floor(Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111);
-			break;
+		client.membres[0].prenom = result.getMemory('prenom').raw;
+	} else if (result.getMemory('personne') != null){
+		client.membres[0].prenom = result.getMemory('personne').fullname;
+	};
+	
+	// A : age
+	if(result.getMemory('age')!=null)
+	{
+		client.membres[0].age =result.getMemory('age').years;
+	}
+	if(result.getMemory('age_nombre')!=null)
+	{
+		client.membres[0].age =result.getMemory('age_nombre').scalar;
+	}
+	
+	// A & C : niveau physique
+	if(result.getMemory('choix') == 'niveau physique'){
+		if (result.getMemory('nv_1_rectif') != null){
+			client.nvPhysique = 1;
+		} else if (result.getMemory('nv_2_rectif') != null){
+			client.nvPhysique = 2;
+		} else if (result.getMemory('nv_3_rectif') != null){
+			client.nvPhysique = 3;
+		} else if (result.getMemory('nv_4_rectif') != null){
+			client.nvPhysique = 4;
+		} 
+	} else {
+		if (result.getMemory('nv_physique_1') != null){
+			client.nvPhysique = 1;
+		} else if (result.getMemory('nv_physique_2') != null){
+			client.nvPhysique = 2;
+		} else if (result.getMemory('nv_physique_3') != null){
+			client.nvPhysique = 3;
+		} else if (result.getMemory('nv_physique_4') != null){
+			client.nvPhysique = 4;
+		} 
+	};
+	
+	// A & C : niveau randonneur
+	if(result.getMemory('choix') == 'niveau randonneur'){
+		if (result.getMemory('nv_1_rectif') != null){
+			client.nvRandonneur = 1;
+		} else if (result.getMemory('nv_2_rectif') != null){
+			client.nvRandonneur = 2;
+		} else if (result.getMemory('nv_3_rectif') != null){
+			client.nvRandonneur = 3;
+		} else if (result.getMemory('nv_4_rectif') != null){
+			client.nvRandonneur = 4;
+		} 
+	} else {
+		if (result.getMemory('nv_randonneur_1') != null){
+			client.nvRandonneur = 1;
+		} else if (result.getMemory('nv_randonneur_2') != null){
+			client.nvRandonneur = 2;
+		} else if (result.getMemory('nv_randonneur_3') != null){
+			client.nvRandonneur = 3;
+		} else if (result.getMemory('nv_randonneur_4') != null){
+			client.nvRandonneur = 4;
 		};
-		break;
-		
-		case 'pas-de-preference-eloignement':
-		client.nvEloignement = data;
-		break;
-		
-		case 'rectifier-details':
-		case 'details':
-		client.rando.nvDifficulte = data[0];
-		client.rando.nvEvasion = data[1];
-		client.rando.nvActivites = data[2];
-		client.rando.nvDecouvertes = data[3];
-		break;
-		
-		case 'rectifier-niveau':
-		if (choix == 'niveau-physique'){
-			client.nvPhysique = data;
-		} else {
-			client.nvRandonneur = data;
+	};
+	
+	// budget
+	if (result.getMemory('budget') != null){
+		client.nvBudget = result.getMemory('budget').amount;
+	} else if (result.getMemory('budget_nombre') != null) {
+		client.nvBudget = result.getMemory('budget_nombre').scalar;
+	} else {
+		client.nvBudget = 1000000;
+	};
+	
+	// eloignement
+	if(result.getMemory('distance_rectif') != null){
+		client.nvEloignement = Math.floor(result.getMemory('distance_rectif').meters/1000);
+	} else if (result.getMemory('distance') != null){
+		client.nvEloignement = Math.floor(result.getMemory('distance').meters/1000);
+	} else if (result.getMemory('lieu') != null){
+		var latP = 49.9;
+		var lonP = 2.3;
+		var lat = result.getMemory('lieu').lat;
+		var lon = result.getMemory('lieu').lng;
+		var deltaLat = (latP-lat);
+		var deltaLon = (lonP-lon);
+		client.nvEloignement = Math.floor(Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111);
+	} else if (result.getMemory('duree') != null){
+		client.nvEloignement = Math.floor(result.getMemory('duree').hours*900);
+	} else {
+		client.nvEloignement = 0;
+	};
+	
+	// details
+	//Spécification niveau difficulte
+	if(client.rando.nvDifficulte == null){
+		client.rando.nvDifficulte = 0;
+		if(result.getMemory('nv_difficulte_1')!=null || result.getMemory('nv_difficulte_1_rectif') != null){
+			client.rando.nvDifficulte = 1;
+		} else if(result.getMemory('nv_difficulte_2')!=null || result.getMemory('nv_difficulte_2_rectif') != null){
+			client.rando.nvDifficulte = 2;
+		} else if(result.getMemory('nv_difficulte_3')!=null || result.getMemory('nv_difficulte_3_rectif') != null){
+			client.rando.nvDifficulte = 3;
+		} else if(result.getMemory('nv_difficulte_4')!=null || result.getMemory('nv_difficulte_4_rectif') != null){
+			client.rando.nvDifficulte = 4;
 		};
-		break;
-		
-		case 'ajuster-reco':
+	};
+	// Specifictation niveau evasion
+	if(client.rando.nvEvasion == null){
+		client.rando.nvEvasion = 0;
+		// TO DO : 4 niveaux pour l'évasion
+		if (result.getMemory('nv_evasion_1')!=null || result.getMemory('nv_evasion_1_rectif') != null){
+			client.rando.nvEvasion = 1;
+		} else if (result.getMemory('nv_evasion_2')!=null || result.getMemory('nv_evasion_2_rectif') != null){
+			client.rando.nvEvasion = 4;
+		};
+	};
+	// Specification niveau activites
+	if(client.rando.nvActivites == null){
+		client.rando.nvActivites = 1;
+		if (result.getMemory('activite_1')!=null){
+			client.rando.nvActivites = 2;
+			if (result.getMemory('activite_2')!=null){
+				client.rando.nvActivites = 3;
+				if (result.getMemory('activite_3')!=null){
+					client.rando.nvActivites = 4;
+				};
+			};		
+		};
+	};
+	// Specification niveau découvertes
+	if(client.rando.nvDecouvertes == null){
+		client.rando.nvDecouvertes = 1;
+		if (result.getMemory('decouverte_1')!=null){
+			client.rando.nvDecouvertes = 2;
+			if (result.getMemory('decouverte_2')!=null){
+				client.rando.nvDecouvertes = 3
+				if (result.getMemory('decouverte_3')!=null){
+					client.rando.nvDecouvertes = 4;
+				};
+			};	
+		};
+	};
+	
+	// ajustement reco
+	if (result.getMemory('ajustement') != null){
 		client.indicateurNouveauSite = true;
 		client.rando.ajustNvActivites = 0;
 		client.rando.ajustNvDecouvertes = 0;
 		client.rando.ajustNvDifficulte = 0;
 		client.rando.ajustNvEvasion = 0;
-		switch(data)
+		switch(result.getMemory('ajustement').value)
 		{
 			case 'Augmenter evasion':
 			client.rando.ajustNvEvasion = 0.8;
@@ -106,11 +179,14 @@ exports.save = function(slug, data, client, choix)
 			client.rando.ajustNvDecouvertes = 0.8;
 			break;
 		};
-		
-		case 'recap-valide':
+	};
+	
+	if(client.nvPhysique != null && client.nvRandonneur != null){
 		[client.rando.siteNum, client.rando.siteTitre, client.rando.imageUrl, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
 		client.dernierSite = client.rando.siteNum;
-		break;
-		
-	}
+	};
+	
+	return(client);
+	
 };
+	

@@ -1,5 +1,4 @@
-var nvBudget;
-var nvEloignement;
+
 
 var nvDifficulte;
 var nvEvasion;

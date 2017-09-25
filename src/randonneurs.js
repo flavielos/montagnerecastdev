@@ -13,13 +13,14 @@ var indicateurNouveauSite;
 
 var nvPhysique;
 var nvRandonneur;
+var nvBudget;
+var nvEloignement;
 
-exports.randonneurs = function(a, id, canal)
+exports.randonneurs = function(a, canal)
 {
 	this.profil = a;
 	this.membres = ['client'];
 	this.rando = new modRandonnee.randonnee(0,0,0,0);
-	this.senderId = id;
 	this.origin = canal;
 	this.indicateurNouveauSite = false;
 

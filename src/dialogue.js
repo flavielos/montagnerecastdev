@@ -1,36 +1,14 @@
+const md = require('./majData.js');
 
-exports.reponseActionDone = function(slug, client, choix)
+
+exports.reponseActionDone = function(slug, result, profil)
 {
+	var client = md.save(result, profil);
 	var type = ['text'];
 	var content = [];
 	switch(slug)
 	{
 		case 'greetings':
-		/*
-		type = ['quickReplies'];
-		content = [{
-		  title: 'Bonjour ! Choisissez un profil type.',
-		  buttons: [
-			{
-				value: 'A',
-				title: 'Célibataire',
-			},
-			{
-				value : 'B',
-				title : 'Famille'
-			},
-			{
-				value : 'C',
-				title: 'Couple retraité'
-			},
-			{
-				value : 'D',
-				title : 'Groupe de potes'
-			}
-		  ],
-		}];
-		*/
-	
 		case 'choisir-profil-type':
 		switch(client.profil)
 		{
@@ -81,7 +59,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		} else {
 			content = ['Vous avez l\'âge idéal pour la marche en montagne.']
 		};
-		content[0] += '</br>Comment qualifieriez-vous votre niveau physique général?';
+		content[0] += '</br>Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
 		break;
 		
 		case 'niveau-physique':
@@ -105,7 +83,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			};
 			break;
 		};
-		content[0] +='</br> Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
+		content[0] +='</br>Quel est votre budget par personne ? ';
 		break;
 		
 		case 'niveau-randonneur':
@@ -129,7 +107,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			}
 			break;
 		};
-		content[0] +='</br>Quel est votre budget par personne ?';
+		content[0] +='</br>Comment qualifieriez-vous votre niveau physique général?';
 		break;
 		
 		case 'nombre-budget':
@@ -424,7 +402,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		break;
 		
 		case 'selectionner-ajustement-donnees':
-		if (choix == 'niveau physique'){
+		if (result.getMemory('choix') == 'niveau physique'){
 			var question = 'Quel sportif êtes-vous ?';
 			var value1 = 'Débutant';
 			var title1 = 'Débutant';
@@ -434,7 +412,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			var title3 = 'Régulier';
 			var value4 = 'Athlète';
 			var title4 = 'Athlète';
-		} else if (choix == 'niveau randonneur'){
+		} else if (result.getMemory('choix') == 'niveau randonneur'){
 			var question = 'Par le passé, combien de randonnées avez-vous faites ?';
 			var value1 = 'Débutant';
 			var title1 = 'Aucune';
@@ -444,7 +422,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			var title3 = 'Plusieurs';
 			var value4 = 'Athlète';
 			var title4 = 'Beaucoup';
-		} else if (choix == 'niveau difficulte'){
+		} else if (result.getMemory('choix') == 'niveau difficulte'){
 			var question = 'Quelle difficulté souhaitez-vous rencontrer pendant votre trek ?';
 			var value1 = 'randonnée très facile';
 			var title1 = 'Très facile';
@@ -454,7 +432,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			var title3 = 'Assez difficile';
 			var value4 = 'randonnée de malade';
 			var title4 = 'Très difficile';
-		} else if (choix == 'niveau eloignement'){
+		} else if (result.getMemory('choix') == 'niveau eloignement'){
 			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
 			var value1 = '0 km';
 			var title1 = 'France';
@@ -464,7 +442,7 @@ exports.reponseActionDone = function(slug, client, choix)
 			var title3 = 'Monde';
 			var value4 = '0 km';
 			var title4 = 'Peu importe';
-		} else if (choix == 'niveau evasion'){
+		} else if (result.getMemory('choix') == 'niveau evasion'){
 			var question = 'Quel type de site aimeriez-vous en terme d\'évasion ?';
 			var value1 = 'une randonnée facilement accessible';
 			var title1 = 'Facilement accessible';
@@ -540,6 +518,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		
 		case 'info':
 		var titre;
+		var choix = result.getMemory('sujet').value;
 		switch(choix)
 		{
 			case 'niveau difficulte':
@@ -606,6 +585,7 @@ exports.reponseActionDone = function(slug, client, choix)
 
 		case 'en-savoir-encore-plus':
 		var titre;
+		var choix = result.getMemory('info').value;
 		switch(choix)
 		{
 			case 'niveau difficulte':
@@ -723,6 +703,7 @@ exports.reponseActionDone = function(slug, client, choix)
 
 exports.reponseActionNotDone = function(slug, client)
 {
+
 	var type = ['quickReplies'];
 	var content = [];
 	switch(slug)
