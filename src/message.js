@@ -27,7 +27,6 @@ const replyMessage = (message) => {
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
   .then(result => {
-	console.log(rando);
 	/*
     * YOUR OWN CODE
     * Here, you can add your own process.
@@ -227,15 +226,17 @@ const replyMessage = (message) => {
 			};	
 			break;
 			
-			case 'en-savoir-plus':
+			case 'info':
 			choix = result.getMemory('sujet').value;
+			break;
+			
+			case 'en-savoir-plus':
 			break;
 			
 			case 'en-savoir-encore-plus':
 			choix = result.getMemory('info').value;
 			break;
 
-			
 			case 'ajuster-reco':
 			entity = result.getMemory('ajustement').value;
 			break;

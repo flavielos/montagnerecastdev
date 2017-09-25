@@ -98,7 +98,11 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['En tant que sportifs réguliers, vous allez apprécier la randonnée.'];
 			break;
 			case 4:
-			content = ['Vous êtes de vrais athlètes ! Je vais vous proposer un trek de bonne difficulté pour que vous ne vous ennuyiez pas.'];
+			if(client.profil == 'A'){
+				content = ['Vous êtes un vrai athlète ! Je vais vous proposer un trek de bonne difficulté pour que vous ne vous ennuyiez pas.'];				
+			} else {
+				content = ['Vous êtes de vrais athlètes ! Je vais vous proposer un trek de bonne difficulté pour que vous ne vous ennuyiez pas.'];
+			};
 			break;
 		};
 		content[0] +='</br> Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?';
@@ -118,7 +122,11 @@ exports.reponseActionDone = function(slug, client, choix)
 			content = ['J\'espère que ce trek confirmera votre amour pour la montagne'];
 			break;
 			case 4:
-			content = ['Vous êtes des experts ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.'];
+			if(client.profil == 'A'){
+				content = ['Vous êtes un expert ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.'];
+			} else {
+				content = ['Vous êtes des experts ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.'];
+			}
 			break;
 		};
 		content[0] +='</br>Quel est votre budget par personne ?';
@@ -352,8 +360,12 @@ exports.reponseActionDone = function(slug, client, choix)
 			imageUrl : client.rando.imageUrl,
 			buttons : [
 			{
-				title : 'En savoir plus',
+				title : 'J\'aime',
 				value : 'Oui'
+			},
+			{
+				title : 'En savoir plus',
+				value : 'en savoir plus'
 			},
 			{
 				title : 'Je n\'aime pas',
@@ -487,7 +499,7 @@ exports.reponseActionDone = function(slug, client, choix)
 				};
 		break;
 		
-		case 'intro-valide':
+		case 'en-savoir-plus':
 		var listeButtons = [];
 		if(client.rando.nvDifficulte != 0)
 		{
@@ -526,7 +538,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		break;
 		
 		
-		case 'en-savoir-plus':
+		case 'info':
 		var titre;
 		switch(choix)
 		{
@@ -545,7 +557,7 @@ exports.reponseActionDone = function(slug, client, choix)
 		};
 		var listeButtons = [];
 		listeButtons[0] = {
-			title : 'Ca me plait',
+			title : 'J\'aime',
 			value : 'oui'
 		};
 		
@@ -662,6 +674,7 @@ exports.reponseActionDone = function(slug, client, choix)
         };
 		break;
 		
+		case 'intro-valide':
 		case 'reco-valide':
 		content[0] = client.rando.recoConclusion;
 		content[0] += '</br>Si vous souhaitez réserver dès maintenant, cliquez <a href="'+client.rando.imageUrl+'"><u><font color="blue">ici</font></u></a>.'
@@ -800,19 +813,19 @@ exports.reponseActionNotDone = function(slug, client)
 			  title: 'Je ne suis pas sûr d\'avoir bien saisi... Dans quel tranche se situe votre budget par personne ? ',
 			  buttons: [
 				{
-					value: '100€',
+					value: '100 euros',
 					title: '- de 100€',
 				},
 				{
-					value: '500€',
+					value: '500 euros',
 					title: '101 - 500€',
 				},
 				{
-					value : '1000€',
+					value : '1000 euros',
 					title : '501 - 1000€'
 				},
 				{
-					value : '5000€',
+					value : '5000 euros',
 					title : '+ de 1000€'
 				}
 			  ],
