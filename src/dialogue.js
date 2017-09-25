@@ -657,7 +657,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		case 'intro-valide':
 		case 'reco-valide':
 		content[0] = client.rando.recoConclusion;
-		content[0] += '</br>Si vous souhaitez réserver dès maintenant, cliquez <a href="'+client.rando.imageUrl+'"><u><font color="blue">ici</font></u></a>.'
+		content[0] += '</br><a type="button" href="'+client.rando.imageUrl+'" class="btn btn-success">Je réserve !</a>.'
 		content[0] += '</br>J\'espère vous revoir bientôt !';
 		break;
 		
