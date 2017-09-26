@@ -21,7 +21,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			content = ['Heureux de vous revoir ' + client.membres[0].prenom + ' !'];
 			content[0] += '</br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.'
 			content[0] += '</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple.';
-			content[0] += '</br>Comment qualifieriez-vous votre niveau physique ?'
+			content[0] += '</br>Comment qualifieriez-vous votre niveau d\'expérience en randonnée ?'
 			break;
 			
 			case 'B':
@@ -347,7 +347,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			imageUrl : client.rando.imageUrl,
 			buttons : [
 			{
-				title : 'J\'aime',
+				title : 'Ca me plait',
 				value : 'Oui'
 			},
 			{
@@ -355,7 +355,7 @@ exports.reponseActionDone = function(slug, result, profil)
 				value : 'en savoir plus'
 			},
 			{
-				title : 'Je n\'aime pas',
+				title : 'Ca ne me plait pas',
 				value : 'Non'
 			}
 			]
@@ -498,7 +498,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		if(client.rando.nvEvasion != 0)
 		{
 			listeButtons.push({
-				title : 'La fréquentation',
+				title : 'L\'évasion',
 				value : 'niveau evasion'
 			});
 		};
@@ -545,12 +545,12 @@ exports.reponseActionDone = function(slug, result, profil)
 		};
 		var listeButtons = [];
 		listeButtons[0] = {
-			title : 'J\'aime',
+			title : 'Ca me plait',
 			value : 'oui'
 		};
 		
 		listeButtons[1] = {
-			title : 'Je n\'aime pas',
+			title : 'Ca ne me plait pas',
 			value : 'non'
 		};
 		if(client.rando.nvDifficulte != 0 && choix != 'niveau difficulte')
@@ -563,7 +563,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		if(client.rando.nvEvasion != 0 && choix != 'niveau evasion')
 		{
 			listeButtons.push({
-				title : 'La fréquentation',
+				title : 'L\'évasion',
 				value : 'niveau evasion'
 			});
 		};
@@ -617,7 +617,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		};
 		
 		listeButtons[1] = {
-			title : 'Je n\'aime pas',
+			title : 'Ca ne me plait pas',
 			value : 'non'
 		};
 		
@@ -666,7 +666,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		case 'intro-valide':
 		case 'reco-valide':
 		content[0] = client.rando.recoConclusion;
-		content[0] += '</br><a type="button" href="'+client.rando.imageUrl+'" class="btn btn-success">Je réserve !</a>.'
+		content[0] += '</br><a type="button" href="'+client.rando.imageUrl+'" class="btn btn-success">Je réserve !</a>'
 		content[0] += '</br></br>J\'espère vous revoir bientôt !';
 		break;
 		

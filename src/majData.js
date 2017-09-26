@@ -102,57 +102,67 @@ exports.save = function(result, profil)
 	
 	// details
 	//Spécification niveau difficulte
-	if(client.rando.nvDifficulte == null){
+	if(client.profil == 'A' || client.profil == 'C')
+	{
 		client.rando.nvDifficulte = 0;
-		if(result.getMemory('nv_difficulte_1')!=null || result.getMemory('nv_difficulte_1_rectif') != null){
-			client.rando.nvDifficulte = 1;
-		} else if(result.getMemory('nv_difficulte_2')!=null || result.getMemory('nv_difficulte_2_rectif') != null){
-			client.rando.nvDifficulte = 2;
-		} else if(result.getMemory('nv_difficulte_3')!=null || result.getMemory('nv_difficulte_3_rectif') != null){
-			client.rando.nvDifficulte = 3;
-		} else if(result.getMemory('nv_difficulte_4')!=null || result.getMemory('nv_difficulte_4_rectif') != null){
-			client.rando.nvDifficulte = 4;
-		};
+	} 
+	if(result.getMemory('nv_difficulte_1')!=null || result.getMemory('nv_difficulte_1_rectif') != null){
+		client.rando.nvDifficulte = 1;
+	} else if(result.getMemory('nv_difficulte_2')!=null || result.getMemory('nv_difficulte_2_rectif') != null){
+		client.rando.nvDifficulte = 2;
+	} else if(result.getMemory('nv_difficulte_3')!=null || result.getMemory('nv_difficulte_3_rectif') != null){
+		client.rando.nvDifficulte = 3;
+	} else if(result.getMemory('nv_difficulte_4')!=null || result.getMemory('nv_difficulte_4_rectif') != null){
+		client.rando.nvDifficulte = 4;
 	};
+	
 	// Specifictation niveau evasion
-	if(client.rando.nvEvasion == null){
+	if(client.profil == 'A' || client.profil == 'C'){
 		client.rando.nvEvasion = 0;
-		// TO DO : 4 niveaux pour l'évasion
-		if (result.getMemory('nv_evasion_1')!=null || result.getMemory('nv_evasion_1_rectif') != null){
-			client.rando.nvEvasion = 1;
-		} else if (result.getMemory('nv_evasion_2')!=null || result.getMemory('nv_evasion_2_rectif') != null){
-			client.rando.nvEvasion = 4;
-		};
 	};
+	// TO DO : 4 niveaux pour l'évasion
+	if (result.getMemory('nv_evasion_1')!=null || result.getMemory('nv_evasion_1_rectif') != null){
+		client.rando.nvEvasion = 1;
+	} else if (result.getMemory('nv_evasion_2')!=null || result.getMemory('nv_evasion_2_rectif') != null){
+		client.rando.nvEvasion = 4;
+	};
+	
 	// Specification niveau activites
-	if(client.rando.nvActivites == null){
+	if(client.profil == 'A' || client.profil == 'C'){
 		client.rando.nvActivites = 1;
-		if (result.getMemory('activite_1')!=null){
-			client.rando.nvActivites = 2;
-			if (result.getMemory('activite_2')!=null){
-				client.rando.nvActivites = 3;
-				if (result.getMemory('activite_3')!=null){
-					client.rando.nvActivites = 4;
-				};
-			};		
-		};
 	};
+	if (result.getMemory('activite_1')!=null){
+		client.rando.nvActivites = 2;
+		if (result.getMemory('activite_2')!=null){
+			client.rando.nvActivites = 3;
+			if (result.getMemory('activite_3')!=null){
+				client.rando.nvActivites = 4;
+			};
+		};		
+	};
+	
 	// Specification niveau découvertes
-	if(client.rando.nvDecouvertes == null){
+	if(client.profil == 'A' || client.profil == 'C'){
 		client.rando.nvDecouvertes = 1;
-		if (result.getMemory('decouverte_1')!=null){
-			client.rando.nvDecouvertes = 2;
-			if (result.getMemory('decouverte_2')!=null){
-				client.rando.nvDecouvertes = 3
-				if (result.getMemory('decouverte_3')!=null){
-					client.rando.nvDecouvertes = 4;
-				};
-			};	
-		};
 	};
+	if (result.getMemory('decouverte_1')!=null){
+		client.rando.nvDecouvertes = 2;
+		if (result.getMemory('decouverte_2')!=null){
+			client.rando.nvDecouvertes = 3
+			if (result.getMemory('decouverte_3')!=null){
+				client.rando.nvDecouvertes = 4;
+			};
+		};	
+	};
+	
+	
 	
 	// ajustement reco
 	if (result.getMemory('ajustement') != null){
+		if(client.nvPhysique != null && client.nvRandonneur != null){
+			[client.rando.siteNum, client.rando.siteTitre, client.rando.imageUrl, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
+			client.dernierSite = client.rando.siteNum;
+		};
 		client.indicateurNouveauSite = true;
 		client.rando.ajustNvActivites = 0;
 		client.rando.ajustNvDecouvertes = 0;
