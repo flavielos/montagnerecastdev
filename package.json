@@ -23,7 +23,7 @@
 	"sync-request" : "^4.1.0",
 	"xmldom" : "^0.1.27",
 	"simple-xml-dom" : "^1.0.0",
-	"xmldoc" : "^1.1.0"
+	"xmldoc" : "^1.1.0",
 	"country-query" : "^1.0.1",
 	"which-country" : "^1.0.0"
   },
