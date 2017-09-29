@@ -14,7 +14,7 @@ var indicateurNouveauSite;
 var nvPhysique;
 var nvRandonneur;
 var nvBudget;
-var nvEloignement;
+var lieu;
 
 exports.randonneurs = function(a, canal)
 {

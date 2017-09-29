@@ -1,6 +1,8 @@
  const rando = require('./randonneurs');
  const ly = require('./lien_yseop');
- const recastai = require('recastai')
+ const recastai = require('recastai');
+ const wc = require('which-country');
+ const ca = require('country-query');
 
 
 exports.save = function(result, profil)
@@ -82,6 +84,7 @@ exports.save = function(result, profil)
 	};
 	
 	// eloignement
+	/*
 	if(result.getMemory('distance_rectif') != null){
 		client.nvEloignement = Math.floor(result.getMemory('distance_rectif').meters/1000);
 	} else if (result.getMemory('distance') != null){
@@ -99,6 +102,19 @@ exports.save = function(result, profil)
 	} else {
 		client.nvEloignement = 0;
 	};
+	*/
+	
+	if(result.getMemory('lieu') != null){
+		var lat = result.getMemory('lieu').lat;
+		var lng = result.getMemory('lieu').lng;
+		var cca3 = wc([lng, lat]);
+		if(cca3 != 'FRA'){
+			client.lieu  = ca.findByCca3(cca3).region;
+		} else {
+			client.lieu = 'france';
+		}
+	};
+	
 	
 	// details
 	//Spécification niveau difficulte
@@ -159,7 +175,7 @@ exports.save = function(result, profil)
 	
 	// ajustement reco
 	if (result.getMemory('ajustement') != null){
-		if(client.nvPhysique != null && client.nvRandonneur != null){
+		if(client.nvPhysique != null && client.nvRandonneur != null && client.lieu != null && client.nvBudget){
 			[client.rando.siteNum, client.rando.siteTitre, client.rando.imageUrl, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
 			client.dernierSite = client.rando.siteNum;
 		};
@@ -191,7 +207,7 @@ exports.save = function(result, profil)
 		};
 	};
 	
-	if(client.nvPhysique != null && client.nvRandonneur != null){
+	if(client.nvPhysique != null && client.nvRandonneur != null && client.lieu != null && client.nvBudget){
 		[client.rando.siteNum, client.rando.siteTitre, client.rando.imageUrl, client.rando.recoIntro, client.rando.recoDifficulte, client.rando.recoEvasion, client.rando.recoActivites, client.rando.recoDecouvertes, client.rando.recoConclusion] = ly.requete(client);
 		client.dernierSite = client.rando.siteNum;
 	};

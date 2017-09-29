@@ -40,7 +40,7 @@ exports.clientXML = function(client)
 	var xml = '<client yid="CLIENT">';
 	xml += '<ageClient>'+client.membres[0].age+'</ageClient>';
 	xml += '<budget>'+client.nvBudget+'</budget>';
-	xml += '<besoinEloignement>'+client.nvEloignement+'</besoinEloignement>';
+	xml += '<besoinEloignement>'+client.lieu+'</besoinEloignement>';
 	xml += '<nomEntite>'+client.membres[0].prenom+'</nomEntite>';
 	xml += '<typeClient>';
 	switch(client.profil)
