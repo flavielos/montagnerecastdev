@@ -40,7 +40,6 @@ const replyMessage = (message) => {
 	  var type;
 	  var content;
 	  var profil = senderId[0];
-	  console.log('memoire : ' + result.memory);
 
 	  if(result.action.done)
 	  {

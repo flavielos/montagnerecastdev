@@ -670,9 +670,9 @@ exports.reponseActionDone = function(slug, result, profil)
 		content[0] = 'Au revoir !';
 		break;
 		
-		case 'insultes':
+		/* case 'insultes':
 		content[0] = 'Ce n\'est pas très gentil de dire ça';
-		break;
+		break; */
 		
 		case 'help':
 		content[0] = 'Réponds à mes questions pour que je te recommande le trek de tes rêves !';
