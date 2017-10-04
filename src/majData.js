@@ -105,14 +105,17 @@ exports.save = function(result, profil)
 	*/
 	
 	if(result.getMemory('lieu') != null){
-		var lat = result.getMemory('lieu').lat;
-		var lng = result.getMemory('lieu').lng;
+		var lat = Math.floor(result.getMemory('lieu').lat);
+		var lng = Math.floor(result.getMemory('lieu').lng);
 		var cca3 = wc([lng, lat]);
 		if(cca3 != 'FRA'){
 			client.lieu  = ca.findByCca3(cca3).region;
+			console.log(client.lieu);
 		} else {
-			client.lieu = 'france';
+			client.lieu = 'France';
 		}
+	} else {
+			client.lieu = 'none';
 	};
 	
 	
@@ -145,7 +148,7 @@ exports.save = function(result, profil)
 	
 	// Specification niveau activites
 	if(client.profil == 'A' || client.profil == 'C'){
-		client.rando.nvActivites = 1;
+		client.rando.nvActivites = 0;
 	};
 	if (result.getMemory('activite_1')!=null){
 		client.rando.nvActivites = 2;
@@ -159,7 +162,7 @@ exports.save = function(result, profil)
 	
 	// Specification niveau découvertes
 	if(client.profil == 'A' || client.profil == 'C'){
-		client.rando.nvDecouvertes = 1;
+		client.rando.nvDecouvertes = 0;
 	};
 	if (result.getMemory('decouverte_1')!=null){
 		client.rando.nvDecouvertes = 2;
@@ -196,6 +199,7 @@ exports.save = function(result, profil)
 			client.rando.ajustNvDifficulte = 0.8;
 			break;
 			case 'Diminuer difficulte':
+			console.log('youou');
 			client.rando.ajustNvDifficulte = '-0.8';
 			break;
 			case 'Augmenter activites':

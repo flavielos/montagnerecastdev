@@ -13,7 +13,7 @@ exports.reponseActionDone = function(slug, result, profil)
 		switch(client.profil)
 		{
 			case 'A':
-			content = ['Je suis toujours ravi de rencontrer de nouveaux passionnés de montagne !'];
+			content = ['Bonjour ! Je suis Oscar, l\'assistant P-Val et je vais vous poser quelques questions pour pouvoir vous recommander le trek de vos rêves.'];
 			content[0] += '</br>J\'aimerais faire votre connaissance, comment vous appelez-vous ?';
 			break;
 			
@@ -25,13 +25,13 @@ exports.reponseActionDone = function(slug, result, profil)
 			break;
 			
 			case 'B':
-			content = ['Bonjour ' + client.membres[0].prenom + ', ravi de vous revoir !'];
-			content[0] += '</br>Je vois que la petite Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
+			content = [client.membres[0].prenom + ', ravi de vous revoir !'];
+			content[0] += '</br>Je vois que votre fille Marie a maintenant '+ client.membres[3].age +' ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !';
 			content[0] += '</br>Dites-moi, quel est votre budget par personne pour cette nouvelle aventure en famille ?';
 			break;
 			
 			case 'D':
-			content = ['Salut ' + client.membres[0].prenom + ' !'];
+			content = ['Content de te revoir ' + client.membres[0].prenom + ' !'];
 			content[0] += '</br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière.';
 			content[0] += '</br>Dites-moi, quel est votre budget par personne pour cette nouvelle aventure entre amis ?';
 			break;
@@ -125,19 +125,19 @@ exports.reponseActionDone = function(slug, result, profil)
 		var nv = client.nvBudget;
 		if (nv == 0){
 			content[0] = 'Ok, nous discuterons du prix plus tard.';
-			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
+			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Sur un autre continent ?';
 		} else if (nv <= 200){
 			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
 			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ?';	
-		} else if(nv <= 800){
+		} else if(nv < 1000){
 			content[0] = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
 			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ?';
 		} else if (nv == 1000000) {
 			content[0] = 'Ok, j\'aime avoir carte blanche !';
-			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
+			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Sur un autre continent ?';
 		} else {
 			content[0] = 'En voilà un budget intéressant !';
-			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Plus loin ?';
+			content[0] += '</br>Cette randonnée, vous la voyez plutôt en France ? En Europe ? Sur un autre continent ?';
 		};
 		break;
 
@@ -320,17 +320,13 @@ exports.reponseActionDone = function(slug, result, profil)
 		
 
 		// niveau eloignement
-
-		content[0] += '</br>Vous aimeriez partir ';
-		if (client.nvEloignement <= 500 && client.nvEloignement != 0){
-			content[0] += 'en France.'
-		} else if (client.nvEloignement <= 2000 && client.nvEloignement != 0){
-			content[0] += 'en Europe.'
-		} else {
-			content[0] += 'à la découverte du monde.'
+		if (client.lieu != 'none'){
+			content[0] += '</br>Vous aimeriez partir en ';
+			var lieuxFr = ['France', 'Europe', 'Asie', 'Amérique', 'Afrique', 'Océanie'];
+			var lieuxEn = ['France', 'Europe', 'Asia', 'Americas', 'Africa', 'Oceania'];
+			content[0] += lieuxFr[lieuxEn.indexOf(client.lieu)] + '.';
 		};
 		
-
 		content[0] += '</br>Ce résumé vous correspond-il ?'
 		break;
 		
@@ -838,7 +834,19 @@ exports.reponseActionNotDone = function(slug)
 				},
 				{
 					value : 'en Asie',
-					title : 'Plus loin'
+					title : 'Asie'
+				},
+				{
+					value : 'en Afrique',
+					title : 'Afrique'
+				},
+				{
+					value : 'en Amérique',
+					title : 'Amérique'
+				},
+				{
+					value : 'en Océanie',
+					title : 'Océanie'
 				},
 				{
 					value : 'en France',
