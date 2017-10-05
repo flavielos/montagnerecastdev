@@ -83,26 +83,7 @@ exports.save = function(result, profil)
 		client.nvBudget = 1000000;
 	};
 	
-	// eloignement
-	/*
-	if(result.getMemory('distance_rectif') != null){
-		client.nvEloignement = Math.floor(result.getMemory('distance_rectif').meters/1000);
-	} else if (result.getMemory('distance') != null){
-		client.nvEloignement = Math.floor(result.getMemory('distance').meters/1000);
-	} else if (result.getMemory('lieu') != null){
-		var latP = 49.9;
-		var lonP = 2.3;
-		var lat = result.getMemory('lieu').lat;
-		var lon = result.getMemory('lieu').lng;
-		var deltaLat = (latP-lat);
-		var deltaLon = (lonP-lon);
-		client.nvEloignement = Math.floor(Math.sqrt(Math.pow(deltaLat,2) + Math.pow(deltaLon,2))*111);
-	} else if (result.getMemory('duree') != null){
-		client.nvEloignement = Math.floor(result.getMemory('duree').hours*900);
-	} else {
-		client.nvEloignement = 0;
-	};
-	*/
+
 	
 	if(result.getMemory('lieu') != null){
 		var lat = Math.floor(result.getMemory('lieu').lat);
@@ -111,6 +92,9 @@ exports.save = function(result, profil)
 		if(cca3 != 'FRA'){
 			client.lieu  = ca.findByCca3(cca3).region;
 		} else {
+			client.lieu = 'France';
+		}
+		if(client.nvBudget < 300){
 			client.lieu = 'France';
 		}
 	} else {

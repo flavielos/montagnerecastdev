@@ -436,7 +436,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			var title2 = 'Assez facile';
 			var value3 = 'Je veux une randonnée assez difficile';
 			var title3 = 'Assez difficile';
-			var value4 = 'Je veux une randonnée de malade';
+			var value4 = 'Je veux une randonnée de fou';
 			var title4 = 'Très difficile';
 		} else if (result.getMemory('choix').raw == 'niveau eloignement'){
 			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
