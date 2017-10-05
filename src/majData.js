@@ -110,7 +110,6 @@ exports.save = function(result, profil)
 		var cca3 = wc([lng, lat]);
 		if(cca3 != 'FRA'){
 			client.lieu  = ca.findByCca3(cca3).region;
-			console.log(client.lieu);
 		} else {
 			client.lieu = 'France';
 		}

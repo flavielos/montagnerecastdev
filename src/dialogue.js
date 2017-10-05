@@ -487,28 +487,28 @@ exports.reponseActionDone = function(slug, result, profil)
 		if(client.rando.nvDifficulte != 0)
 		{
 			listeButtons.push({
-				title : 'La difficulté',
+				title : 'Difficulté',
 				value : 'niveau difficulte'
 			});
 		};
 		if(client.rando.nvEvasion != 0)
 		{
 			listeButtons.push({
-				title : 'L\'évasion',
+				title : 'Evasion',
 				value : 'niveau evasion'
 			});
 		};
 		if(client.rando.nvActivites != 0)
 		{
 			listeButtons.push({
-				title : 'Les activités',
+				title : 'Activités',
 				value : 'niveau activites'
 			});
 		};
 		if(client.rando.nvDecouvertes != 0)
 		{
 			listeButtons.push({
-				title : 'Les découvertes',
+				title : 'Découvertes',
 				value : 'niveau decouvertes'
 			});
 		};
@@ -552,28 +552,28 @@ exports.reponseActionDone = function(slug, result, profil)
 		if(client.rando.nvDifficulte != 0 && choix != 'niveau difficulte')
 		{
 			listeButtons.push({
-				title : 'La difficulté',
+				title : 'Difficulté',
 				value : 'niveau difficulte'
 			});
 		};
 		if(client.rando.nvEvasion != 0 && choix != 'niveau evasion')
 		{
 			listeButtons.push({
-				title : 'L\'évasion',
+				title : 'Evasion',
 				value : 'niveau evasion'
 			});
 		};
 		if(client.rando.nvActivites != 0 && choix != 'niveau activites')
 		{
 			listeButtons.push({
-				title : 'Les activités',
+				title : 'Activités',
 				value : 'niveau activites'
 			});
 		};
 		if(client.rando.nvDecouvertes != 0 && choix != 'niveau decouvertes')
 		{
 			listeButtons.push({
-				title : 'Les découvertes',
+				title : 'Découvertes',
 				value : 'niveau decouvertes'
 			});
 		};
@@ -670,9 +670,9 @@ exports.reponseActionDone = function(slug, result, profil)
 		content[0] = 'Au revoir !';
 		break;
 		
-		/* case 'insultes':
+		case 'insultes':
 		content[0] = 'Ce n\'est pas très gentil de dire ça';
-		break; */
+		break;
 		
 		case 'help':
 		content[0] = 'Réponds à mes questions pour que je te recommande le trek de tes rêves !';
