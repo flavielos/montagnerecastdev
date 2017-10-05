@@ -407,7 +407,8 @@ exports.reponseActionDone = function(slug, result, profil)
 		break;
 		
 		case 'selectionner-ajustement-donnees':
-		if (result.getMemory('choix') == 'niveau physique'){
+		console.log(result.getMemory('choix').raw);
+		if (result.getMemory('choix').raw == 'niveau physique'){
 			var question = 'Quel sportif êtes-vous ?';
 			var value1 = 'Débutant';
 			var title1 = 'Débutant';
@@ -417,7 +418,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			var title3 = 'Régulier';
 			var value4 = 'Athlète';
 			var title4 = 'Athlète';
-		} else if (result.getMemory('choix') == 'niveau randonneur'){
+		} else if (result.getMemory('choix').raw == 'niveau randonneur'){
 			var question = 'Par le passé, combien de randonnées avez-vous faites ?';
 			var value1 = 'Débutant';
 			var title1 = 'Aucune';
@@ -427,27 +428,27 @@ exports.reponseActionDone = function(slug, result, profil)
 			var title3 = 'Plusieurs';
 			var value4 = 'Athlète';
 			var title4 = 'Beaucoup';
-		} else if (result.getMemory('choix') == 'niveau difficulte'){
+		} else if (result.getMemory('choix').raw == 'niveau difficulte'){
 			var question = 'Quelle difficulté souhaitez-vous rencontrer pendant votre trek ?';
-			var value1 = 'randonnée très facile';
+			var value1 = 'Je veux une randonnée très facile';
 			var title1 = 'Très facile';
-			var value2 = 'randonnée cool';
+			var value2 = 'Je veux une randonnée cool';
 			var title2 = 'Assez facile';
-			var value3 = 'randonnée assez difficile';
+			var value3 = 'Je veux une randonnée assez difficile';
 			var title3 = 'Assez difficile';
-			var value4 = 'randonnée de malade';
+			var value4 = 'Je veux une randonnée de malade';
 			var title4 = 'Très difficile';
-		} else if (result.getMemory('choix') == 'niveau eloignement'){
+		} else if (result.getMemory('choix').raw == 'niveau eloignement'){
 			var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
-			var value1 = '0 km';
+			var value1 = 'France';
 			var title1 = 'France';
-			var value2 = '500 km';
+			var value2 = 'Europe';
 			var title2 = 'Europe';
-			var value3 = '2000 km';
+			var value3 = 'au bout du monde';
 			var title3 = 'Monde';
-			var value4 = '0 km';
+			var value4 = 'Peu importe';
 			var title4 = 'Peu importe';
-		} else if (result.getMemory('choix') == 'niveau evasion'){
+		} else if (result.getMemory('choix').raw == 'niveau evasion'){
 			var question = 'Quel type de site aimeriez-vous en terme d\'évasion ?';
 			var value1 = 'une randonnée facilement accessible';
 			var title1 = 'Facilement accessible';
@@ -484,34 +485,29 @@ exports.reponseActionDone = function(slug, result, profil)
 		
 		case 'en-savoir-plus':
 		var listeButtons = [];
-		if(client.rando.nvDifficulte != 0)
-		{
-			listeButtons.push({
-				title : 'Difficulté',
-				value : 'niveau difficulte'
-			});
-		};
-		if(client.rando.nvEvasion != 0)
-		{
-			listeButtons.push({
-				title : 'Evasion',
-				value : 'niveau evasion'
-			});
-		};
-		if(client.rando.nvActivites != 0)
-		{
-			listeButtons.push({
-				title : 'Activités',
-				value : 'niveau activites'
-			});
-		};
-		if(client.rando.nvDecouvertes != 0)
-		{
-			listeButtons.push({
-				title : 'Découvertes',
-				value : 'niveau decouvertes'
-			});
-		};
+		
+		listeButtons.push({
+			title : 'Difficulté',
+			value : 'niveau difficulte'
+		});
+	
+	
+		listeButtons.push({
+			title : 'Evasion',
+			value : 'niveau evasion'
+		});
+	
+	
+		listeButtons.push({
+			title : 'Activités',
+			value : 'niveau activites'
+		});
+		
+		listeButtons.push({
+			title : 'Découvertes',
+			value : 'niveau decouvertes'
+		});
+	
 		
 		type = ['quickReplies'];
 		content = [{
@@ -549,28 +545,28 @@ exports.reponseActionDone = function(slug, result, profil)
 			title : 'Ca ne me plait pas',
 			value : 'non'
 		};
-		if(client.rando.nvDifficulte != 0 && choix != 'niveau difficulte')
+		if(choix != 'niveau difficulte')
 		{
 			listeButtons.push({
 				title : 'Difficulté',
 				value : 'niveau difficulte'
 			});
 		};
-		if(client.rando.nvEvasion != 0 && choix != 'niveau evasion')
+		if(choix != 'niveau evasion')
 		{
 			listeButtons.push({
 				title : 'Evasion',
 				value : 'niveau evasion'
 			});
 		};
-		if(client.rando.nvActivites != 0 && choix != 'niveau activites')
+		if(choix != 'niveau activites')
 		{
 			listeButtons.push({
 				title : 'Activités',
 				value : 'niveau activites'
 			});
 		};
-		if(client.rando.nvDecouvertes != 0 && choix != 'niveau decouvertes')
+		if(choix != 'niveau decouvertes')
 		{
 			listeButtons.push({
 				title : 'Découvertes',
@@ -645,7 +641,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			},
 			{
 				value : 'Augmenter activites',
-				title : 'Pas assez d\'activités'
+				title : 'Pas assez de divertissements'
 			},
 			{
 				value : 'Augmenter evasion',
