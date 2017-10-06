@@ -679,22 +679,12 @@ exports.reponseActionDone = function(slug, result, profil)
 		break;
 		
 		case 'meteo' :
-		type = ['card'];
-		content = [{
-			title : 'Meteo',
-			subtitle : 'Il fera beau toute ta vie, top nan ?',
-			imageUrl : 'https://beebom-redkapmedia.netdna-ssl.com/wp-content/uploads/2016/01/Reverse-Image-Search-Engines-Apps-And-Its-Uses-2016.jpg',
-			buttons : [
-			{
-				title : 'En savoir plus',
-				value : 'Oui'
-			},
-			{
-				title : 'Autre site',
-				value : 'Non'
-			}
-			]
-		}];
+		content[0] = 'Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau !';
+		break;
+		
+		case 'asking-name':
+		content[0] = "Je m\'appelle Oscar !";
+		break;
 	};
 	
 	
@@ -895,6 +885,8 @@ exports.reponseActionNotDone = function(slug)
 		type[0] = 'text';
 		content[0] = 'Je ne sais pas répondre à cette question, mon domaine de spécialisation est la randonnée en montagne';
 		break;
+		
+		
 		
 
 		
