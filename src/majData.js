@@ -25,7 +25,11 @@ exports.save = function(result, profil)
 	}
 	if(result.getMemory('age_nombre')!=null)
 	{
-		client.membres[0].age =result.getMemory('age_nombre').scalar;
+		if(result.getMemory('age_nombre').scalar != null){
+			client.membres[0].age = result.getMemory('age_nombre').scalar;
+		} else {
+			client.membres[0].age = 40;
+		}
 	}
 	
 	// A & C : niveau physique

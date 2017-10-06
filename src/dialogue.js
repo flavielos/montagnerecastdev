@@ -822,27 +822,27 @@ exports.reponseActionNotDone = function(slug)
 			  buttons: [
 				{
 					value: 'en France',
-					title: 'France',
+					title: 'en France',
 				},
 				{
 					value: 'en Europe',
-					title: 'Europe',
+					title: 'en Europe',
 				},
 				{
 					value : 'en Asie',
-					title : 'Asie'
+					title : 'en Asie'
 				},
 				{
 					value : 'en Afrique',
-					title : 'Afrique'
+					title : 'en Afrique'
 				},
 				{
 					value : 'en Amérique',
-					title : 'Amérique'
+					title : 'en Amérique'
 				},
 				{
 					value : 'en Océanie',
-					title : 'Océanie'
+					title : 'en Australie'
 				},
 				{
 					value : 'en France',
