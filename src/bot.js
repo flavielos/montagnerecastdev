@@ -1,4 +1,4 @@
-/* LALALA
+/* LALA
  * bot.js
  *
  * In this file:
