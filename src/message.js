@@ -7,7 +7,9 @@
  const dial = require('./dialogue');
  const md = require('./majData');
  const rando = require('./randonneurs');
- 
+ const rep = require('./reponse.js');
+ const qu = require('./question.js');
+ const nea = require('./nextExpAction.js');
  var client;
 
  // This function is the core of the bot behaviour
@@ -26,6 +28,7 @@ const replyMessage = (message) => {
 
   // Call Recast.AI SDK, through /converse route
   request.converseText(text, { conversationToken: senderId })
+
   .then(result => {
 	/*
     * YOUR OWN CODE
@@ -34,48 +37,90 @@ const replyMessage = (message) => {
     * Or: Update your mongo DB
     * etc...
     */
-	
-	if (result.action) {
-      console.log('The conversation action is: ', result.action.slug + ' and it is ' + result.action.done)
-	  var type;
-	  var content;
-	  var profil = senderId[0];
-
-	  if(result.action.done)
-	  {
-		  var entity = '';
-		  var choix = '';
-		  var slug = result.action.slug;
-		  switch(slug)
-		  {
-			
-			case 'greetings':
+	if (result) {
+		//console.log(result.getMemory());
+		var profil = senderId[0];
+		if(result.getMemory('profil') != profil){
 			result.setMemory(
-			{
-			  profil: {
-				value: senderId[0],
-				raw : senderId[0]
-			  },
-			  prenom : null
-			}
+				{
+				  profil: {
+					value: senderId[0],
+					raw : senderId[0]
+				  }
+				}
 			);
-			break;
-
-		  };
-		  [type, content] = dial.reponseActionDone(slug, result, profil);
-	  } else {
-		  [type, content] = dial.reponseActionNotDone(result.action.slug);
-	  };
-		console.log('type : ' + type);
-		console.log('content : ' + content);
-		if(content[0] !=null){	
-			for(var i=0; i<type.length; i++)
-			{
-				message.addReply({type : type[i], content : content[i]});
-			};
+		};
+		
+		var action;
+		var done;
+		if(result.action){
+			action = result.action.slug;
+			done = result.action.done;
 		} else {
-			message.addReply({type : 'text', content : 'Message vide'});
-		}
+			action = 'default';
+			done = true;
+		};
+		console.log('action is ' + action + ' and it is ' + done);
+		
+		var expAction
+		if( result.getMemory('expaction') != null){
+			expAction = result.getMemory('expaction').value;
+		} else {
+			expAction = "greetings";
+		};
+		var prevAction 
+		if(result.getMemory('prevaction') != null){
+			prevAction = result.getMemory('prevaction').value;
+		} else {
+			prevAction = "start";
+		};
+		console.log('previous action was ' + prevAction + ' and expected action was ' + expAction);
+		
+		
+		client = md.save(result, profil);
+		var choix = 'none';
+		if(result.getMemory('info') != null){
+			choix = result.getMemory('info').raw;
+		} else  if(result.getMemory('sujet') != null){
+			choix = result.getMemory('sujet').raw;
+		} else  if(result.getMemory('choix') != null){
+			choix = result.getMemory('choix').raw;
+		} 
+		var reponse = rep.reponse(action, done, client, choix);
+
+		
+		[prevAction, expAction] = nea.NEA(expAction, prevAction, action, profil, done);
+		console.log('expected next action is ' + expAction);
+		result.setMemory({
+				  expaction: {
+					value: expAction,
+					raw : expAction
+				  },
+				  prevaction : {
+					  value : prevAction,
+					  raw : prevAction
+				  }
+				}
+			);
+		var question = qu.question(expAction, done);
+
+		if(reponse.type == 'text' && question.type == 'text'){
+			message.addReply({'type' : 'text', 'content' : reponse.content + '</br>' + question.content})
+		} else if(reponse.type == 'text' && question.type == 'quickReplies'){
+			message.addReply({
+				'type' : 'quickReplies',
+				content : {
+					title: reponse.content + '</br>' + question.content.title,
+					buttons: question.content.buttons
+					}
+			})
+		} else if ( reponse.type == 'card'){
+			message.addReply(reponse);
+		} else if (reponse.type == 'quickReplies'){
+			message.addReply(reponse);
+		} 
+
+	  
     }
 
     // If there is not any message return by Recast.AI for this current conversation

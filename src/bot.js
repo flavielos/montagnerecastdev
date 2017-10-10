@@ -1,4 +1,4 @@
-/* LALA
+/* 
  * bot.js
  *
  * In this file:
@@ -27,6 +27,7 @@ const client = new recastai(process.env.REQUEST_TOKEN)
  */
 export const bot = (body, response, callback) => {
 	console.log(body)
+
   if (body.message) {
     /*
     * Call the Recast.AI SDK function to handle message from Bot Connector
@@ -56,7 +57,7 @@ export const bot = (body, response, callback) => {
           /*
            * If response received from Recast.AI contains a reply
            */
-          callback(null, {
+			callback(null, {
             reply: res.reply(),
             conversationToken: res.conversationToken,
           })

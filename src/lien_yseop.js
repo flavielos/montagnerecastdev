@@ -29,7 +29,7 @@ exports.requete = function(client){
 		var siteNum = xml.childNamed('siteId').val;
 		var siteTitre = xml.childNamed('siteTitre').val;
 		var imageUrl = xml.childNamed('imageUrl').val;
-		//var imageURL = 'http://www.france-montagnes.com/sites/default/files/pages/7132679751_7675d430bf_k.jpg';
+
 		
 		var recoIntro = xml.childWithAttribute('class', 'recommandationIntro').toString();
 		var recoDifficulte = xml.childWithAttribute('class', 'recommandationDifficulte').toString();
@@ -37,47 +37,7 @@ exports.requete = function(client){
 		var recoActivites = xml.childWithAttribute('class', 'recommandationActivites').toString();
 		var recoDecouvertes = xml.childWithAttribute('class', 'recommandationDecouvertes').toString();
 		var recoConclusion = xml.childWithAttribute('class', 'recommandationConclusion').toString();
-		
-		/*
-		var recoIntro = xml.childWithAttribute('div', 'recommandationIntro').val;
-		var recoDifficulte = xml.childNamed('recommandationDifficulte').val;
-		var recoEvasion = xml.childNamed('recommandationEvasion').val;
-		var recoActivites = xml.childNamed('recommandationDivertissement').val;
-		var recoDecouvertes = xml.childNamed('recommandationDecouverte').val;
-		var recoConclusion = xml.childNamed('recommandationPrix').val;
-		*/
+
 		return([siteNum, siteTitre, imageUrl, recoIntro, recoDifficulte, recoEvasion, recoActivites, recoDecouvertes, recoConclusion]);
-		/*
-		switch(client.origin)
-		{
-			case 'slack':
-			var texte = xml.childNamed('recommandationIntro').val;
-			texte += '</br>';
-			texte += xml.childNamed('recommandationDifficulte').val;
-			texte += '</br>';
-			texte += xml.childNamed('recommandationEvasion').val;
-			texte += '</br>';
-			texte += xml.childNamed('recommandationDecouverte').val;
-			texte += '</br>';
-			texte += xml.childNamed('recommandationDivertissement').val;
-			texte += '</br>';
-			texte += xml.childNamed('recommandationPrix').val;
-			break;
-			
-			case 'microsoft':
-			var textes = xml.childrenNamed('div');
-			var i;
-			texte = '<div style="display:initial;">';
-			texte += textes[0];
-			for (i=2;i<5;i++)
-			{
-				texte += '</br>' + textes[i];
-			};
-			texte += '</div>';
-			break;
-		};
-		
-		return([texte, site, imageURL]);
-		*/
-		//return('texte');
+
 }; 

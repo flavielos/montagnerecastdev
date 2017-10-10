@@ -8,6 +8,7 @@ exports.reponseActionDone = function(slug, result, profil)
 	var content = [];
 	switch(slug)
 	{
+
 		case 'greetings':
 		case 'choisir-profil-type':
 		switch(client.profil)
@@ -357,22 +358,7 @@ exports.reponseActionDone = function(slug, result, profil)
 			]
 		}];
 		
-		 
-		//temporaire
-		/* type = ['quickReplies'];
-		content = [{
-		  title: client.rando.recoIntro,
-		  buttons: [
-			{
-				value: 'Oui',
-				title: 'En savoir plus',
-			},
-			{
-				value : 'Non',
-				title : 'Je n\'aime pas'
-			}
-		  ],
-		}]; */
+		
 		break;
 		
 		
