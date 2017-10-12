@@ -1,23 +1,39 @@
 
 
-exports.reponse = function(action, done, client, choix){
+exports.reponse = function(action, done, client, choix, isEA){
 	var treeRep = exports.tree(client, choix);
-	return(treeRep[action][done][client.profil]);
+	if(done == isEA){
+		return(treeRep[action][true][client.profil]);
+	} else {
+		return(treeRep[action][false][client.profil]);
+	};
 };
 
-exports.tree = function (client, choix) {
+exports.tree = function (client, choix, action) {
 	var treeRep = {
 		"default" : {
 			"true" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas compris."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas compris."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas compris."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas compris."}
+				"A" : {"type" : "text", "content" : exports.reponseDefault()},
+				"B" : {"type" : "text", "content" : exports.reponseDefault()},
+				"C" : {"type" : "text", "content" : exports.reponseDefault()},
+				"D" : {"type" : "text", "content" : exports.reponseDefault()}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : exports.reponseDefault()},
+				"B" : {"type" : "text", "content" : exports.reponseDefault()},
+				"C" : {"type" : "text", "content" : exports.reponseDefault()},
+				"D" : {"type" : "text", "content" : exports.reponseDefault()}
 			}
 		},
 		"greetings": {
 			"true": {
-				"A": {"type" : "text", "content" : "Bonjour ! Je suis Oscar, l\'assistant P-Val et je vais vous poser quelques questions pour pouvoir vous recommander le trek de vos rêves."},
+				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Oscar, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
+				"B" : {"type" : "text", "content" : "Michel, ravi de vous revoir !</br>Je vois que votre fille Marie a maintenant 6 ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !"},
+				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeaninne ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
+				"D" : {"type" : "text", "content" : "Content de vous revoir, Paul ! </br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière."}
+			},
+			"false": {
+				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Oscar, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
 				"B" : {"type" : "text", "content" : "Michel, ravi de vous revoir !</br>Je vois que votre fille Marie a maintenant 6 ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !"},
 				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeaninne ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
 				"D" : {"type" : "text", "content" : "Content de vous revoir, Paul ! </br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière."}
@@ -31,10 +47,10 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : "Enchanté " + client.membres[0].prenom + " !"}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre prénom."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre prénom."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre prénom."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre prénom."}
+				"A" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
+				"B" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
+				"C" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
+				"D" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."}
 			}
 		},
 		"age" : {
@@ -45,10 +61,10 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : exports.reponseAge(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."}
+				"A" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"B" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"C" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"D" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."}
 			}
 		},
 		"nombre-age" : {
@@ -59,10 +75,10 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : exports.reponseAge(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre âge."}
+				"A" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"B" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"C" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
+				"D" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."}
 			}
 		},
 		"niveau-randonneur" : {
@@ -73,10 +89,10 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : exports.reponseNvRando(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau d'expérience en randonnée."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau d'expérience en randonnée."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau d'expérience en randonnée."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau d'expérience en randonnée."}
+				"A" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
+				"B" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
+				"C" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
+				"D" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."}
 			}
 		},
 		"niveau-physique" : {
@@ -87,10 +103,10 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : exports.reponseNvPhysique(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau physique."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau physique."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau physique."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre niveau physique."}
+				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif"},
+				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."},
+				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."},
+				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."}
 			}
 		},
 		"budget" : {
@@ -143,24 +159,24 @@ exports.tree = function (client, choix) {
 				"D" : {"type" : "text", "content" : exports.reponseDetails(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."}
+				"A" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"B" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"C" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"D" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."}
 			}
 		},
 		"pas-de-preference-eloignement" : {
 			"true" : {
 				"A" : {"type" : "text", "content" : "Ok, je vais vous trouver un endroit sympa !"},
-				"B" : {"type" : "text", "content" : "Ok, je vais vous trouver un endroit sympa !"},
+				"B" : {"type" : "text", "content" : exports.reponseDetails(client)},
 				"C" : {"type" : "text", "content" : "Ok, je vais vous trouver un endroit sympa !"},
-				"D" : {"type" : "text", "content" : "Ok, je vais vous trouver un endroit sympa !"}
+				"D" : {"type" : "text", "content" : exports.reponseDetails(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris où vous vouliez partir."}
+				"A" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"B" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"C" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
+				"D" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."}
 			}
 		},
 		"details" : {
@@ -179,6 +195,12 @@ exports.tree = function (client, choix) {
 		},
 		"recap-valide" : {
 			"true" : {
+				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
+			},
+			"false" : {
 				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
@@ -251,15 +273,133 @@ exports.tree = function (client, choix) {
 		},
 		"info" : {
 			"true" : {
-				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix)},
-				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix)},
-				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix)},
-				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix)}
+				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)}
 			}
 		},
 		"reco-invalide" : {
 			"true" : {
-				"A" : {"quickReplies" : "text", "content" : {
+				"A" : {"type" : "quickReplies", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"B" : {"type" : "quickReplies", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"C" : {"type" : "quickReplies", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"D" : {"type" : "quickReplies", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }}
+			},
+			"false" : {
+				"A" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -495,6 +635,124 @@ exports.tree = function (client, choix) {
 			}
           ],
         }}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"B" : {"type" : "text", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"C" : {"type" : "text", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }},
+				"D" : {"type" : "text", "content" : {
+          title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
+          buttons: [
+            {
+				value: 'Diminuer difficulte',
+				title: 'Trop difficile',
+            },
+            {
+				value: 'Augmenter difficulte',
+				title: 'Trop facile',
+            },
+			{
+				value : 'Augmenter decouvertes',
+				title : 'Pas assez de découvertes'
+			},
+			{
+				value : 'Augmenter activites',
+				title : 'Pas assez de divertissements'
+			},
+			{
+				value : 'Augmenter evasion',
+				title : 'Trop fréquenté'
+			},
+			{
+				value : 'Diminuer evasion',
+				title : 'Trop isolé'
+			}
+          ],
+        }}
 			}
 		},
 		"reco-valide" : {
@@ -507,14 +765,26 @@ exports.tree = function (client, choix) {
 		},
 		"en-savoir-encore-plus" : {
 			"true" : {
-				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client)},
-				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client)},
-				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client)},
-				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client)}
+				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)}
+			},
+			"false" : {
+				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)}
 			}
 		},
 		"goodbye" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : "A bientôt !"},
+				"B" : {"type" : "text", "content" : "A bientôt !"},
+				"C" : {"type" : "text", "content" : "A bientôt !"},
+				"D" : {"type" : "text", "content" : "A bientôt !"}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : "A bientôt !"},
 				"B" : {"type" : "text", "content" : "A bientôt !"},
 				"C" : {"type" : "text", "content" : "A bientôt !"},
@@ -527,10 +797,22 @@ exports.tree = function (client, choix) {
 				"B" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."},
 				"C" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."},
 				"D" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."},
+				"B" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."},
+				"C" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."},
+				"D" : {"type" : "text", "content" : "Je suis désolé si je vous ai offensé, essayons de repartir sur de bonnes bases."}
 			}
 		},
 		"meteo" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
+				"B" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
+				"C" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
+				"D" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
 				"B" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
 				"C" : {"type" : "text", "content" : "Je ne connais pas la météo, mais je vous souhaite qu\'il fasse beau tout au long de votre trek."},
@@ -543,10 +825,22 @@ exports.tree = function (client, choix) {
 				"B" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."},
 				"C" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."},
 				"D" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."},
+				"B" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."},
+				"C" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."},
+				"D" : {"type" : "text", "content" : "Je peux vous aider à choisir un trek en montagne."}
 			}
 		},
 		"asking_name" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : "Je m'appelle Oscar."},
+				"B" : {"type" : "text", "content" : "Je m'appelle Oscar."},
+				"C" : {"type" : "text", "content" : "Je m'appelle Oscar."},
+				"D" : {"type" : "text", "content" : "Je m'appelle Oscar."}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : "Je m'appelle Oscar."},
 				"B" : {"type" : "text", "content" : "Je m'appelle Oscar."},
 				"C" : {"type" : "text", "content" : "Je m'appelle Oscar."},
@@ -559,10 +853,22 @@ exports.tree = function (client, choix) {
 				"B" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."},
 				"C" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."},
 				"D" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."},
+				"B" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."},
+				"C" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."},
+				"D" : {"type" : "text", "content" : "Je ne sais pas répondre à cette question."}
 			}
 		},
 		"thanks" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : "Je vous en prie."},
+				"B" : {"type" : "text", "content" : "Je vous en prie."},
+				"C" : {"type" : "text", "content" : "Je vous en prie."},
+				"D" : {"type" : "text", "content" : "Je vous en prie."}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : "Je vous en prie."},
 				"B" : {"type" : "text", "content" : "Je vous en prie."},
 				"C" : {"type" : "text", "content" : "Je vous en prie."},
@@ -579,15 +885,15 @@ exports.reponseAge = function(client){
 	var age = client.membres[0].age;
 	var content;
 	if (age < seuil[0]){
-		content = 'Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour sa santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
+		content = 'Vos enfants vont adorer la montagne ! Nos guides pourront leur montrer les animaux qui se cachent dans la nature. <br/>Comme les jeunes enfants sont très sensibles à l\'altitude, je vais sélectionner des sites de randonnées en basse montagne, jusqu\'à 1500m.'
 	} else if (age < seuil[1]){
-		content ='Je vous félicite de faire découvrir la montagne à un enfant aussi jeune. Pour sa santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
+		content ='Vos enfants vont adorer la montagne ! Nos guides pourront leur montrer les animaux qui se cachent dans la nature. <br/>Comme les enfants sont sensibles à l\'altitude, je vais sélectionner des sites de randonnées en moyenne montagne, jusqu\'à 3000m.'
 	} else if (age > seuil[2]){
-		content = 'L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 1500m.'
+		content = 'L\'air de la montagne vous fera le plus grand bien. Je vais choisir pour vous des sites en basse montagne, à moins de 1500m. Vous pourrez ainsi vous ressourcer sans être gêné par de l\'altitude.'
 	} else if (age > seuil[3]){
-		content = 'L\'air de la montagne vous fera le plus grand bien. Pour votre santé, je ne pourrai vous conseiller que des sites d\'altitude inférieure à 3000m.'
+		content = 'L\'air de la montagne vous fera le plus grand bien. Je vais choisir pour vous des sites en moyenne montagne, à moins de 3000m. Vous pourrez ainsi vous ressourcer sans être gêné par l\'altitude.'
 	} else {
-		content = "Vous avez l\'âge idéal pour la marche en montagne."
+		content = "Vous avez l\'âge idéal pour la marche en montagne ! Nous allons pouvoir explorer des sites à toute altitude."
 	};
 	return(content)
 };
@@ -601,10 +907,10 @@ exports.reponseNvRando = function(client){
 		content = 'Je suis ravi de vous faire découvrir mon sport préféré !';
 		break;
 		case 2:
-		content = 'J\'espère que ce trek confirmera votre amour pour la montagne';
+		content = 'J\'espère que ce trek confirmera votre amour pour la montagne.';
 		break;
 		case 3:
-		content = 'J\'espère que ce trek confirmera votre amour pour la montagne';
+		content = 'J\'espère que ce trek confirmera votre amour pour la montagne.';
 		break;
 		case 4:
 		if(client.profil == 'A'){
@@ -626,18 +932,10 @@ exports.reponseNvPhysique = function(client){
 		content = 'Rassurez-vous, la marche en montagne est un sport adapté à tous les niveaux. </br> Je vais vous proposer une randonnée accessible à tous.';
 		break;
 		case 2:
-		if(client.profil == 'A'){
-			content = 'En tant que sportif occasionnel, vous allez apprécier la randonnée.';				
-		} else {
-			content = 'En tant que sportifs occasionnels, vous allez apprécier la randonnée.';
-		};
+		content = 'Vous faites du sport de temps en temps et cela va déjà vous permettre de vous faire plaisir sur des randonnées de niveau moyen.';				
 		break;
 		case 3:
-		if(client.profil == 'A'){
-			content = 'En tant que sportif régulier, vous allez apprécier la randonnée.';				
-		} else {
-			content = 'En tant que sportifs réguliers, vous allez apprécier la randonnée.';
-		};
+		content = 'Super ! Grâce à votre pratique régulière du sport, vous allez pouvoir faire des randonnées de tous niveaux.'
 		break;
 		break;
 		case 4:
@@ -657,14 +955,14 @@ exports.reponseBudget = function(client){
 	if (nv == 0){
 		content = 'Ok, nous discuterons du prix plus tard.';
 	} else if (nv <= 200){
-		content = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à la France et son voisinage';
+		content = 'Profitez de cette occasion pour (re)découvrir la France. Nos montagnes offrent des paysages magnifiques accessibles aux petits budgets !';
 	} else if(nv < 1000){
-		content = 'Je peux déjà vous dire qu\’avec un budget de cette gamme mes recommandations se cantonneront à l\’Europe et son voisinage';
+		content = 'Super ! Vous allez pouvoir randonner aux quatre coins de l\'Europe pendant quelques jours.';
 	} else if (nv == 1000000) {
 		content = 'Ok, j\'aime avoir carte blanche !';
 
 	} else {
-		content = 'En voilà un budget intéressant !';
+		content = 'Top ! Vous allez pouvoir partir au bout du monde pour ce trek.';
 	};
 	return(content);
 };
@@ -712,7 +1010,7 @@ exports.reponseDetails = function(client){
 		adjNvDi = 'assez facile'
 		break;
 		case 3:
-		adjNvDi = 'moyennement difficile'
+		adjNvDi = 'assez difficile'
 		break;
 		case 4:
 		adjNvDi = 'très difficile'
@@ -775,7 +1073,7 @@ exports.reponseDetails = function(client){
 			content += adjNvDi;
 		};
 		if (adjNvEv != null){
-			content += ', dans un lieu ' + adjNvEv +', ';
+			content += ' dans un lieu ' + adjNvEv ;
 		};
 		if (adjNvAc != null || adjNvDe != null){
 			content += ' où vous pourrez '
@@ -908,13 +1206,13 @@ exports.reponseAjustDonnees = function(client, choix){
 		var title4 = 'Très difficile';
 	} else if (choix == 'niveau eloignement'){
 		var question = 'Dans quels environs souhaitez-vous faire votre trek ?';
-		var value1 = 'France';
+		var value1 = 'en France';
 		var title1 = 'France';
-		var value2 = 'Europe';
+		var value2 = 'en Europe';
 		var title2 = 'Europe';
-		var value3 = 'Afrique';
+		var value3 = 'en Afrique';
 		var title3 = 'Afrique';
-		var value4 = 'Asie';
+		var value4 = 'en Asie';
 		var title4 = 'Asie';
 	} else if (choix == 'niveau evasion'){
 		var question = 'Quel type de site aimeriez-vous en terme d\'évasion ?';
@@ -959,7 +1257,7 @@ exports.reponseReserve = function(client){
 	return(content);
 };
 
-exports.reponseInfo = function(client, choix){
+exports.reponseInfo = function(client, choix, action){
 	var titre;
 	
 	switch(choix)
@@ -987,28 +1285,28 @@ exports.reponseInfo = function(client, choix){
 		title : 'Ca ne me plait pas',
 		value : 'non'
 	};
-	if(choix != 'niveau difficulte')
+	if(choix != 'niveau difficulte' && action == 'info')
 	{
 		listeButtons.push({
 			title : 'En savoir plus sur la difficulté',
 			value : 'niveau difficulte'
 		});
 	};
-	if(choix != 'niveau evasion')
+	if(choix != 'niveau evasion' && action == 'info')
 	{
 		listeButtons.push({
 			title : 'En savoir plus sur le dépaysement',
 			value : 'niveau evasion'
 		});
 	};
-	if(choix != 'niveau activites')
+	if(choix != 'niveau activites' && action == 'info')
 	{
 		listeButtons.push({
 			title : 'En savoir plus sur les divertissements',
 			value : 'niveau activites'
 		});
 	};
-	if(choix != 'niveau decouvertes')
+	if(choix != 'niveau decouvertes' && action == 'info')
 	{
 		listeButtons.push({
 			title : 'En savoir plus sur la nature',
@@ -1023,4 +1321,8 @@ exports.reponseInfo = function(client, choix){
 	return(content);
 };
 
-
+exports.reponseDefault = function(){
+	var rep = ['Je ne suis pas sûr d\'avoir bien saisi...', 'Flûte, je n\'ai pas bien compris.', 'Zut, je ne suis pas sûr d\'avoir bien compris ce que tu viens de dire.']
+	var i = Math.floor(Math.random()  * (rep.length - 0) + 0);
+	return(rep[i]);
+};

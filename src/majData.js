@@ -98,13 +98,9 @@ exports.save = function(result, profil)
 		} else {
 			client.lieu = 'France';
 		}
-		if(client.nvBudget < 300){
-			client.lieu = 'France';
-		}
 	} else {
 			client.lieu = 'none';
 	};
-	
 	
 	// details
 	//Spécification niveau difficulte
@@ -186,7 +182,6 @@ exports.save = function(result, profil)
 			client.rando.ajustNvDifficulte = 0.8;
 			break;
 			case 'Diminuer difficulte':
-			console.log('youou');
 			client.rando.ajustNvDifficulte = '-0.8';
 			break;
 			case 'Augmenter activites':

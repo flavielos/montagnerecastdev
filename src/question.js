@@ -1,12 +1,12 @@
 var tree = {
 	"nom" : {
-		"true" : {"type" : "text", "content" : "Comment vous appelez-vous ?"},
+		"true" : {"type" : "text", "content" : "Pour commencer, comment vous appelez-vous ?"},
 		"false" : {"type" : "text", "content" : "Pourriez-vous reformuler pour m\'aider à mieux comprendre votre nom ?"}
 	},
 	"age" : {
-		"true" : {"type" : "text", "content" : "Quel est votre âge ?"},
+		"true" : {"type" : "text", "content" : "Quel âge avez-vous ?"},
 		"false" : {"type" : "quickReplies", "content" : {
-			  title: 'Est-ce que vous pourriez choisir une tranche d\'âge ?',
+			  title: 'Est-ce que vous pourriez choisir la tranche d\'âge qui vous correspond ?',
 			  buttons: [
 				{
 					title: '- de 2 ans',
@@ -37,14 +37,14 @@ var tree = {
 		"false" : {
 			"type" : "quickReplies",
 			"content" : {
-				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
+				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau d\'expérience en randonnée ?',
 				buttons: [
 				{
 					value: 'Débutant',
 					title: 'Débutant',
 				},
 				{
-					value: 'Sportif occasionnel',
+					value: 'Je fais du sport de temps en temps',
 					title: 'Peu expérimenté',
 				},
 				{
@@ -64,32 +64,34 @@ var tree = {
 		"false" : {
 			"type" : "quickReplies",
 			"content" :{
-				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau ?',
+				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau physique général ?',
 				buttons: [
 				{
 					value: 'Débutant',
-					title: 'Débutant',
+					title: 'Peu sportif',
 				},
 				{
-					value: 'Sportif occasionnel',
-					title: 'Peu expérimenté',
+					value: 'Je fais du sport de temps en temps',
+					title: 'Sportif occasionnel',
 				},
 				{
 					value : 'Sportif régulier',
-					title : 'Confirmé'
+					title : 'Sportif régulier'
 				},
 				{
 					value : 'Athlète',
-					title : 'Expert'
+					title : 'Sportif de haut niveau'
 				}
 				],
 			}
 		}
 	},
 	"budget" : {
-		"true" : {"type" : "text", "content" : "Quel est votre budget par personne ?"},
+		"true" : {"type" : "text", "content" : "Maintenant que l\'on se connait un peu mieux, quel est votre budget par personne pour ce trek de quelques jours ?"},
 		"false" : {
-			  title: 'Je ne suis pas sûr d\'avoir bien saisi... Dans quel tranche se situe votre budget par personne ? ',
+			"type" : "quickReplies",
+			"content" : {
+			  title: 'Dans quel tranche se situe votre budget par personne pour ce trek de quelques jours ? ',
 			  buttons: [
 				{
 					value: '100 euros',
@@ -108,12 +110,16 @@ var tree = {
 					title : '+ de 1000€'
 				}
 			  ],
+			}
 		}
 	},
 	"eloignement" : {
-		"true" : {'type' : 'text', 'content' : 'Cette randonnée, vous la voyez plutôt en France ? En Europe ? Ou bien sur quel autre continent ?'},
+		"true" : {'type' : 'text', 'content' : 'Cette randonnée, vous la voyez plutôt en France ? En Europe ? Quel continent voulez-vous découvrir ?'},
 		"false" : {
-			  title: 'Pourriez-vous choisir l\'éloignement qui vous conviendrait le mieux parmi ces propositions ?',
+			"type" : "quickReplies",
+			"content" : {
+			
+			  title: 'Pourriez-vous choisir la région du monde qui vous attire le plus parmi ces propositions ?',
 			  buttons: [
 				{
 					value: 'en France',
@@ -145,14 +151,17 @@ var tree = {
 				}
 			  ],
 			}
+		}
 	},
 	"details" : {
-		"true" : {"type" : "text", "content" : "Maintenant que l\'on se connait un peu mieux, qu\'est-ce qui vous ferait plaisir pendant cette randonnée ?"},
+		"true" : {"type" : "text", "content" : "Dernière question, pourriez-vous m\'en dire plus sur le trek de vos rêves ? <br/>Souhaitez-vous vous évader ? vous challenger ? vous cultiver ?"},
 		"false" : {
+			"type" : "quickReplies",
+			"content" : {
 			  title: 'Quel type de trek vous plairait le plus ?',
 			  buttons: [
 				{
-					value: 'un trek facile, loin de la ville',
+					value: 'un trek reposant et loin de la ville',
 					title: 'Facile et dépaysant',
 				},
 				{
@@ -164,15 +173,46 @@ var tree = {
 					title : 'Plutôt difficile avec des activités'
 				},
 				{
-					value : 'un trek  difficile, loin de la ville',
-					title : 'De niveau moyen, loin de la civilisation'
+					value : 'une rando de fou dans un lieu isolé',
+					title : 'De niveau élevé, loin de la civilisation'
 				}
 			  ],
+			}
 		}
 	},
 	"recap-valide" : {
-		"true" : {'type' : 'text', 'content' : 'Ce résumé vous convient-il ?'},
-		"false" : {'type' : 'text', 'content' : 'Ce résumé vous convient-il ?'}
+		"true" : {
+			"type" : "quickReplies",
+			"content" : {
+			  title: 'Ce résumé vous convient-il ?',
+			  buttons: [
+				{
+					value: 'Oui',
+					title: 'Oui'
+				},
+				{
+					value: 'Non',
+					title: 'Non'
+				}
+			  ],
+			}
+		},
+		"false" : {
+			"type" : "quickReplies",
+			"content" : {
+			  title: 'Ce résumé vous convient-il ?',
+			  buttons: [
+				{
+					value: 'Oui',
+					title: 'Oui'
+				},
+				{
+					value: 'Non',
+					title: 'Non'
+				}
+			  ],
+			}
+		}
 	},
 	"intro-valide" : {
 		"true" : {'type' : 'text', 'content' : ''},
@@ -206,7 +246,7 @@ var tree = {
 			}
 		},
 		"false" : {'type' : 'text', 'content' : {
-				title : 'Zut...qu\'est-ce que j\'ai mal compris ?',
+				title : 'Que souhaitez-vous modifier ?',
 				buttons :[
 					{
 						title : 'Niveau physique',
@@ -300,6 +340,10 @@ var tree = {
 	}
 };
 
-exports.question = function (expAction, done) {
-	return(tree[expAction][done]);
+exports.question = function (expAction, done, isEA) {
+	if(done == isEA){
+		return(tree[expAction][true]);
+	} else {
+		return(tree[expAction][false]);
+	};
 };

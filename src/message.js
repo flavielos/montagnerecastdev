@@ -4,7 +4,6 @@
  */
 
  const recastai = require('recastai')
- const dial = require('./dialogue');
  const md = require('./majData');
  const rando = require('./randonneurs');
  const rep = require('./reponse.js');
@@ -64,13 +63,25 @@ const replyMessage = (message) => {
 		
 		var expAction
 		if( result.getMemory('expaction') != null){
-			expAction = result.getMemory('expaction').value;
+			if(result.action){
+				if (result.action.slug != 'goodbye'){
+					expAction = result.getMemory('expaction').value;
+				}
+			} else if (!result.action){
+				expAction = result.getMemory('expaction').value;
+			}
 		} else {
 			expAction = "greetings";
 		};
 		var prevAction 
 		if(result.getMemory('prevaction') != null){
-			prevAction = result.getMemory('prevaction').value;
+			if(result.action){
+				if (result.action.slug != 'goodbye'){
+					prevAction = result.getMemory('prevaction').value;
+				}
+			} else if (!result.action){
+				prevAction = result.getMemory('prevaction').value;
+			}
 		} else {
 			prevAction = "start";
 		};
@@ -86,9 +97,10 @@ const replyMessage = (message) => {
 		} else  if(result.getMemory('choix') != null){
 			choix = result.getMemory('choix').raw;
 		} 
-		var reponse = rep.reponse(action, done, client, choix);
-
-		
+		var isea = nea.isEA(prevAction, action, profil);
+		var reponse = rep.reponse(action, done, client, choix, isea);
+		console.log(reponse);
+	
 		[prevAction, expAction] = nea.NEA(expAction, prevAction, action, profil, done);
 		console.log('expected next action is ' + expAction);
 		result.setMemory({
@@ -102,7 +114,7 @@ const replyMessage = (message) => {
 				  }
 				}
 			);
-		var question = qu.question(expAction, done);
+		var question = qu.question(expAction, done, isea);
 
 		if(reponse.type == 'text' && question.type == 'text'){
 			message.addReply({'type' : 'text', 'content' : reponse.content + '</br>' + question.content})
