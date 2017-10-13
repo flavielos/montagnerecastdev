@@ -37,7 +37,7 @@ const replyMessage = (message) => {
     * etc...
     */
 	if (result) {
-		console.log(result.getMemory());
+		//console.log(result.getMemory());
 		var profil = senderId[0];
 		if(result.getMemory('profil') != profil){
 			result.setMemory(
