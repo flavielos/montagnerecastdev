@@ -1015,9 +1015,9 @@ exports.reponseBudget = function(client){
 	if (nv == 0){
 		content = 'Ok, nous discuterons du prix plus tard.';
 	} else if (nv <= 200){
-		content = 'Profitez de cette occasion pour (re)découvrir la France. Nos montagnes offrent des paysages magnifiques accessibles aux petits budgets !';
+		content = 'Profitez de cette occasion pour (re)découvrir le coin près de chez vous. Nos montagnes offrent des paysages magnifiques accessibles aux petits budgets !';
 	} else if(nv < 1000){
-		content = 'Super ! Vous allez pouvoir randonner aux quatre coins de l\'Europe pendant quelques jours.';
+		content = 'Super ! Vous allez pouvoir randonner aux quatre coins de l\'Europe pendant ces quelques jours.';
 	} else if (nv == 1000000) {
 		content = 'Ok, j\'aime avoir carte blanche !';
 
