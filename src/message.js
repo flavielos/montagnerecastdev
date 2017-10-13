@@ -37,7 +37,7 @@ const replyMessage = (message) => {
     * etc...
     */
 	if (result) {
-		//console.log(result.getMemory());
+		console.log(result.getMemory());
 		var profil = senderId[0];
 		if(result.getMemory('profil') != profil){
 			result.setMemory(
@@ -89,6 +89,9 @@ const replyMessage = (message) => {
 		
 		
 		client = md.save(result, profil);
+		
+
+		
 		var choix = 'none';
 		if(result.getMemory('info') != null){
 			choix = result.getMemory('info').raw;
@@ -101,6 +104,7 @@ const replyMessage = (message) => {
 		var reponse = rep.reponse(action, done, client, choix, isea);
 		console.log(reponse);
 	
+
 		[prevAction, expAction] = nea.NEA(expAction, prevAction, action, profil, done);
 		console.log('expected next action is ' + expAction);
 		result.setMemory({
