@@ -213,6 +213,12 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
+			},
+			"false" : {
+				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
 			}
 		},
 		"rectifier-details" : {
@@ -904,13 +910,13 @@ exports.reponseNvRando = function(client){
 	switch(nv)
 	{
 		case 1:
-		content = 'Je suis ravi de vous faire découvrir mon sport préféré !';
+		content = 'Je suis ravi de vous faire découvrir mon sport préféré ! Les treks sont l\'occasion de faire du sport tout en se ressourçant en pleine nature.';
 		break;
 		case 2:
-		content = 'J\'espère que ce trek confirmera votre amour pour la montagne.';
+		content = 'Je vois que vous y avez pris goût ! J\'espère que ce trek confirmera votre amour pour la montagne.';
 		break;
 		case 3:
-		content = 'J\'espère que ce trek confirmera votre amour pour la montagne.';
+		content = 'J\'adore rencontrer de nouveaux passionnés de randonnée ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.';
 		break;
 		case 4:
 		if(client.profil == 'A'){
