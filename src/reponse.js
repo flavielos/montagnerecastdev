@@ -227,10 +227,22 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
+			},
+			"false" : {
+				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
 			}
 		},
 		"rectifier-niveau" : {
 			"true" : {
+				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
+			},
+			"false" : {
 				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
@@ -243,10 +255,22 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
 				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
+			},
+			"false" : {
+				"A" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"B" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"C" : {"type" : "card", "content" : exports.reponseIntro(client)},
+				"D" : {"type" : "card", "content" : exports.reponseIntro(client)}
 			}
 		},
 		"recap-invalide" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"B" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."},
+				"C" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"D" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
 				"B" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."},
 				"C" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
@@ -259,10 +283,22 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)},
 				"C" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)},
 				"D" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)}
+			},
+			"false" : {
+				"A" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)},
+				"B" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)},
+				"C" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)},
+				"D" : {"type" : "quickReplies", "content" : exports.reponseAjustDonnees(client, choix)}
 			}
 		},
 		"intro-valide" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"B" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"C" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"D" : {"type" : "text", "content" : exports.reponseReserve(client)}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : exports.reponseReserve(client)},
 				"B" : {"type" : "text", "content" : exports.reponseReserve(client)},
 				"C" : {"type" : "text", "content" : exports.reponseReserve(client)},
@@ -275,10 +311,22 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "text", "content" : ''},
 				"C" : {"type" : "text", "content" : ''},
 				"D" : {"type" : "text", "content" : ''}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : ''},
+				"B" : {"type" : "text", "content" : ''},
+				"C" : {"type" : "text", "content" : ''},
+				"D" : {"type" : "text", "content" : ''}
 			}
 		},
 		"info" : {
 			"true" : {
+				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
+				"D" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)}
+			},
+			"false" : {
 				"A" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
 				"B" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
 				"C" : {"type" : "quickReplies", "content" : exports.reponseInfo(client, choix, action)},
@@ -763,6 +811,12 @@ exports.tree = function (client, choix, action) {
 		},
 		"reco-valide" : {
 			"true" : {
+				"A" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"B" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"C" : {"type" : "text", "content" : exports.reponseReserve(client)},
+				"D" : {"type" : "text", "content" : exports.reponseReserve(client)}
+			},
+			"false" : {
 				"A" : {"type" : "text", "content" : exports.reponseReserve(client)},
 				"B" : {"type" : "text", "content" : exports.reponseReserve(client)},
 				"C" : {"type" : "text", "content" : exports.reponseReserve(client)},
