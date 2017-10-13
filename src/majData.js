@@ -11,13 +11,14 @@ exports.save = function(result, profil)
 	var client = new rando.randonneurs(profil, 'microsoft')
 	
 	//A : prenom
+
 	if(result.getMemory('prenom') != null)
 	{
 		client.membres[0].prenom = result.getMemory('prenom').raw;
 	} else if (result.getMemory('personne') != null){
 		client.membres[0].prenom = result.getMemory('personne').fullname;
 	};
-	
+
 	// A : age
 	if(result.getMemory('age')!=null)
 	{
