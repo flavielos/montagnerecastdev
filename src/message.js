@@ -1,4 +1,4 @@
-/*
+/* test
  * message.js
  * This file contains your bot code
  */
