@@ -5,6 +5,12 @@ var tree = {
 		"C" : ["greetings"],
 		"D" : ["greetings"]
 	},
+	"goodbye" : {
+		"A" : ["greetings"],
+		"B" : ["greetings"],
+		"C" : ["greetings"],
+		"D" : ["greetings"]
+	},
 	"greetings" : {
 		"A" : ["nom"],
 		"B" : ["budget", "pas-de-preference-budget", "nombre-budget"],
@@ -164,13 +170,17 @@ var tree = {
 };
 
 exports.isEA = function(prevAction, action, profil){
+	
 	return(action == tree[prevAction][profil][0] || action == tree[prevAction][profil][1] || action == tree[prevAction][profil][2])
 };
 
 exports.NEA = function(expAction, prevAction, action, profil, done){
-	if(exports.isEA(prevAction, action,profil) && done){
+	if(action == 'goodbye'){
+		return([action, tree[action][profil][0]]);
+	} else if(exports.isEA(prevAction, action,profil) && done){
 		return([action, tree[action][profil][0]]);
 	} else {
 		return([prevAction, expAction]);
 	}
+
 };

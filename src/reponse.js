@@ -2,11 +2,13 @@
 
 exports.reponse = function(action, done, client, choix, isEA){
 	var treeRep = exports.tree(client, choix);
-	if(done == isEA){
-		return(treeRep[action][true][client.profil]);
-	} else {
-		return(treeRep[action][false][client.profil]);
-	};
+
+		if(done == isEA){
+			return(treeRep[action][true][client.profil]);
+		} else {
+			return(treeRep[action][false][client.profil]);
+		};
+
 };
 
 exports.tree = function (client, choix, action) {
@@ -47,10 +49,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : "Enchanté " + client.membres[0].prenom + " !"}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
-				"B" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
-				"C" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."},
-				"D" : {"type" : "text", "content" : "Je ne voudrais pas écorcher votre nom..."}
+				"A" : {"type" : "text", "content" : "Drôle de nom ! Je ne voudrais pas l'écorcher..."},
+				"B" : {"type" : "text", "content" : "Drôle de nom ! Je ne voudrais pas l'écorcher..."},
+				"C" : {"type" : "text", "content" : "Drôle de nom ! Je ne voudrais pas l'écorcher..."},
+				"D" : {"type" : "text", "content" : "Drôle de nom ! Je ne voudrais pas l'écorcher..."}
 			}
 		},
 		"age" : {
@@ -61,10 +63,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseAge(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"B" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"C" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"D" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."}
+				"A" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"B" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"C" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"D" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"}
 			}
 		},
 		"nombre-age" : {
@@ -75,10 +77,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseAge(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"B" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"C" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."},
-				"D" : {"type" : "text", "content" : "Mince, je n'ai pas bien compris votre âge."}
+				"A" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"B" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"C" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"D" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"}
 			}
 		},
 		"niveau-randonneur" : {
@@ -89,10 +91,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseNvRando(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
-				"B" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
-				"C" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."},
-				"D" : {"type" : "text", "content" : "Zut, je préfère vérifier afin de vous recommander une randonnée adaptée à votre niveau."}
+				"A" : {"type" : "text", "content" : "En connaissant bien votre niveau, je peux vous recommander une randonnée adaptée."},
+				"B" : {"type" : "text", "content" : "En connaissant bien votre niveau, je peux vous recommander une randonnée adaptée."},
+				"C" : {"type" : "text", "content" : "En connaissant bien votre niveau, je peux vous recommander une randonnée adaptée."},
+				"D" : {"type" : "text", "content" : "En connaissant bien votre niveau, je peux vous recommander une randonnée adaptée."}
 			}
 		},
 		"niveau-physique" : {
@@ -103,10 +105,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseNvPhysique(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif"},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris si vous êtes sportif."}
+				"A" : {"type" : "text", "content" : "Certaines randonnées demandent une vraie préparation physique."},
+				"B" : {"type" : "text", "content" : "Certaines randonnées demandent une vraie préparation physique."},
+				"C" : {"type" : "text", "content" : "Certaines randonnées demandent une vraie préparation physique."},
+				"D" : {"type" : "text", "content" : "Certaines randonnées demandent une vraie préparation physique."}
 			}
 		},
 		"budget" : {
@@ -117,10 +119,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseBudget(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."}
+				"A" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"B" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"C" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"D" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"}
 			}
 		},
 		"nombre-budget" : {
@@ -131,10 +133,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseBudget(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre budget."}
+				"A" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"B" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"C" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"},
+				"D" : {"type" : "text", "content" : "Soyons un peu plus précis ;)"}
 			}
 		},
 		"pas-de-preference-budget" : {
@@ -159,10 +161,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseDetails(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
-				"B" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
-				"C" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."},
-				"D" : {"type" : "text", "content" : "Je ne suis pas sûr d\'avoir saisi où vous vouliez partir."}
+				"A" : {"type" : "text", "content" : "Je ne suis pas sûr de connaître cet endroit..."},
+				"B" : {"type" : "text", "content" : "Je ne suis pas sûr de connaître cet endroit..."},
+				"C" : {"type" : "text", "content" : "Je ne suis pas sûr de connaître cet endroit..."},
+				"D" : {"type" : "text", "content" : "Je ne suis pas sûr de connaître cet endroit..."}
 			}
 		},
 		"pas-de-preference-eloignement" : {
@@ -187,10 +189,10 @@ exports.tree = function (client, choix, action) {
 				"D" : {"type" : "text", "content" : exports.reponseDetails(client)}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre demande."},
-				"B" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre demande."},
-				"C" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre demande."},
-				"D" : {"type" : "text", "content" : "Je n\'ai pas bien compris votre demande."}
+				"A" : {"type" : "text", "content" : "Voilà une demande qui sort de l'ordinaire !"},
+				"B" : {"type" : "text", "content" : "Voilà une demande qui sort de l'ordinaire !"},
+				"C" : {"type" : "text", "content" : "Voilà une demande qui sort de l'ordinaire !"},
+				"D" : {"type" : "text", "content" : "Voilà une demande qui sort de l'ordinaire !"}
 			}
 		},
 		"recap-valide" : {
@@ -923,16 +925,30 @@ exports.tree = function (client, choix, action) {
 		},
 		"thanks" : {
 			"true" : {
-				"A" : {"type" : "text", "content" : "Je vous en prie."},
-				"B" : {"type" : "text", "content" : "Je vous en prie."},
-				"C" : {"type" : "text", "content" : "Je vous en prie."},
-				"D" : {"type" : "text", "content" : "Je vous en prie."}
+				"A" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"B" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"C" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"D" : {"type" : "text", "content" : "C'était un plaisir !"}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je vous en prie."},
-				"B" : {"type" : "text", "content" : "Je vous en prie."},
-				"C" : {"type" : "text", "content" : "Je vous en prie."},
-				"D" : {"type" : "text", "content" : "Je vous en prie."}
+				"A" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"B" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"C" : {"type" : "text", "content" : "C'était un plaisir !"},
+				"D" : {"type" : "text", "content" : "C'était un plaisir !"}
+			}
+		},
+		"goodbye" : {
+			"true" : {
+				"A" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"B" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"C" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"D" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"B" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"C" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
+				"D" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."}
 			}
 		}
 		};
@@ -949,7 +965,7 @@ exports.reponseAge = function(client){
 	} else if (age < seuil[1]){
 		content ='Vos enfants vont adorer la montagne ! Nos guides pourront leur montrer les animaux qui se cachent dans la nature. <br/>Comme les enfants sont sensibles à l\'altitude, je vais sélectionner des sites de randonnées en moyenne montagne, jusqu\'à 3000m.'
 	} else if (age > seuil[2]){
-		content = 'L\'air de la montagne vous fera le plus grand bien. Je vais choisir pour vous des sites en basse montagne, à moins de 1500m. Vous pourrez ainsi vous ressourcer sans être gêné par de l\'altitude.'
+		content = 'L\'air de la montagne vous fera le plus grand bien. Je vais choisir pour vous des sites en basse montagne, à moins de 1500m. Vous pourrez ainsi vous ressourcer sans être gêné par l\'altitude.'
 	} else if (age > seuil[3]){
 		content = 'L\'air de la montagne vous fera le plus grand bien. Je vais choisir pour vous des sites en moyenne montagne, à moins de 3000m. Vous pourrez ainsi vous ressourcer sans être gêné par l\'altitude.'
 	} else {
@@ -967,7 +983,7 @@ exports.reponseNvRando = function(client){
 		content = 'Je suis ravi de vous faire découvrir mon sport préféré ! Les treks sont l\'occasion de faire du sport tout en se ressourçant en pleine nature.';
 		break;
 		case 2:
-		content = 'Je vois que vous y avez pris goût ! J\'espère que ce trek confirmera votre amour pour la montagne.';
+		content = 'Vous verrez, plus on fait de treks, plus on y prend goût !';
 		break;
 		case 3:
 		content = 'J\'adore rencontrer de nouveaux passionnés de randonnée ! Je vais vous faire découvrir un parcours que vous n\'avez jamais fait.';
@@ -1029,182 +1045,185 @@ exports.reponseBudget = function(client){
 
 exports.reponseDetails = function(client){
 	var content;
-	var adjNvP;
-	switch(client.nvPhysique){
-		case 1:
-		adjNvP = 'débutant';
-		break;
-		case 2:
-		adjNvP = 'occasionnel';
-		break;
-		case 3:
-		adjNvP = 'régulier';
-		break;
-		case 4:
-		adjNvP = 'performant';
-		break;			
-	};
-	var adjNvR;
-	switch(client.nvRandonneur){
-		case 1:
-		adjNvR = 'une ou deux';
-		break;
-		case 2:
-		adjNvR = 'quelques';
-		break;
-		case 3:
-		adjNvR = 'plusieurs';
-		break;
-		case 4:
-		adjNvR = 'de multiples';
-		break
-	};
-	//Niveau difficulte
-	var adjNvDi;
-	switch(client.rando.nvDifficulte)
-	{
-		case 1:
-		adjNvDi = 'très facile'
-		break;
-		case 2:
-		adjNvDi = 'assez facile'
-		break;
-		case 3:
-		adjNvDi = 'assez difficile'
-		break;
-		case 4:
-		adjNvDi = 'très difficile'
-		break;
-	};
-	//Niveau evasion
-	var adjNvEv;
-	switch(client.rando.nvEvasion)
-	{
-		case 1:
-		adjNvEv = 'accessible facilement'
-		break;
-		case 4:
-		adjNvEv = 'isolé'
-		break;
-	};
-	// niveau activites
-	var adjNvAc;
-	if (client.rando.nvActivites == 2){
-		adjNvAc = 'quelques';
-	} else if(client.rando.nvActivites >2){
-		adjNvAc = 'plusieurs';
-	};
-	// niveau decouvertes
-	var adjNvDe;
-	if (client.rando.nvDecouvertes == 2){
-		adjNvDe = 'quelques';
-	} else if(client.rando.nvDecouvertes >2){
-		adjNvDe = 'plusieurs';
-	};
-	
-	// recap
-	var a = Math.floor(Math.random());
-	var b = Math.floor(Math.random());
-	var ab = a + b;
-	switch(ab) 
-	{
-		case 0:
-		content = 'Ok '+ client.membres[0].prenom +', pour résumer :'
-		break;
-		case 1:
-		content = 'D\'accord '+ client.membres[0].prenom +', je résume :'
-		break;
-		case 2:
-		content = 'C\'est noté '+ client.membres[0].prenom +', en résumé :'
-		break;
-	};
-	
-	switch(client.profil){
-		case 'A':
-		case 'C':
-		if (client.profil == 'A'){
-			content += '</br>Vous êtes un sportif ' + adjNvP +' qui a fait '+ adjNvR +' randonnées par le passé.';
-		}; 
-		if (client.profil == 'C'){
-			content += '</br>Vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
+	if(client.nvPhysique != null && client.nvRandonneur != null && client.nvBudget != null && client.lieu != null){
+		var adjNvP;
+		switch(client.nvPhysique){
+			case 1:
+			adjNvP = 'débutant';
+			break;
+			case 2:
+			adjNvP = 'occasionnel';
+			break;
+			case 3:
+			adjNvP = 'régulier';
+			break;
+			case 4:
+			adjNvP = 'performant';
+			break;			
 		};
-		content += '</br>Vous souhaitez un trek '
-		if (adjNvDi != null){
-			content += adjNvDi;
+		var adjNvR;
+		switch(client.nvRandonneur){
+			case 1:
+			adjNvR = 'peu ou pas de';
+			break;
+			case 2:
+			adjNvR = 'quelques';
+			break;
+			case 3:
+			adjNvR = 'plusieurs';
+			break;
+			case 4:
+			adjNvR = 'de multiples';
+			break
 		};
-		if (adjNvEv != null){
-			content += ' dans un lieu ' + adjNvEv ;
+		//Niveau difficulte
+		var adjNvDi;
+		switch(client.rando.nvDifficulte)
+		{
+			case 1:
+			adjNvDi = 'très facile'
+			break;
+			case 2:
+			adjNvDi = 'assez facile'
+			break;
+			case 3:
+			adjNvDi = 'assez difficile'
+			break;
+			case 4:
+			adjNvDi = 'très difficile'
+			break;
 		};
-		if (adjNvAc != null || adjNvDe != null){
-			content += ' où vous pourrez '
-			if (adjNvAc != null && adjNvDe == null){
-				content += 'pratiquer ' + adjNvAc +' activités.';
-			};
-			if (adjNvDe != null && adjNvAc == null){
-				content += 'faire ' + adjNvDe +' découvertes.';
-			};
-			if (adjNvDe != null && adjNvAc != null){
-				content += 'faire ' + adjNvDe +' découvertes et pratiquer ' + adjNvAc +' activités.';
-			};
+		//Niveau evasion
+		var adjNvEv;
+		switch(client.rando.nvEvasion)
+		{
+			case 1:
+			adjNvEv = 'accessible facilement'
+			break;
+			case 4:
+			adjNvEv = 'isolé'
+			break;
 		};
-		if (client.nvBudget != 1000000){
-			content += '</br>Votre budget maximum est de ' + client.nvBudget + ' euros.';
+		// niveau activites
+		var adjNvAc;
+		if (client.rando.nvActivites == 2){
+			adjNvAc = 'quelques';
+		} else if(client.rando.nvActivites >2){
+			adjNvAc = 'plusieurs';
 		};
-		break;
+		// niveau decouvertes
+		var adjNvDe;
+		if (client.rando.nvDecouvertes == 2){
+			adjNvDe = 'quelques';
+		} else if(client.rando.nvDecouvertes >2){
+			adjNvDe = 'plusieurs';
+		};
 		
-		case 'B':
+		// recap
+		var a = Math.floor(Math.random());
+		var b = Math.floor(Math.random());
+		var ab = a + b;
 		switch(ab) 
 		{
 			case 0:
-			content += '</br>Avec les enfants, vous préférez généralement des randonnées familiales assez faciles';
-			content += '</br>Lors de vos derniers treks, vous aviez apprécié des promenades pleines de découvertes dans la nature.';
+			content = 'Ok '+ client.membres[0].prenom +', pour résumer :'
 			break;
 			case 1:
-			content += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
-			content += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+			content = 'D\'accord '+ client.membres[0].prenom +', je résume :'
 			break;
 			case 2:
-			content += '</br>Je me souviens que Patricia et vous aimez vous détendre loin de la ville en pleine nature.';
-			content += '</br>Il est important pour vous la promenade soit sans risque afin que vos enfants, Pierre et Marie, puissent découvrir la faune et la flore librement.';
+			content = 'C\'est noté '+ client.membres[0].prenom +', en résumé :'
 			break;
 		};
 		
-		if (client.nvBudget != 1000000){
-			content += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
+		switch(client.profil){
+			case 'A':
+			case 'C':
+			if (client.profil == 'A'){
+				content += '</br>Vous êtes un sportif ' + adjNvP +' qui a fait '+ adjNvR +' randonnées par le passé.';
+			}; 
+			if (client.profil == 'C'){
+				content += '</br>Vous êtes des sportifs ' + adjNvP +'s qui avez fait '+ adjNvR +' randonnées par le passé.';
+			};
+			content += '</br>Vous souhaitez un trek '
+			if (adjNvDi != null){
+				content += adjNvDi;
+			};
+			if (adjNvEv != null){
+				content += ' dans un lieu ' + adjNvEv ;
+			};
+			if (adjNvAc != null || adjNvDe != null){
+				content += ' où vous pourrez '
+				if (adjNvAc != null && adjNvDe == null){
+					content += 'pratiquer ' + adjNvAc +' activités.';
+				};
+				if (adjNvDe != null && adjNvAc == null){
+					content += 'faire ' + adjNvDe +' découvertes.';
+				};
+				if (adjNvDe != null && adjNvAc != null){
+					content += 'faire ' + adjNvDe +' découvertes et pratiquer ' + adjNvAc +' activités.';
+				};
+			};
+			if (client.nvBudget != 1000000){
+				content += '</br>Votre budget maximum est de ' + client.nvBudget + ' euros.';
+			};
+			break;
+			
+			case 'B':
+			switch(ab) 
+			{
+				case 0:
+				content += '</br>Avec les enfants, vous préférez généralement des randonnées familiales assez faciles';
+				content += '</br>Lors de vos derniers treks, vous aviez apprécié des promenades pleines de découvertes dans la nature.';
+				break;
+				case 1:
+				content += '</br>D\'après mes souvenirs, votre famille aime les sorties tranquilles, sans trop de difficultés.';
+				content += '</br>Les vacances sont, pour vous, l\'occasion de vous évader et de faire découvrir la nature à vos enfants.';
+				break;
+				case 2:
+				content += '</br>Je me souviens que Patricia et vous aimez vous détendre loin de la ville en pleine nature.';
+				content += '</br>Il est important pour vous la promenade soit sans risque afin que vos enfants, Pierre et Marie, puissent découvrir la faune et la flore librement.';
+				break;
+			};
+			
+			if (client.nvBudget != 1000000){
+				content += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
+			};
+			break;
+			
+			case 'D':
+			switch(ab) 
+			{
+				case 0:
+				content += '</br>D\'après mes souvenirs, les treks sont, pour vos amis et vous, des défis pendant lesquels vous aimez vous challenger.';
+				content += '</br>Vous adorez pratiquer des activités sportives variées et faire des rencontres sur votre chemin.';
+				break;
+				case 1:
+				content += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
+				content += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
+				break;
+				case 2:
+				content += '</br>Lors de votre dernier trek difficile, vous aviez aimé la variété d\activités sportives.';
+				content += '</br>Vous aviez fait beaucoup de nouvelles rencontres enrichissantes dans les gîtes disponibles sur votre parcours.';
+				break;
+			};
+			if (client.nvBudget != 1000000){
+				content += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
+			};
+			break;
 		};
-		break;
 		
-		case 'D':
-		switch(ab) 
-		{
-			case 0:
-			content += '</br>D\'après mes souvenirs, les treks sont, pour vos amis et vous, des défis pendant lesquels vous aimez vous challenger.';
-			content += '</br>Vous adorez pratiquer des activités sportives variées et faire des rencontres sur votre chemin.';
-			break;
-			case 1:
-			content += '</br>Je me souviens que vous et vos amis êtes des randonneurs intrépides à qui les obstacles ne font pas peur.';
-			content += '</br>Vous préférez généralement rester proche d\'une ville afin de pouvoir pratiquer de multiples activités.';
-			break;
-			case 2:
-			content += '</br>Lors de votre dernier trek difficile, vous aviez aimé la variété d\activités sportives.';
-			content += '</br>Vous aviez fait beaucoup de nouvelles rencontres enrichissantes dans les gîtes disponibles sur votre parcours.';
-			break;
-		};
-		if (client.nvBudget != 1000000){
-			content += '</br>Votre budget maximum est, cette fois-ci, de ' + client.nvBudget + ' euros.';
-		};
-		break;
-	};
-	
 
-	// niveau eloignement
-	if (client.lieu != 'none'){
-		content += '</br>Vous aimeriez partir en ';
-		var lieuxFr = ['France', 'Europe', 'Asie', 'Amérique', 'Afrique', 'Océanie'];
-		var lieuxEn = ['France', 'Europe', 'Asia', 'Americas', 'Africa', 'Oceania'];
-		content += lieuxFr[lieuxEn.indexOf(client.lieu)] + '.';
+		// niveau eloignement
+		if (client.lieu != 'none'){
+			content += '</br>Vous aimeriez partir en ';
+			var lieuxFr = ['France', 'Europe', 'Asie', 'Amérique', 'Afrique', 'Océanie'];
+			var lieuxEn = ['France', 'Europe', 'Asia', 'Americas', 'Africa', 'Oceania'];
+			content += lieuxFr[lieuxEn.indexOf(client.lieu)] + '.';
+		};
+	} else {
+		content = 'Discutons encore un peu, j\'ai besoin de quelques informations supplémentaires.'
 	};
-	
 	return(content);
 };
 
@@ -1237,7 +1256,7 @@ exports.reponseAjustDonnees = function(client, choix){
 		console.log('test ok');
 		var question = 'Quel sportif êtes-vous ?';
 		var value1 = 'Débutant';
-		var title1 = 'Débutant';
+		var title1 = 'Peu sportif';
 		var value2 = 'Sportif occasionnel';
 		var title2 = 'Occasionnel';
 		var value3 = 'Sportif régulier';
@@ -1382,7 +1401,7 @@ exports.reponseInfo = function(client, choix, action){
 };
 
 exports.reponseDefault = function(){
-	var rep = ['Je ne suis pas sûr d\'avoir bien saisi...', 'Flûte, je n\'ai pas bien compris.', 'Zut, je ne suis pas sûr d\'avoir bien compris ce que tu viens de dire.']
+	var rep = ['Je ne suis pas sûr d\'avoir bien saisi...', 'Flûte, je n\'ai pas bien compris.', 'Zut, je ne suis pas sûr d\'avoir bien compris ce que vous venez de dire.']
 	var i = Math.floor(Math.random()  * (rep.length - 0) + 0);
 	return(rep[i]);
 };

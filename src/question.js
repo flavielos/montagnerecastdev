@@ -37,7 +37,7 @@ var tree = {
 		"false" : {
 			"type" : "quickReplies",
 			"content" : {
-				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau d\'expérience en randonnée ?',
+				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau de randonneur ?',
 				buttons: [
 				{
 					value: 'Débutant',
@@ -64,7 +64,7 @@ var tree = {
 		"false" : {
 			"type" : "quickReplies",
 			"content" :{
-				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau physique général ?',
+				title: 'Pourriez-vous choisir ce qui correspond le mieux à votre niveau sportif ?',
 				buttons: [
 				{
 					value: 'Débutant',
@@ -161,15 +161,15 @@ var tree = {
 			  title: 'Quel type de trek vous plairait le plus ?',
 			  buttons: [
 				{
-					value: 'un trek reposant et loin de la ville',
+					value: 'un trek facile et loin de la ville',
 					title: 'Facile et dépaysant',
 				},
 				{
-					value: 'Un trek facile, voir des animaux comme des marmottes et des lacs',
+					value: 'Un trek cool, voir des animaux comme des marmottes et des lacs',
 					title: 'Assez facile et plein de découvertes',
 				},
 				{
-					value : 'Un trek plutôt difficile pour faire du kayak, du rafting',
+					value : 'Un trek plutôt difficile pour faire du kayak, du rafting, du ski',
 					title : 'Plutôt difficile avec des activités'
 				},
 				{
@@ -337,11 +337,15 @@ var tree = {
 	"fin" : {
 		"true" : {'type' : 'text', 'content' : ''},
 		"false" : {'type' : 'text', 'content' : ''}
+	},
+	"greetings" : {
+		"true" : {'type' : 'text', 'content' : ''},
+		"false" : {'type' : 'text', 'content' : ''}
 	}
 };
 
 exports.question = function (expAction, done, isEA) {
-	if(done == isEA){
+	if(done == true && isEA == true){
 		return(tree[expAction][true]);
 	} else {
 		return(tree[expAction][false]);

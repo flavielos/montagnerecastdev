@@ -64,9 +64,9 @@ const replyMessage = (message) => {
 		var expAction
 		if( result.getMemory('expaction') != null){
 			if(result.action){
-				if (result.action.slug != 'goodbye'){
+				//if (result.action.slug != 'goodbye'){
 					expAction = result.getMemory('expaction').value;
-				}
+				//} 
 			} else if (!result.action){
 				expAction = result.getMemory('expaction').value;
 			}
@@ -76,9 +76,9 @@ const replyMessage = (message) => {
 		var prevAction 
 		if(result.getMemory('prevaction') != null){
 			if(result.action){
-				if (result.action.slug != 'goodbye'){
+				//if (result.action.slug != 'goodbye'){
 					prevAction = result.getMemory('prevaction').value;
-				}
+				//} 
 			} else if (!result.action){
 				prevAction = result.getMemory('prevaction').value;
 			}
@@ -90,7 +90,7 @@ const replyMessage = (message) => {
 		
 		client = md.save(result, profil);
 		
-
+		
 		
 		var choix = 'none';
 		if(result.getMemory('info') != null){
