@@ -29,13 +29,13 @@ exports.tree = function (client, choix, action) {
 		},
 		"greetings": {
 			"true": {
-				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Oscar, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
+				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Philéas, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
 				"B" : {"type" : "text", "content" : "Michel, ravi de vous revoir !</br>Je vois que votre fille Marie a maintenant 6 ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !"},
 				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeaninne ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
 				"D" : {"type" : "text", "content" : "Content de vous revoir, Paul ! </br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière."}
 			},
 			"false": {
-				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Oscar, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
+				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Philéas, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
 				"B" : {"type" : "text", "content" : "Michel, ravi de vous revoir !</br>Je vois que votre fille Marie a maintenant 6 ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !"},
 				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeaninne ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
 				"D" : {"type" : "text", "content" : "Content de vous revoir, Paul ! </br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière."}
@@ -897,16 +897,16 @@ exports.tree = function (client, choix, action) {
 		},
 		"asking_name" : {
 			"true" : {
-				"A" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"B" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"C" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"D" : {"type" : "text", "content" : "Je m'appelle Oscar."}
+				"A" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"B" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"C" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"D" : {"type" : "text", "content" : "Je m'appelle Philéas."}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"B" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"C" : {"type" : "text", "content" : "Je m'appelle Oscar."},
-				"D" : {"type" : "text", "content" : "Je m'appelle Oscar."}
+				"A" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"B" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"C" : {"type" : "text", "content" : "Je m'appelle Philéas."},
+				"D" : {"type" : "text", "content" : "Je m'appelle Philéas."}
 			}
 		},
 		"none" : {

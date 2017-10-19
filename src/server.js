@@ -29,26 +29,7 @@ app.use(bodyParser.json())
 
 
 
-/* app.use(function (req, res, next) {
-	if(req.session != null){
-		cookieSession({
-	  name: 'session',
-	  keys: [Math.random().toString(), 'key2'],
-	  overwrite: false
-	})
-	} else {
-	console.log(req.session || 'cookie non défini');
-		next();
-	};
-});
-	
-	
 
-
-app.use(function (req, res, next) {
-	console.log(req.session || 'cookie non défini');
-	next();
-}) */
 
 // Handle / route
 app.use('/', (request, response) => {
