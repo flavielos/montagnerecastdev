@@ -25,7 +25,7 @@ const client = new recastai(process.env.REQUEST_TOKEN)
  * - response: Response of your server (can be a blank object if not needed: {})
  * - callback: Callback is a function called by Recast.AI hosting system when your code will be hosted
  */
-const bot = (body, response, callback) => {
+exports.bot = function(body, response, callback)  {
 
 	console.log(body)
 
@@ -82,4 +82,3 @@ const bot = (body, response, callback) => {
 }
 
 
-module.exports = bot;
