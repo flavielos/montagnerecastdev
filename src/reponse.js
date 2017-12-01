@@ -37,7 +37,7 @@ exports.tree = function (client, choix, action) {
 			"false": {
 				"A" : {"type" : "text", "content" : "Bonjour ! Je suis Philéas, l\'assistant P-Val et mon travail est de vous recommander le trek de vos rêves. </br>Pour mieux vous connaître, je vais vous poser quelques questions rapides."},
 				"B" : {"type" : "text", "content" : "Michel, ravi de vous revoir !</br>Je vois que votre fille Marie a maintenant 6 ans. Vous allez pouvoir lui faire découvrir des treks jusqu\'à 3500m !"},
-				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeaninne ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
+				"C" : {"type" : "text", "content" : "Heureux de vous revoir, Jeannine ! </br>Je vous rappelle que, compte-tenu de votre âge, il est plus prudent de ne pas dépasser les 3500m.</br>Faisons un peu mieux connaissance pour que je puisse vous recommander le trek le mieux adapté à votre couple."},
 				"D" : {"type" : "text", "content" : "Content de vous revoir, Paul ! </br>Je vais tout faire pour que vos amis et vous profitiez de cette nouvelle aventure autant que de celle au Mont Fuji l\'année dernière."}
 			}
 		},
@@ -267,15 +267,15 @@ exports.tree = function (client, choix, action) {
 		},
 		"recap-invalide" : {
 			"true" : {
-				"A" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"A" : {"type" : "text", "content" : "Oh, j\'ai dû mal comprendre quelque chose."},
 				"B" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."},
-				"C" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"C" : {"type" : "text", "content" : "Oh, j\'ai dû mal comprendre quelque chose."},
 				"D" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"A" : {"type" : "text", "content" : "Oh, j\'ai dû mal comprendre quelque chose."},
 				"B" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."},
-				"C" : {"type" : "text", "content" : "Oh, j\'ai du mal comprendre quelque chose."},
+				"C" : {"type" : "text", "content" : "Oh, j\'ai dû mal comprendre quelque chose."},
 				"D" : {"type" : "text", "content" : "Il est vrai qu'une année s'est écoulée depuis votre dernière visite."}
 			}
 		},
@@ -575,7 +575,7 @@ exports.tree = function (client, choix, action) {
 		},
 		"intro-invalide" : {
 			"true" : {
-				"A" : {"type" : "text", "content" : {
+				"A" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -604,7 +604,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"B" : {"type" : "text", "content" : {
+				"B" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -633,7 +633,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"C" : {"type" : "text", "content" : {
+				"C" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -662,7 +662,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"D" : {"type" : "text", "content" : {
+				"D" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -693,7 +693,7 @@ exports.tree = function (client, choix, action) {
         }}
 			},
 			"false" : {
-				"A" : {"type" : "text", "content" : {
+				"A" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -722,7 +722,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"B" : {"type" : "text", "content" : {
+				"B" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -751,7 +751,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"C" : {"type" : "text", "content" : {
+				"C" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -780,7 +780,7 @@ exports.tree = function (client, choix, action) {
 			}
           ],
         }},
-				"D" : {"type" : "text", "content" : {
+				"D" : {"type" : "quickReplies", "content" : {
           title: 'Zut...Qu\'est-ce qui ne vous convient pas ?',
           buttons: [
             {
@@ -949,6 +949,20 @@ exports.tree = function (client, choix, action) {
 				"B" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
 				"C" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."},
 				"D" : {"type" : "text", "content" : "A bientôt !<br/>La conversation est maintenant terminée. Je peux vous faire une nouvelle recommandation. Pour cela, dites-moi \'Bonjour\'."}
+			}
+		},
+		"choisir-profil-type" : {
+			"true" : {
+				"A" : {"type" : "text", "content" : "Profil choisi"},
+				"B" : {"type" : "text", "content" : "Profil choisi"},
+				"C" : {"type" : "text", "content" : "Profil choisi"},
+				"D" : {"type" : "text", "content" : "Profil choisi"}
+			},
+			"false" : {
+				"A" : {"type" : "text", "content" : "Profil non choisi"},
+				"B" : {"type" : "text", "content" : "Profil non choisi"},
+				"C" : {"type" : "text", "content" : "Profil non choisi"},
+				"D" : {"type" : "text", "content" : "Profil non choisi"}
 			}
 		}
 		};

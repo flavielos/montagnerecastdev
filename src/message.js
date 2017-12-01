@@ -37,19 +37,20 @@ const replyMessage = (message) => {
     * etc...
     */
 	if (result) {
-		//console.log(result.getMemory());
-		var profil = senderId[0];
-		if(result.getMemory('profil') != profil){
-			result.setMemory(
-				{
-				  profil: {
-					value: senderId[0],
-					raw : senderId[0]
-				  }
-				}
-			);
-		};
-		
+
+			//console.log(result.getMemory());
+			var profil = senderId[0];
+			if(result.getMemory('profil') != profil){
+				result.setMemory(
+					{
+					  profil: {
+						value: senderId[0],
+						raw : senderId[0]
+					  }
+					}
+				);
+			};
+
 		var action;
 		var done;
 		if(result.action){
@@ -118,7 +119,7 @@ const replyMessage = (message) => {
 				  }
 				}
 			);
-		var question = qu.question(expAction, done, isea);
+		var question = qu.question(expAction, done, isea, client);
 
 		if(reponse.type == 'text' && question.type == 'text'){
 			message.addReply({'type' : 'text', 'content' : reponse.content + '</br>' + question.content})
